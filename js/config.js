@@ -1,5 +1,5 @@
 export const STORE = {
-  name: "007importado",
-  instagram: "https://www.instagram.com/pilchas_caballito22/",
-  whatsapp: "5491130786998"
+    name: "007imported",
+    instagram: "https://www.instagram.com/007imported/",
+    whatsapp: "5491173854862"
 };
