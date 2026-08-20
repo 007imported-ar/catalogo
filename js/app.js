@@ -1,10 +1,4 @@
-import { SUPABASE_URL, SUPABASE_KEY } from "./supabase.js";
-
-const supabase = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-
+import { supabase } from "./supabase.js";
 import { STORE } from "./config.js";
 
 /* =====================================================
