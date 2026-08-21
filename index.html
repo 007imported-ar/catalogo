@@ -17,11 +17,21 @@
 
     <title>007IMPORTED — Indumentaria</title>
 
+
+    <!-- =====================================================
+         FAVICON
+    ====================================================== -->
+
     <link
         rel="icon"
         type="image/x-icon"
         href="favicon.ico"
     >
+
+
+    <!-- =====================================================
+         FUENTE
+    ====================================================== -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -110,6 +120,7 @@
             --black: #080808;
             --black-2: #0c0c0b;
             --dark: #11100e;
+
             --card: #151412;
             --card-2: #1c1a17;
 
@@ -117,13 +128,12 @@
             --border-light: #4a443c;
 
             --white: #f4f1eb;
+
             --gray: #96918a;
             --gray-light: #c9c2b8;
 
             --cream: #cdbb9e;
             --cream-light: #dfd0b7;
-
-            --red: #d9534f;
 
             --max-width: 1250px;
         }
@@ -187,14 +197,14 @@
             background:
                 rgba(8, 8, 8, .94);
 
-            backdrop-filter: blur(14px);
+            backdrop-filter:
+                blur(14px);
         }
 
 
         .header-inner {
 
             width: 100%;
-
             max-width: var(--max-width);
 
             margin: auto;
@@ -384,7 +394,7 @@
 
 
         /* =====================================================
-           MOBILE MENU
+           MOBILE MENU BUTTON
         ===================================================== */
 
         .menu-button {
@@ -394,13 +404,74 @@
             width: 42px;
             height: 42px;
 
-            border: 1px solid var(--border);
+            border:
+                1px solid
+                var(--border);
 
             background: transparent;
 
             color: white;
 
             font-size: 20px;
+        }
+
+
+        /* =====================================================
+           MOBILE MENU
+        ===================================================== */
+
+        .mobile-menu {
+
+            position: fixed;
+
+            top: 76px;
+
+            left: 0;
+            right: 0;
+
+            z-index: 999;
+
+            display: none;
+
+            padding: 22px;
+
+            background: #0b0b0a;
+
+            border-bottom:
+                1px solid
+                var(--border);
+        }
+
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+
+        .mobile-menu-inner {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 20px;
+        }
+
+
+        .mobile-menu a {
+
+            color: var(--white);
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            letter-spacing: .5px;
+        }
+
+
+        .mobile-menu a:hover {
+            color: var(--cream);
         }
 
 
@@ -441,7 +512,6 @@
             border-radius: 50%;
 
             background:
-
                 radial-gradient(
                     circle,
                     rgba(150, 120, 75, .13),
@@ -484,7 +554,6 @@
         .hero-inner {
 
             width: 100%;
-
             max-width: var(--max-width);
 
             margin: auto;
@@ -582,6 +651,7 @@
             padding: 0 25px;
 
             display: inline-flex;
+
             align-items: center;
             justify-content: center;
 
@@ -619,7 +689,8 @@
 
             border-color: var(--cream-light);
 
-            transform: translateY(-2px);
+            transform:
+                translateY(-2px);
         }
 
 
@@ -629,7 +700,8 @@
 
             border-color: var(--cream);
 
-            transform: translateY(-2px);
+            transform:
+                translateY(-2px);
         }
 
 
@@ -649,7 +721,6 @@
         .section-inner {
 
             width: 100%;
-
             max-width: var(--max-width);
 
             margin: auto;
@@ -659,7 +730,9 @@
         .section-header {
 
             display: flex;
+
             align-items: flex-end;
+
             justify-content: space-between;
 
             gap: 30px;
@@ -701,6 +774,11 @@
         }
 
 
+        .section-title span {
+            color: var(--cream);
+        }
+
+
         .section-description {
 
             max-width: 360px;
@@ -714,7 +792,7 @@
 
 
         /* =====================================================
-           CATEGORIES
+           CATEGORIAS
         ===================================================== */
 
         .categories {
@@ -722,9 +800,9 @@
             display: grid;
 
             grid-template-columns:
-                repeat(3, 1fr);
+                repeat(4, 1fr);
 
-            gap: 5px;
+            gap: 8px;
         }
 
 
@@ -732,24 +810,19 @@
 
             position: relative;
 
-            min-height: 190px;
+            min-height: 330px;
 
-            padding: 22px;
+            padding: 28px;
 
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+
+            align-items: flex-end;
 
             border:
                 1px solid
                 var(--border);
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #171614,
-                    #10100f
-                );
+            background: #11100e;
 
             color: white;
 
@@ -757,82 +830,163 @@
 
             text-align: left;
 
+            cursor: pointer;
+
+            isolation: isolate;
+
             transition:
-                border-color .25s,
-                transform .25s,
-                background .25s;
+                transform .35s ease,
+                border-color .35s ease;
         }
 
 
-        .category::before {
+        /* FOTO DA CATEGORIA */
 
-            content: "";
+        .category-image {
 
             position: absolute;
 
-            width: 120px;
-            height: 120px;
+            inset: 0;
 
-            right: -45px;
-            bottom: -55px;
+            width: 100%;
+            height: 100%;
 
-            border-radius: 50%;
+            object-fit: cover;
 
-            background:
-                rgba(205, 187, 158, .07);
+            z-index: -3;
+
+            filter:
+                brightness(.48)
+                saturate(.75);
+
+            transition:
+                transform .6s ease,
+                filter .6s ease;
         }
 
+
+        /* OVERLAY */
+
+        .category-overlay {
+
+            position: absolute;
+
+            inset: 0;
+
+            z-index: -2;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(8,8,8,.98) 0%,
+                    rgba(8,8,8,.72) 35%,
+                    rgba(8,8,8,.25) 70%,
+                    rgba(8,8,8,.35) 100%
+                );
+
+            transition:
+                background .35s ease;
+        }
+
+
+        /* HOVER / ACTIVO */
 
         .category:hover,
         .category.active {
 
             border-color: var(--cream);
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #1c1915,
-                    #12110f
-                );
-
-            transform: translateY(-3px);
+            transform:
+                translateY(-3px);
         }
 
 
+        .category:hover .category-image,
+        .category.active .category-image {
+
+            transform:
+                scale(1.07);
+
+            filter:
+                brightness(.58)
+                saturate(.9);
+        }
+
+
+        .category:hover .category-overlay,
+        .category.active .category-overlay {
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(8,8,8,.98) 0%,
+                    rgba(8,8,8,.58) 42%,
+                    rgba(8,8,8,.12) 100%
+                );
+        }
+
+
+        /* NUMERO */
+
         .category-number {
 
-            position: relative;
+            position: absolute;
 
-            z-index: 2;
+            top: 25px;
+            left: 25px;
 
-            color: #777169;
+            z-index: 5;
+
+            color: #c0bbb3;
 
             font-size: 9px;
 
             font-weight: 700;
 
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
+
+        /* FLECHA */
 
         .category-arrow {
 
             position: absolute;
 
-            right: 22px;
             top: 22px;
+            right: 25px;
+
+            z-index: 5;
 
             color: var(--cream);
 
-            font-size: 18px;
+            font-size: 19px;
+
+            transition:
+                transform .3s ease;
         }
 
+
+        .category:hover .category-arrow,
+        .category.active .category-arrow {
+
+            transform:
+                translate(
+                    3px,
+                    -3px
+                );
+        }
+
+
+        /* NOMBRE */
 
         .category-name {
 
             position: relative;
 
-            z-index: 2;
+            z-index: 5;
+
+            color: #f4f1eb;
 
             font-size: 22px;
 
@@ -840,12 +994,14 @@
 
             letter-spacing: -1px;
 
+            line-height: 1;
+
             text-transform: uppercase;
         }
 
 
         /* =====================================================
-           PRODUCTS
+           PRODUCTOS
         ===================================================== */
 
         #productos {
@@ -854,18 +1010,20 @@
 
             border-top:
                 1px solid
-                rgba(205, 187, 158, .10);
+                rgba(205,187,158,.10);
 
             border-bottom:
                 1px solid
-                rgba(205, 187, 158, .10);
+                rgba(205,187,158,.10);
         }
 
 
         .products-toolbar {
 
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
             margin-bottom: 25px;
@@ -917,11 +1075,17 @@
 
         .product-card:hover {
 
-            transform: translateY(-4px);
+            transform:
+                translateY(-4px);
 
-            border-color: var(--cream);
+            border-color:
+                var(--cream);
         }
 
+
+        /* =====================================================
+           IMAGEN PRODUCTO
+        ===================================================== */
 
         .product-image {
 
@@ -948,14 +1112,16 @@
 
             object-fit: cover;
 
-            transition: transform .5s;
+            transition:
+                transform .5s;
         }
 
 
         .product-card:hover
         .product-image img {
 
-            transform: scale(1.04);
+            transform:
+                scale(1.04);
         }
 
 
@@ -965,6 +1131,7 @@
             height: 100%;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -991,7 +1158,7 @@
             padding: 6px 8px;
 
             background:
-                rgba(8, 8, 8, .82);
+                rgba(8,8,8,.82);
 
             color: var(--cream);
 
@@ -1004,6 +1171,48 @@
             text-transform: uppercase;
         }
 
+
+        /* =====================================================
+           CONTADOR DE FOTOS EN TARJETA
+        ===================================================== */
+
+        .product-image-count {
+
+            position: absolute;
+
+            top: 10px;
+            right: 10px;
+
+            min-width: 27px;
+            height: 27px;
+
+            padding: 0 7px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border:
+                1px solid
+                rgba(255,255,255,.18);
+
+            background:
+                rgba(8,8,8,.78);
+
+            color: var(--cream);
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            border-radius: 50%;
+        }
+
+
+        /* =====================================================
+           INFO PRODUCTO
+        ===================================================== */
 
         .product-info {
 
@@ -1040,7 +1249,9 @@
         .product-bottom {
 
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
             gap: 10px;
@@ -1104,7 +1315,7 @@
 
 
         /* =====================================================
-           LOADING / EMPTY
+           MENSAJE PRODUCTOS
         ===================================================== */
 
         .products-message {
@@ -1114,6 +1325,7 @@
             min-height: 220px;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -1184,7 +1396,8 @@
 
             display: grid;
 
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns:
+                1fr 1fr;
 
             gap: 1px;
 
@@ -1223,7 +1436,7 @@
 
 
         /* =====================================================
-           CONTACT
+           CONTACTO
         ===================================================== */
 
         .contact-section {
@@ -1231,7 +1444,6 @@
             text-align: center;
 
             padding-top: 130px;
-
             padding-bottom: 130px;
         }
 
@@ -1432,15 +1644,15 @@
             display: none;
 
             align-items: center;
-
             justify-content: center;
 
             padding: 20px;
 
             background:
-                rgba(0,0,0,.82);
+                rgba(0,0,0,.84);
 
-            backdrop-filter: blur(10px);
+            backdrop-filter:
+                blur(10px);
         }
 
 
@@ -1453,11 +1665,11 @@
 
             width: 100%;
 
-            max-width: 900px;
+            max-width: 950px;
 
             max-height: 90vh;
 
-            overflow-y: auto;
+            overflow: hidden;
 
             display: grid;
 
@@ -1473,168 +1685,192 @@
 
 
         /* =====================================================
-           MODAL IMAGEN + CARRUSEL
+           GALERIA MODAL
         ===================================================== */
 
-        .modal-image {
+        .modal-gallery {
+
+            position: relative;
 
             min-height: 550px;
 
             background: #10100f;
 
             overflow: hidden;
+        }
 
-            position: relative;
 
-            display: flex;
+        .modal-image {
 
-            align-items: center;
+            width: 100%;
+            height: 100%;
 
-            justify-content: center;
+            min-height: 550px;
 
-            touch-action: pan-y;
+            overflow: hidden;
         }
 
 
         .modal-image img {
 
             width: 100%;
-
             height: 100%;
-
-            object-fit: cover;
 
             display: block;
 
-            user-select: none;
-
-            -webkit-user-drag: none;
+            object-fit: cover;
         }
 
 
         /* =====================================================
-           FLECHAS DEL CARRUSEL
+           FLECHAS GALERIA
         ===================================================== */
 
-        .modal-image-arrow {
+        .gallery-arrow {
 
             position: absolute;
 
             top: 50%;
 
-            transform: translateY(-50%);
-
-            z-index: 20;
-
-            width: 48px;
-
-            height: 48px;
+            width: 46px;
+            height: 46px;
 
             display: flex;
 
             align-items: center;
-
             justify-content: center;
+
+            transform:
+                translateY(-50%);
 
             border:
                 1px solid
-                rgba(205,187,158,.55);
+                rgba(255,255,255,.25);
 
             background:
                 rgba(8,8,8,.72);
 
-            color: var(--cream);
+            color: white;
 
-            font-size: 25px;
+            font-size: 24px;
 
-            line-height: 1;
+            z-index: 10;
+
+            opacity: 0;
 
             transition:
-                background .2s,
-                border-color .2s,
-                transform .2s;
+                opacity .25s,
+                background .25s,
+                color .25s;
         }
 
 
-        .modal-image-arrow:hover {
+        .modal-gallery:hover .gallery-arrow {
+            opacity: 1;
+        }
 
-            background: var(--cream);
 
-            border-color: var(--cream);
+        .gallery-arrow:hover {
+
+            background:
+                var(--cream);
 
             color: #080808;
 
-            transform:
-                translateY(-50%)
-                scale(1.05);
+            border-color:
+                var(--cream);
         }
 
 
-        .modal-image-arrow.left {
-            left: 15px;
+        .gallery-prev {
+            left: 18px;
         }
 
 
-        .modal-image-arrow.right {
-            right: 15px;
-        }
-
-
-        /*
-           Las flechas están ocultas
-           hasta que haya más de una imagen.
-        */
-
-        .modal-image-arrow.hidden {
-            display: none;
+        .gallery-next {
+            right: 18px;
         }
 
 
         /* =====================================================
-           CONTADOR DE IMAGENES
+           INDICADORES GALERIA
         ===================================================== */
 
-        .modal-image-counter {
+        .gallery-dots {
 
             position: absolute;
 
             left: 50%;
+            bottom: 18px;
 
-            bottom: 15px;
+            transform:
+                translateX(-50%);
 
-            transform: translateX(-50%);
+            display: flex;
 
-            z-index: 20;
+            gap: 6px;
 
-            padding:
-                7px 12px;
-
-            background:
-                rgba(8,8,8,.78);
-
-            border:
-                1px solid
-                rgba(205,187,158,.30);
-
-            color: var(--cream);
-
-            font-size: 10px;
-
-            font-weight: 800;
-
-            letter-spacing: 1px;
-
-            display: none;
+            z-index: 15;
         }
 
 
-        .modal-image-counter.show {
-            display: block;
+        .gallery-dot {
+
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,.38);
+
+            transition: .2s;
+        }
+
+
+        .gallery-dot.active {
+
+            width: 18px;
+
+            border-radius: 5px;
+
+            background:
+                var(--cream);
         }
 
 
         /* =====================================================
-           MODAL INFO
+           CONTADOR GALERIA
+        ===================================================== */
+
+        .gallery-counter {
+
+            position: absolute;
+
+            left: 18px;
+            top: 18px;
+
+            padding: 7px 10px;
+
+            background:
+                rgba(8,8,8,.72);
+
+            border:
+                1px solid
+                rgba(255,255,255,.15);
+
+            color: var(--cream);
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            z-index: 15;
+        }
+
+
+        /* =====================================================
+           INFO MODAL
         ===================================================== */
 
         .modal-info {
@@ -1650,11 +1886,9 @@
             position: absolute;
 
             right: 20px;
-
             top: 20px;
 
             width: 38px;
-
             height: 38px;
 
             border:
@@ -1666,6 +1900,8 @@
             color: white;
 
             font-size: 18px;
+
+            z-index: 20;
         }
 
 
@@ -1673,7 +1909,8 @@
 
             color: var(--cream);
 
-            border-color: var(--cream);
+            border-color:
+                var(--cream);
         }
 
 
@@ -1742,7 +1979,6 @@
             display: flex;
 
             align-items: center;
-
             justify-content: center;
 
             background: var(--cream);
@@ -1758,19 +1994,54 @@
             font-weight: 900;
 
             text-transform: uppercase;
+
+            transition: .2s;
         }
 
 
         .modal-whatsapp:hover {
 
-            background: var(--cream-light);
+            background:
+                var(--cream-light);
 
-            border-color: var(--cream-light);
+            border-color:
+                var(--cream-light);
         }
 
 
         /* =====================================================
-           MOBILE
+           MODAL TOUCH / MOBILE
+        ===================================================== */
+
+        .modal-gallery {
+            touch-action: pan-y;
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .products-grid {
+
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+
+            .categories {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE MENU / TABLET
         ===================================================== */
 
         @media (max-width: 950px) {
@@ -1797,44 +2068,51 @@
             }
 
 
-            .categories {
+            .about {
 
                 grid-template-columns:
-                    repeat(2, 1fr);
+                    1fr;
+
+                gap: 40px;
             }
 
 
-            .about {
+            .modal-box {
 
-                grid-template-columns: 1fr;
-
-                gap: 40px;
+                max-width: 850px;
             }
 
         }
 
 
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
         @media (max-width: 650px) {
 
             .header {
+
                 height: 76px;
             }
 
 
             .header-inner {
-                padding: 0 18px;
+
+                padding:
+                    0 18px;
             }
 
 
             .brand-logo {
 
                 width: 45px;
-
                 height: 45px;
             }
 
 
             .brand-name {
+
                 font-size: 14px;
             }
 
@@ -1863,11 +2141,13 @@
                         90px
                     );
 
-                letter-spacing: -4px;
+                letter-spacing:
+                    -4px;
             }
 
 
             .hero-description {
+
                 font-size: 13px;
             }
 
@@ -1883,7 +2163,8 @@
 
             .button {
 
-                padding: 0 10px;
+                padding:
+                    0 10px;
 
                 font-size: 9px;
             }
@@ -1897,44 +2178,57 @@
 
 
             .section-header {
+
                 display: block;
             }
 
 
             .section-description {
+
                 margin-top: 20px;
             }
 
 
+            /* CATEGORIAS */
+
             .categories {
 
                 grid-template-columns:
-                    1fr 1fr;
+                    repeat(2, 1fr);
 
-                gap: 4px;
+                gap: 5px;
             }
 
 
             .category {
 
-                min-height: 145px;
+                min-height: 220px;
 
-                padding: 15px;
+                padding: 17px;
             }
 
 
-            .category-name {
-                font-size: 16px;
+            .category-number {
+
+                top: 17px;
+                left: 17px;
             }
 
 
             .category-arrow {
 
-                right: 15px;
-
                 top: 15px;
+                right: 17px;
             }
 
+
+            .category-name {
+
+                font-size: 16px;
+            }
+
+
+            /* PRODUCTOS */
 
             .products-grid {
 
@@ -1946,46 +2240,59 @@
 
 
             .product-info {
+
                 padding: 12px;
             }
 
 
             .product-name {
+
                 font-size: 12px;
             }
 
 
             .product-description {
+
                 display: none;
             }
 
 
             .product-price {
+
                 font-size: 13px;
             }
 
 
             .product-stock {
+
                 display: none;
             }
 
 
             .product-contact {
 
-                padding: 9px 5px;
+                padding:
+                    9px 5px;
 
                 font-size: 8px;
             }
 
 
+            /* ABOUT */
+
             .about-list {
 
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
             }
 
 
+            /* CONTACT */
+
             .contact-title {
-                letter-spacing: -4px;
+
+                letter-spacing:
+                    -4px;
             }
 
 
@@ -1993,9 +2300,12 @@
 
                 display: grid;
 
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
             }
 
+
+            /* FOOTER */
 
             .footer-top {
 
@@ -2019,21 +2329,40 @@
             }
 
 
-            /* MODAL MOBILE */
+            /* MODAL */
+
+            .product-modal {
+
+                padding: 10px;
+            }
+
 
             .modal-box {
 
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
 
-                max-height: 92vh;
+                max-height: 94vh;
+
+                overflow-y: auto;
+            }
+
+
+            .modal-gallery {
+
+                min-height: 350px;
+
+                height: 50vh;
+
+                max-height: 430px;
             }
 
 
             .modal-image {
 
-                min-height: 330px;
+                min-height: 350px;
 
-                max-height: 45vh;
+                height: 100%;
             }
 
 
@@ -2045,26 +2374,28 @@
 
 
             .modal-name {
+
                 font-size: 30px;
             }
 
 
-            .modal-image-arrow {
+            .gallery-arrow {
 
-                width: 42px;
+                width: 40px;
+                height: 40px;
 
-                height: 42px;
+                opacity: 1;
 
-                font-size: 21px;
+                font-size: 20px;
             }
 
 
-            .modal-image-arrow.left {
+            .gallery-prev {
                 left: 10px;
             }
 
 
-            .modal-image-arrow.right {
+            .gallery-next {
                 right: 10px;
             }
 
@@ -2099,7 +2430,9 @@
                 >
 
                 <div class="brand-name">
+
                     007<span>IMPORTED</span>
+
                 </div>
 
             </a>
@@ -2127,6 +2460,7 @@
 
 
             <div class="header-actions">
+
 
                 <a
                     href="https://www.instagram.com/007imported/?hl=es"
@@ -2165,6 +2499,7 @@
                     ☰
                 </button>
 
+
             </div>
 
         </div>
@@ -2177,41 +2512,37 @@
     ====================================================== -->
 
     <div
+        class="mobile-menu"
         id="mobileMenu"
-        style="
-            position:fixed;
-            top:76px;
-            left:0;
-            right:0;
-            z-index:999;
-            display:none;
-            padding:20px;
-            background:#0b0b0a;
-            border-bottom:1px solid #35312c;
-        "
     >
 
-        <div
-            style="
-                display:flex;
-                flex-direction:column;
-                gap:18px;
-            "
-        >
+        <div class="mobile-menu-inner">
 
-            <a href="#inicio" onclick="closeMobileMenu()">
+            <a
+                href="#inicio"
+                onclick="closeMobileMenu()"
+            >
                 INICIO
             </a>
 
-            <a href="#catalogo" onclick="closeMobileMenu()">
+            <a
+                href="#catalogo"
+                onclick="closeMobileMenu()"
+            >
                 CATÁLOGO
             </a>
 
-            <a href="#nosotros" onclick="closeMobileMenu()">
+            <a
+                href="#nosotros"
+                onclick="closeMobileMenu()"
+            >
                 NOSOTROS
             </a>
 
-            <a href="#contacto" onclick="closeMobileMenu()">
+            <a
+                href="#contacto"
+                onclick="closeMobileMenu()"
+            >
                 CONTACTO
             </a>
 
@@ -2241,6 +2572,7 @@
         >
 
             <div class="hero-inner">
+
 
                 <div class="hero-label">
                     007IMPORTED
@@ -2289,6 +2621,7 @@
 
                 </div>
 
+
             </div>
 
         </section>
@@ -2308,11 +2641,13 @@
 
                 <div class="section-header">
 
+
                     <div>
 
                         <div class="section-label">
                             01 — COLECCIÓN
                         </div>
+
 
                         <h2 class="section-title">
 
@@ -2320,7 +2655,7 @@
 
                             <br>
 
-                            <span style="color:#cdbb9e;">
+                            <span>
                                 LA COLECCIÓN
                             </span>
 
@@ -2336,116 +2671,56 @@
 
                     </p>
 
+
                 </div>
 
+
+                <!-- =================================================
+                     CATEGORIAS
+                ================================================== -->
 
                 <div class="categories">
 
 
+                    <!-- ZAPATILLAS -->
+
                     <button
-                        class="category active"
-                        data-category="Todos"
-                        onclick="filterCategory('Todos', this)"
+                        class="category"
+                        data-category="Zapatillas"
+                        onclick="filterCategory('Zapatillas', this)"
                     >
+
+                        <img
+                            src="img/categorias/zapatillas.jpg"
+                            alt="Zapatillas"
+                            class="category-image"
+                            loading="lazy"
+                        >
+
+
+                        <div
+                            class="category-overlay"
+                        ></div>
+
 
                         <span class="category-number">
                             01
                         </span>
 
-                        <span class="category-arrow">
-                            ↗
-                        </span>
-
-                        <span class="category-name">
-                            TODO
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        class="category"
-                        data-category="Remeras"
-                        onclick="filterCategory('Remeras', this)"
-                    >
-
-                        <span class="category-number">
-                            02
-                        </span>
 
                         <span class="category-arrow">
                             ↗
                         </span>
 
+
                         <span class="category-name">
-                            REMERAS
+                            ZAPATILLAS
                         </span>
 
                     </button>
 
 
-                    <button
-                        class="category"
-                        data-category="Pantalones"
-                        onclick="filterCategory('Pantalones', this)"
-                    >
-
-                        <span class="category-number">
-                            03
-                        </span>
-
-                        <span class="category-arrow">
-                            ↗
-                        </span>
-
-                        <span class="category-name">
-                            PANTALONES
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        class="category"
-                        data-category="Buzos"
-                        onclick="filterCategory('Buzos', this)"
-                    >
-
-                        <span class="category-number">
-                            04
-                        </span>
-
-                        <span class="category-arrow">
-                            ↗
-                        </span>
-
-                        <span class="category-name">
-                            BUZOS
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        class="category"
-                        data-category="Camperas"
-                        onclick="filterCategory('Camperas', this)"
-                    >
-
-                        <span class="category-number">
-                            05
-                        </span>
-
-                        <span class="category-arrow">
-                            ↗
-                        </span>
-
-                        <span class="category-name">
-                            CAMPERAS
-                        </span>
-
-                    </button>
-
+                    <!-- ACCESORIOS -->
 
                     <button
                         class="category"
@@ -2453,16 +2728,107 @@
                         onclick="filterCategory('Accesorios', this)"
                     >
 
+                        <img
+                            src="img/categorias/accesorios.jpg"
+                            alt="Accesorios"
+                            class="category-image"
+                            loading="lazy"
+                        >
+
+
+                        <div
+                            class="category-overlay"
+                        ></div>
+
+
                         <span class="category-number">
-                            06
+                            02
                         </span>
+
 
                         <span class="category-arrow">
                             ↗
                         </span>
 
+
                         <span class="category-name">
                             ACCESORIOS
+                        </span>
+
+                    </button>
+
+
+                    <!-- JEAN -->
+
+                    <button
+                        class="category"
+                        data-category="Jean"
+                        onclick="filterCategory('Jean', this)"
+                    >
+
+                        <img
+                            src="img/categorias/jean.jpg"
+                            alt="Jean"
+                            class="category-image"
+                            loading="lazy"
+                        >
+
+
+                        <div
+                            class="category-overlay"
+                        ></div>
+
+
+                        <span class="category-number">
+                            03
+                        </span>
+
+
+                        <span class="category-arrow">
+                            ↗
+                        </span>
+
+
+                        <span class="category-name">
+                            JEAN
+                        </span>
+
+                    </button>
+
+
+                    <!-- CONJUNTOS -->
+
+                    <button
+                        class="category"
+                        data-category="Conjuntos"
+                        onclick="filterCategory('Conjuntos', this)"
+                    >
+
+                        <img
+                            src="img/categorias/conjuntos.jpg"
+                            alt="Conjuntos"
+                            class="category-image"
+                            loading="lazy"
+                        >
+
+
+                        <div
+                            class="category-overlay"
+                        ></div>
+
+
+                        <span class="category-number">
+                            04
+                        </span>
+
+
+                        <span class="category-arrow">
+                            ↗
+                        </span>
+
+
+                        <span class="category-name">
+                            CONJUNTOS
                         </span>
 
                     </button>
@@ -2505,7 +2871,9 @@
                 >
 
                     <div class="products-message">
+
                         Cargando productos...
+
                     </div>
 
                 </div>
@@ -2527,6 +2895,7 @@
 
             <div class="section-inner">
 
+
                 <div class="about">
 
 
@@ -2535,6 +2904,7 @@
                         <div class="section-label">
                             02 — NOSOTROS
                         </div>
+
 
                         <div class="about-big">
 
@@ -2552,6 +2922,7 @@
 
 
                     <div>
+
 
                         <p class="about-text">
 
@@ -2572,13 +2943,14 @@
 
                         <div class="about-list">
 
+
                             <div class="about-item">
 
                                 <span>
                                     01
                                 </span>
 
-                                INDUMENTARIA
+                                ZAPATILLAS
 
                             </div>
 
@@ -2600,7 +2972,7 @@
                                     03
                                 </span>
 
-                                MAYORISTA
+                                JEAN
 
                             </div>
 
@@ -2611,13 +2983,15 @@
                                     04
                                 </span>
 
-                                MINORISTA
+                                CONJUNTOS
 
                             </div>
+
 
                         </div>
 
                     </div>
+
 
                 </div>
 
@@ -2636,6 +3010,7 @@
         >
 
             <div class="section-inner">
+
 
                 <div class="section-label">
                     03 — CONTACTO
@@ -2667,6 +3042,7 @@
 
                 <div class="contact-buttons">
 
+
                     <a
                         href="https://wa.me/5491173854862"
                         target="_blank"
@@ -2685,6 +3061,7 @@
                     >
                         INSTAGRAM ↗
                     </a>
+
 
                 </div>
 
@@ -2717,6 +3094,7 @@
                         alt="007IMPORTED"
                     >
 
+
                     <strong>
                         007IMPORTED
                     </strong>
@@ -2744,6 +3122,7 @@
 
                 </div>
 
+
             </div>
 
 
@@ -2763,6 +3142,7 @@
 
             </div>
 
+
         </div>
 
     </footer>
@@ -2778,24 +3158,34 @@
         onclick="closeModalOutside(event)"
     >
 
+
         <div class="modal-box">
 
 
             <!-- =================================================
-                 IMAGEN DEL PRODUCTO
-            ================================================= -->
+                 GALERIA
+            ================================================== -->
 
             <div
-                class="modal-image"
-                id="modalImage"
+                class="modal-gallery"
+                id="modalGallery"
             >
+
+
+                <div
+                    class="modal-image"
+                    id="modalImage"
+                >
+                </div>
+
 
                 <!-- FLECHA IZQUIERDA -->
 
                 <button
                     type="button"
-                    class="modal-image-arrow left hidden"
-                    id="modalPrev"
+                    class="gallery-arrow gallery-prev"
+                    id="galleryPrev"
+                    onclick="previousProductImage(event)"
                     aria-label="Imagen anterior"
                 >
                     ‹
@@ -2806,8 +3196,9 @@
 
                 <button
                     type="button"
-                    class="modal-image-arrow right hidden"
-                    id="modalNext"
+                    class="gallery-arrow gallery-next"
+                    id="galleryNext"
+                    onclick="nextProductImage(event)"
                     aria-label="Imagen siguiente"
                 >
                     ›
@@ -2817,25 +3208,36 @@
                 <!-- CONTADOR -->
 
                 <div
-                    class="modal-image-counter"
-                    id="modalImageCounter"
+                    class="gallery-counter"
+                    id="galleryCounter"
                 >
                     1 / 1
                 </div>
+
+
+                <!-- PUNTOS -->
+
+                <div
+                    class="gallery-dots"
+                    id="galleryDots"
+                ></div>
+
 
             </div>
 
 
             <!-- =================================================
-                 INFORMACIÓN
+                 INFORMACION
             ================================================== -->
 
             <div class="modal-info">
+
 
                 <button
                     class="modal-close"
                     onclick="closeProductModal()"
                     type="button"
+                    aria-label="Cerrar"
                 >
                     ×
                 </button>
@@ -2882,7 +3284,9 @@
                     CONSULTAR POR WHATSAPP ↗
                 </a>
 
+
             </div>
+
 
         </div>
 
@@ -2895,13 +3299,20 @@
 
     <script type="module">
 
-        import { supabase }
-            from "./js/supabase.js";
+
+        /* =====================================================
+           SUPABASE
+        ====================================================== */
+
+        import {
+            supabase
+        }
+        from "./js/supabase.js";
 
 
-        /* =================================================
-           CONFIGURACIÓN
-        ================================================= */
+        /* =====================================================
+           CONFIGURACION
+        ====================================================== */
 
         const WHATSAPP =
             "5491173854862";
@@ -2911,9 +3322,9 @@
             "https://www.instagram.com/007imported/?hl=es";
 
 
-        /* =================================================
+        /* =====================================================
            ELEMENTOS
-        ================================================= */
+        ====================================================== */
 
         const productsGrid =
             document.querySelector(
@@ -2942,24 +3353,6 @@
         const modalImage =
             document.querySelector(
                 "#modalImage"
-            );
-
-
-        const modalPrev =
-            document.querySelector(
-                "#modalPrev"
-            );
-
-
-        const modalNext =
-            document.querySelector(
-                "#modalNext"
-            );
-
-
-        const modalImageCounter =
-            document.querySelector(
-                "#modalImageCounter"
             );
 
 
@@ -2993,9 +3386,33 @@
             );
 
 
-        /* =================================================
+        const galleryPrev =
+            document.querySelector(
+                "#galleryPrev"
+            );
+
+
+        const galleryNext =
+            document.querySelector(
+                "#galleryNext"
+            );
+
+
+        const galleryCounter =
+            document.querySelector(
+                "#galleryCounter"
+            );
+
+
+        const galleryDots =
+            document.querySelector(
+                "#galleryDots"
+            );
+
+
+        /* =====================================================
            VARIABLES
-        ================================================= */
+        ====================================================== */
 
         let allProducts = [];
 
@@ -3003,18 +3420,18 @@
 
         let currentProduct = null;
 
-        let currentImages = [];
-
         let currentImageIndex = 0;
+
+        let currentProductImages = [];
 
         let touchStartX = 0;
 
         let touchEndX = 0;
 
 
-        /* =================================================
-           FORMATO PRECIO
-        ================================================= */
+        /* =====================================================
+           PRECIO
+        ====================================================== */
 
         function formatPrice(value) {
 
@@ -3030,9 +3447,9 @@
         }
 
 
-        /* =================================================
+        /* =====================================================
            ESCAPE HTML
-        ================================================= */
+        ====================================================== */
 
         function escapeHtml(value) {
 
@@ -3063,9 +3480,9 @@
         }
 
 
-        /* =================================================
+        /* =====================================================
            OBTENER IMAGENES
-        ================================================= */
+        ====================================================== */
 
         function getProductImages(product) {
 
@@ -3073,8 +3490,9 @@
 
 
             /*
-               Si Supabase devuelve images como array
-            */
+             * Si Supabase devuelve images
+             * como un array.
+             */
 
             if (
                 Array.isArray(
@@ -3094,75 +3512,29 @@
 
 
             /*
-               Si por alguna razón images
-               viene como texto JSON
-            */
-
-            else if (
-                typeof product.images ===
-                "string"
-            ) {
-
-                try {
-
-                    const parsed =
-                        JSON.parse(
-                            product.images
-                        );
-
-
-                    if (
-                        Array.isArray(
-                            parsed
-                        )
-                    ) {
-
-                        images =
-                            parsed.filter(
-                                image =>
-                                    image &&
-                                    typeof image === "string"
-                            );
-
-                    }
-
-                } catch (error) {
-
-                    /*
-                       Si no es JSON,
-                       lo tratamos como URL única.
-                    */
-
-                    if (
-                        product.images.trim()
-                    ) {
-
-                        images = [
-                            product.images.trim()
-                        ];
-
-                    }
-
-                }
-
-            }
-
-
-            /*
-               Si no hay images,
-               usamos product.image.
-            */
+             * Si por alguna razón
+             * images viene vacío,
+             * utilizamos product.image.
+             */
 
             if (
                 images.length === 0 &&
                 product.image
             ) {
 
-                images = [
+                images.push(
                     product.image
-                ];
+                );
 
             }
+
+
+            /*
+             * Elimina imágenes duplicadas.
+             */
+
+            images =
+                [...new Set(images)];
 
 
             return images;
@@ -3170,16 +3542,20 @@
         }
 
 
-        /* =================================================
+        /* =====================================================
            CARGAR PRODUCTOS
-        ================================================= */
+        ====================================================== */
 
         async function loadProducts() {
 
             productsGrid.innerHTML = `
+
                 <div class="products-message">
+
                     Cargando productos...
+
                 </div>
+
             `;
 
 
@@ -3201,7 +3577,9 @@
 
 
                 if (error) {
+
                     throw error;
+
                 }
 
 
@@ -3213,8 +3591,31 @@
                     allProducts.length;
 
 
+                /*
+                 * Al entrar mostramos TODOS.
+                 */
+
+                currentCategory =
+                    "Todos";
+
+
+                document
+                    .querySelectorAll(
+                        ".category"
+                    )
+                    .forEach(
+                        category => {
+
+                            category.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
                 renderProducts(
-                    currentCategory
+                    "Todos"
                 );
 
 
@@ -3242,9 +3643,9 @@
         }
 
 
-        /* =================================================
-           FILTRAR CATEGORÍA
-        ================================================= */
+        /* =====================================================
+           FILTRAR CATEGORIA
+        ====================================================== */
 
         window.filterCategory =
             function(
@@ -3293,7 +3694,8 @@
                                 "#productos"
                             )
                             .scrollIntoView({
-                                behavior: "smooth"
+                                behavior:
+                                    "smooth"
                             });
 
                     },
@@ -3303,9 +3705,9 @@
             };
 
 
-        /* =================================================
+        /* =====================================================
            RENDER PRODUCTOS
-        ================================================= */
+        ====================================================== */
 
         function renderProducts(
             category
@@ -3325,14 +3727,22 @@
                         product => {
 
                             return (
+
                                 String(
                                     product.category ||
                                     ""
-                                ).toLowerCase()
+                                )
+                                .trim()
+                                .toLowerCase()
+
                                 ===
+
                                 String(
                                     category
-                                ).toLowerCase()
+                                )
+                                .trim()
+                                .toLowerCase()
+
                             );
 
                         }
@@ -3392,9 +3802,9 @@
         }
 
 
-        /* =================================================
+        /* =====================================================
            CREAR TARJETA
-        ================================================= */
+        ====================================================== */
 
         function createProductCard(
             product
@@ -3417,8 +3827,7 @@
 
 
             const image =
-                images[0] ||
-                "";
+                images[0] || "";
 
 
             const description =
@@ -3426,9 +3835,19 @@
                 "Consultá disponibilidad y detalles.";
 
 
+            const productName =
+                product.name ||
+                "Producto";
+
+
+            const imageCount =
+                images.length;
+
+
             card.innerHTML = `
 
                 <div class="product-image">
+
 
                     ${
                         image
@@ -3439,10 +3858,7 @@
 
                         <img
                             src="${escapeHtml(image)}"
-                            alt="${escapeHtml(
-                                product.name ||
-                                "Producto"
-                            )}"
+                            alt="${escapeHtml(productName)}"
                             loading="lazy"
                         >
 
@@ -3476,16 +3892,40 @@
 
                     </div>
 
+
+                    ${
+                        imageCount > 1
+
+                        ?
+
+                        `
+
+                        <div
+                            class="product-image-count"
+                            title="${imageCount} imágenes"
+                        >
+                            ${imageCount}
+                        </div>
+
+                        `
+
+                        :
+
+                        ""
+
+                    }
+
+
                 </div>
 
 
                 <div class="product-info">
 
+
                     <h3 class="product-name">
 
                         ${escapeHtml(
-                            product.name ||
-                            "Producto"
+                            productName
                         )}
 
                     </h3>
@@ -3501,6 +3941,7 @@
 
 
                     <div class="product-bottom">
+
 
                         <div class="product-price">
 
@@ -3518,17 +3959,18 @@
                                     product.stock || 0
                                 ) > 0
 
-                                    ?
+                                ?
 
-                                    "DISPONIBLE"
+                                "DISPONIBLE"
 
-                                    :
+                                :
 
-                                    "CONSULTAR"
+                                "CONSULTAR"
 
                             }
 
                         </div>
+
 
                     </div>
 
@@ -3537,8 +3979,11 @@
                         type="button"
                         class="product-contact"
                     >
+
                         VER PRODUCTO
+
                     </button>
+
 
                 </div>
 
@@ -3582,9 +4027,9 @@
         }
 
 
-        /* =================================================
+        /* =====================================================
            ABRIR MODAL
-        ================================================= */
+        ====================================================== */
 
         function openProductModal(
             product
@@ -3594,7 +4039,7 @@
                 product;
 
 
-            currentImages =
+            currentProductImages =
                 getProductImages(
                     product
                 );
@@ -3625,24 +4070,19 @@
                 "Consultá disponibilidad, talles y detalles por WhatsApp.";
 
 
-            /*
-               Mostrar primera imagen
-            */
+            updateModalImage();
 
-            renderModalImage();
-
-
-            /*
-               WhatsApp
-            */
 
             const message =
                 encodeURIComponent(
+
                     "Hola 007IMPORTED, quiero consultar por el producto: " +
+
                     (
                         product.name ||
                         "Producto"
                     )
+
                 );
 
 
@@ -3652,10 +4092,6 @@
                 "?text=" +
                 message;
 
-
-            /*
-               Abrir modal
-            */
 
             productModal.classList.add(
                 "show"
@@ -3668,404 +4104,261 @@
         }
 
 
-        /* =================================================
-           MOSTRAR IMAGEN ACTUAL
-        ================================================= */
+        /* =====================================================
+           ACTUALIZAR IMAGEN MODAL
+        ====================================================== */
 
-        function renderModalImage() {
+        function updateModalImage() {
+
+            const total =
+                currentProductImages.length;
+
 
             /*
-               Si no hay imágenes
-            */
+             * Producto sin imágenes.
+             */
 
-            if (
-                currentImages.length === 0
-            ) {
+            if (total === 0) {
 
-                modalImage
-                    .querySelectorAll(
-                        ".modal-current-image, .modal-no-image"
-                    )
-                    .forEach(
-                        element => element.remove()
-                    );
+                modalImage.innerHTML = `
 
+                    <div
+                        style="
+                            width:100%;
+                            height:100%;
+                            min-height:550px;
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            background:#10100f;
+                        "
+                    >
 
-                const noImage =
-                    document.createElement(
-                        "div"
-                    );
+                        <img
+                            src="007imported-logo-circle.png"
+                            alt="007IMPORTED"
+                            style="
+                                width:55%;
+                                height:55%;
+                                object-fit:contain;
+                            "
+                        >
 
+                    </div>
 
-                noImage.className =
-                    "modal-no-image";
-
-
-                noImage.style.cssText = `
-                    width:100%;
-                    height:100%;
-                    min-height:500px;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
                 `;
 
+            } else {
 
-                noImage.innerHTML = `
+                const image =
+                    currentProductImages[
+                        currentImageIndex
+                    ];
+
+
+                modalImage.innerHTML = `
 
                     <img
-                        src="007imported-logo-circle.png"
-                        alt="007IMPORTED"
-                        style="
-                            width:55%;
-                            object-fit:contain;
-                        "
+                        src="${escapeHtml(image)}"
+                        alt="${escapeHtml(
+                            currentProduct?.name ||
+                            "Producto"
+                        )}"
                     >
 
                 `;
 
-
-                modalImage.prepend(
-                    noImage
-                );
-
-
-                modalPrev.classList.add(
-                    "hidden"
-                );
-
-
-                modalNext.classList.add(
-                    "hidden"
-                );
-
-
-                modalImageCounter.classList.remove(
-                    "show"
-                );
-
-
-                return;
-
             }
 
 
             /*
-               Eliminar imagen anterior
-            */
+             * Si hay más de una imagen,
+             * mostramos flechas.
+             */
 
-            modalImage
-                .querySelectorAll(
-                    ".modal-current-image, .modal-no-image"
-                )
-                .forEach(
-                    element => element.remove()
-                );
+            if (total > 1) {
 
+                galleryPrev.style.display =
+                    "flex";
 
-            /*
-               Crear nueva imagen
-            */
+                galleryNext.style.display =
+                    "flex";
 
-            const image =
-                document.createElement(
-                    "img"
-                );
+                galleryCounter.style.display =
+                    "block";
+
+                galleryDots.style.display =
+                    "flex";
 
 
-            image.className =
-                "modal-current-image";
-
-
-            image.src =
-                currentImages[
-                    currentImageIndex
-                ];
-
-
-            image.alt =
-                currentProduct?.name ||
-                "Producto";
-
-
-            image.draggable =
-                false;
-
-
-            /*
-               Insertar antes de las flechas
-            */
-
-            modalImage.prepend(
-                image
-            );
-
-
-            /*
-               Si hay más de una imagen,
-               mostrar flechas
-            */
-
-            if (
-                currentImages.length > 1
-            ) {
-
-                modalPrev.classList.remove(
-                    "hidden"
-                );
-
-
-                modalNext.classList.remove(
-                    "hidden"
-                );
-
-
-                modalImageCounter.classList.add(
-                    "show"
-                );
-
-
-                modalImageCounter.textContent =
+                galleryCounter.textContent =
                     (
                         currentImageIndex + 1
                     ) +
                     " / " +
-                    currentImages.length;
+                    total;
+
+
+                galleryDots.innerHTML =
+                    "";
+
+
+                currentProductImages.forEach(
+                    (
+                        image,
+                        index
+                    ) => {
+
+                        const dot =
+                            document.createElement(
+                                "span"
+                            );
+
+
+                        dot.className =
+                            "gallery-dot";
+
+
+                        if (
+                            index ===
+                            currentImageIndex
+                        ) {
+
+                            dot.classList.add(
+                                "active"
+                            );
+
+                        }
+
+
+                        dot.addEventListener(
+                            "click",
+                            event => {
+
+                                event.stopPropagation();
+
+                                currentImageIndex =
+                                    index;
+
+                                updateModalImage();
+
+                            }
+                        );
+
+
+                        galleryDots.appendChild(
+                            dot
+                        );
+
+                    }
+                );
+
 
             } else {
 
-                modalPrev.classList.add(
-                    "hidden"
-                );
+                galleryPrev.style.display =
+                    "none";
 
+                galleryNext.style.display =
+                    "none";
 
-                modalNext.classList.add(
-                    "hidden"
-                );
+                galleryCounter.style.display =
+                    "none";
 
-
-                modalImageCounter.classList.remove(
-                    "show"
-                );
+                galleryDots.style.display =
+                    "none";
 
             }
 
         }
 
 
-        /* =================================================
+        /* =====================================================
            IMAGEN ANTERIOR
-        ================================================= */
+        ====================================================== */
 
-        function previousImage() {
+        window.previousProductImage =
+            function(event) {
 
-            if (
-                currentImages.length <= 1
-            ) {
-                return;
-            }
+                if (event) {
 
+                    event.stopPropagation();
 
-            currentImageIndex--;
+                }
 
 
-            if (
-                currentImageIndex < 0
-            ) {
-
-                currentImageIndex =
-                    currentImages.length - 1;
-
-            }
+                const total =
+                    currentProductImages.length;
 
 
-            renderModalImage();
-
-        }
-
-
-        /* =================================================
-           IMAGEN SIGUIENTE
-        ================================================= */
-
-        function nextImage() {
-
-            if (
-                currentImages.length <= 1
-            ) {
-                return;
-            }
-
-
-            currentImageIndex++;
-
-
-            if (
-                currentImageIndex >=
-                currentImages.length
-            ) {
-
-                currentImageIndex =
-                    0;
-
-            }
-
-
-            renderModalImage();
-
-        }
-
-
-        /* =================================================
-           EVENTOS FLECHAS
-        ================================================= */
-
-        modalPrev.addEventListener(
-            "click",
-            event => {
-
-                event.stopPropagation();
-
-                previousImage();
-
-            }
-        );
-
-
-        modalNext.addEventListener(
-            "click",
-            event => {
-
-                event.stopPropagation();
-
-                nextImage();
-
-            }
-        );
-
-
-        /* =================================================
-           TECLADO
-        ================================================= */
-
-        document.addEventListener(
-            "keydown",
-            event => {
-
-                if (
-                    !productModal.classList.contains(
-                        "show"
-                    )
-                ) {
+                if (total <= 1) {
                     return;
                 }
 
 
+                currentImageIndex--;
+
                 if (
-                    event.key ===
-                    "ArrowLeft"
+                    currentImageIndex <
+                    0
                 ) {
 
-                    previousImage();
+                    currentImageIndex =
+                        total - 1;
 
                 }
 
 
-                if (
-                    event.key ===
-                    "ArrowRight"
-                ) {
+                updateModalImage();
 
-                    nextImage();
+            };
+
+
+        /* =====================================================
+           IMAGEN SIGUIENTE
+        ====================================================== */
+
+        window.nextProductImage =
+            function(event) {
+
+                if (event) {
+
+                    event.stopPropagation();
 
                 }
 
 
+                const total =
+                    currentProductImages.length;
+
+
+                if (total <= 1) {
+                    return;
+                }
+
+
+                currentImageIndex++;
+
+
                 if (
-                    event.key ===
-                    "Escape"
+                    currentImageIndex >=
+                    total
                 ) {
 
-                    closeProductModal();
+                    currentImageIndex =
+                        0;
 
                 }
 
-            }
-        );
+
+                updateModalImage();
+
+            };
 
 
-        /* =================================================
-           SWIPE CELULAR
-        ================================================= */
-
-        modalImage.addEventListener(
-            "touchstart",
-            event => {
-
-                touchStartX =
-                    event.changedTouches[0].screenX;
-
-            },
-            {
-                passive: true
-            }
-        );
-
-
-        modalImage.addEventListener(
-            "touchend",
-            event => {
-
-                touchEndX =
-                    event.changedTouches[0].screenX;
-
-
-                handleSwipe();
-
-            },
-            {
-                passive: true
-            }
-        );
-
-
-        function handleSwipe() {
-
-            const difference =
-                touchStartX -
-                touchEndX;
-
-
-            /*
-               Evita cambios por pequeños
-               movimientos del dedo.
-            */
-
-            if (
-                Math.abs(difference) < 50
-            ) {
-                return;
-            }
-
-
-            if (
-                difference > 0
-            ) {
-
-                nextImage();
-
-            } else {
-
-                previousImage();
-
-            }
-
-        }
-
-
-        /* =================================================
+        /* =====================================================
            CERRAR MODAL
-        ================================================= */
+        ====================================================== */
 
         window.closeProductModal =
             function() {
@@ -4078,20 +4371,12 @@
                 document.body.style.overflow =
                     "";
 
-
-                currentProduct =
-                    null;
-
-
-                currentImages =
-                    [];
-
-
-                currentImageIndex =
-                    0;
-
             };
 
+
+        /* =====================================================
+           CERRAR AL HACER CLICK AFUERA
+        ====================================================== */
 
         window.closeModalOutside =
             function(event) {
@@ -4108,9 +4393,142 @@
             };
 
 
-        /* =================================================
+        /* =====================================================
+           TECLADO
+        ====================================================== */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+
+                if (
+                    !productModal.classList.contains(
+                        "show"
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closeProductModal();
+
+                }
+
+
+                if (
+                    event.key ===
+                    "ArrowLeft"
+                ) {
+
+                    previousProductImage();
+
+                }
+
+
+                if (
+                    event.key ===
+                    "ArrowRight"
+                ) {
+
+                    nextProductImage();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           SWIPE EN MOVIL
+        ====================================================== */
+
+        const modalGallery =
+            document.querySelector(
+                "#modalGallery"
+            );
+
+
+        modalGallery.addEventListener(
+            "touchstart",
+            event => {
+
+                touchStartX =
+                    event.changedTouches[0]
+                        .screenX;
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        modalGallery.addEventListener(
+            "touchend",
+            event => {
+
+                touchEndX =
+                    event.changedTouches[0]
+                        .screenX;
+
+
+                handleGallerySwipe();
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        function handleGallerySwipe() {
+
+            const difference =
+                touchEndX -
+                touchStartX;
+
+
+            /*
+             * Evitamos movimientos
+             * demasiado pequeños.
+             */
+
+            if (
+                Math.abs(difference) <
+                45
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                difference > 0
+            ) {
+
+                previousProductImage();
+
+            } else {
+
+                nextProductImage();
+
+            }
+
+        }
+
+
+        /* =====================================================
            SCROLL PRODUCTOS
-        ================================================= */
+        ====================================================== */
 
         window.scrollToProducts =
             function() {
@@ -4120,15 +4538,16 @@
                         "#catalogo"
                     )
                     .scrollIntoView({
-                        behavior: "smooth"
+                        behavior:
+                            "smooth"
                     });
 
             };
 
 
-        /* =================================================
+        /* =====================================================
            MOBILE MENU
-        ================================================= */
+        ====================================================== */
 
         window.toggleMobileMenu =
             function() {
@@ -4139,12 +4558,9 @@
                     );
 
 
-                menu.style.display =
-                    menu.style.display === "block"
-                        ?
-                        "none"
-                        :
-                        "block";
+                menu.classList.toggle(
+                    "open"
+                );
 
             };
 
@@ -4158,19 +4574,22 @@
                     );
 
 
-                menu.style.display =
-                    "none";
+                menu.classList.remove(
+                    "open"
+                );
 
             };
 
 
-        /* =================================================
+        /* =====================================================
            INICIO
-        ================================================= */
+        ====================================================== */
 
         loadProducts();
 
+
     </script>
+
 
 </body>
 
