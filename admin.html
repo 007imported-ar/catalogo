@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>007imported — Panel Admin</title>
+
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="favicon.ico"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0b0b0b;
+            --panel: #151515;
+            --panel-2: #191919;
+            --border: #303030;
+            --text: #f5f5f5;
+            --muted: #8d8d8d;
+            --accent: #c8ff00;
+            --danger: #ff3b30;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family:
+                Inter,
+                Arial,
+                Helvetica,
+                sans-serif;
+            min-height: 100vh;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================
+           LOGIN
+        ========================= */
+
+        .login-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 430px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 42px;
+        }
+
+        .login-logo {
+            font-size: 34px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 8px;
+        }
+
+        .login-logo span {
+            display: block;
+            font-size: 15px;
+            letter-spacing: 5px;
+            color: var(--accent);
+        }
+
+        .login-title {
+            margin-top: 40px;
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .login-subtitle {
+            margin-top: 10px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* =========================
+           ADMIN
+        ========================= */
+
+        .admin-app {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .admin-header {
+            height: 90px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 42px;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: rgba(11, 11, 11, .96);
+            backdrop-filter: blur(12px);
+        }
+
+        .admin-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .admin-brand-mark {
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        .admin-brand-text strong {
+            display: block;
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        .admin-brand-text span {
+            display: block;
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .user-info {
+            text-align: right;
+        }
+
+        .user-info strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .user-info span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .logout-button {
+            border: 1px solid var(--border);
+            background: transparent;
+            color: white;
+            padding: 12px 18px;
+            font-weight: 700;
+        }
+
+        .logout-button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .admin-content {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 50px 30px 100px;
+        }
+
+        .page-heading {
+            margin-bottom: 35px;
+        }
+
+        .page-heading small {
+            display: block;
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .page-heading h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            line-height: .95;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+
+        .page-heading p {
+            margin-top: 15px;
+            color: var(--muted);
+        }
+
+        /* =========================
+           GRID
+        ========================= */
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(300px, .6fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .admin-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 32px;
+        }
+
+        .card-heading {
+            margin-bottom: 30px;
+        }
+
+        .card-heading h2 {
+            font-size: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .card-heading p {
+            margin-top: 7px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 9px;
+            color: #999;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .form-control {
+            width: 100%;
+            min-height: 56px;
+            padding: 15px 16px;
+            background: #181818;
+            border: 1px solid #343434;
+            color: white;
+            outline: none;
+            border-radius: 0;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent);
+        }
+
+        textarea.form-control {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        select.form-control {
+            appearance: auto;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        /* =========================
+           IMAGE
+        ========================= */
+
+        .image-upload {
+            border: 1px dashed #4a4a4a;
+            min-height: 210px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 25px;
+            background: #111;
+            transition: .2s;
+        }
+
+        .image-upload:hover {
+            border-color: var(--accent);
+        }
+
+        .image-upload input {
+            display: none;
+        }
+
+        .upload-content {
+            color: var(--muted);
+        }
+
+        .upload-icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .upload-title {
+            color: #aaa;
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .upload-subtitle {
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        .image-preview {
+            display: none;
+            width: 100%;
+            max-height: 280px;
+            object-fit: contain;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .primary-button {
+            width: 100%;
+            min-height: 58px;
+            border: 0;
+            background: var(--accent);
+            color: #050505;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .primary-button:hover {
+            filter: brightness(.9);
+        }
+
+        .secondary-button {
+            width: 100%;
+            min-height: 52px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: white;
+            font-weight: 700;
+        }
+
+        .secondary-button:hover {
+            border-color: var(--accent);
+        }
+
+        /* =========================
+           PRODUCTS
+        ========================= */
+
+        .products-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .product-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px;
+            background: var(--panel-2);
+            border: 1px solid var(--border);
+        }
+
+        .product-image {
+            width: 65px;
+            height: 65px;
+            background: #222;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .product-info strong {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 14px;
+        }
+
+        .product-info span {
+            display: block;
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .product-price {
+            color: var(--accent) !important;
+            font-weight: 800;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .icon-button {
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: white;
+        }
+
+        .icon-button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .icon-button.delete:hover {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        .empty-state {
+            padding: 30px 15px;
+            text-align: center;
+            border: 1px dashed var(--border);
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .admin-header {
+                height: auto;
+                min-height: 82px;
+                padding: 18px 20px;
+            }
+
+            .admin-user {
+                gap: 10px;
+            }
+
+            .user-info {
+                display: none;
+            }
+
+            .logout-button {
+                padding: 10px 12px;
+                font-size: 11px;
+            }
+
+            .admin-content {
+                padding: 35px 15px 80px;
+            }
+
+            .admin-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-card {
+                padding: 25px 20px;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .login-box {
+                padding: 30px 22px;
+            }
+
+            .admin-brand-mark {
+                width: 40px;
+                height: 40px;
+            }
+
+            .admin-brand-text strong {
+                font-size: 15px;
+            }
+
+            .admin-brand-text span {
+                font-size: 10px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .product-item {
+                align-items: flex-start;
+            }
+
+            .product-actions {
+                flex-direction: column;
+            }
+
+            .page-heading h1 {
+                font-size: 38px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         LOGIN
+    =========================================== -->
+
+    <section
+        class="login-screen"
+        id="loginScreen"
+    >
+
+        <div class="login-box">
+
+            <div class="login-logo">
+                007
+                <span>IMPORTED</span>
+            </div>
+
+            <h1 class="login-title">
+                PANEL ADMIN
+            </h1>
+
+            <p class="login-subtitle">
+                Ingresá con tu cuenta para administrar
+                los productos de 007imported.
+            </p>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+
+                    <label for="loginEmail">
+                        Email
+                    </label>
+
+                    <input
+                        class="form-control"
+                        id="loginEmail"
+                        type="email"
+                        placeholder="tu@email.com"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="loginPassword">
+                        Contraseña
+                    </label>
+
+                    <input
+                        class="form-control"
+                        id="loginPassword"
+                        type="password"
+                        placeholder="••••••••"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    class="primary-button"
+                    type="submit"
+                >
+                    Iniciar sesión
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         ADMIN APP
+    =========================================== -->
+
+    <div
+        class="admin-app"
+        id="adminApp"
+    >
+
+
+        <!-- HEADER -->
+
+        <header class="admin-header">
+
+            <div class="admin-brand">
+
+                <div class="admin-brand-mark">
+                    007
+                </div>
+
+                <div class="admin-brand-text">
+
+                    <strong>
+                        PANEL ADMIN
+                    </strong>
+
+                    <span>
+                        007IMPORTED
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-user">
+
+                <div class="user-info">
+
+                    <strong id="adminUserName">
+                        Administrador
+                    </strong>
+
+                    <span id="adminUserEmail">
+                        -
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="logout-button"
+                    id="logoutButton"
+                    type="button"
+                >
+                    CERRAR SESIÓN
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENIDO -->
+
+        <main class="admin-content">
+
+
+            <div class="page-heading">
+
+                <small>
+                    ADMINISTRACIÓN
+                </small>
+
+                <h1>
+                    GESTIONÁ<br>
+                    TU CATÁLOGO.
+                </h1>
+
+                <p>
+                    Agregá y administrá los productos
+                    que aparecen en tu tienda.
+                </p>
+
+            </div>
+
+
+            <div class="admin-grid">
+
+
+                <!-- ==================================
+                     NUEVO PRODUCTO
+                =================================== -->
+
+                <section class="admin-card">
+
+                    <div class="card-heading">
+
+                        <h2>
+                            Nuevo producto
+                        </h2>
+
+                        <p>
+                            Completá los datos del producto.
+                        </p>
+
+                    </div>
+
+
+                    <form id="productForm">
+
+
+                        <div class="form-group">
+
+                            <label for="productName">
+                                Nombre
+                            </label>
+
+                            <input
+                                class="form-control"
+                                id="productName"
+                                type="text"
+                                placeholder="Ej: Remera Nueva"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="productPrice">
+                                    Precio ($)
+                                </label>
+
+                                <input
+                                    class="form-control"
+                                    id="productPrice"
+                                    type="number"
+                                    min="0"
+                                    step="1"
+                                    placeholder="Ej: 25000"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="productStock">
+                                    Stock
+                                </label>
+
+                                <input
+                                    class="form-control"
+                                    id="productStock"
+                                    type="number"
+                                    min="0"
+                                    step="1"
+                                    placeholder="Ej: 10"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="productDescription">
+                                Descripción
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="productDescription"
+                                placeholder="Ej: Conjunto premium compuesto por hoodie y pantalón."
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="productLabel">
+                                    Etiqueta
+                                </label>
+
+                                <select
+                                    class="form-control"
+                                    id="productLabel"
+                                >
+
+                                    <option value="NUEVO">
+                                        NUEVO
+                                    </option>
+
+                                    <option value="DESTACADO">
+                                        DESTACADO
+                                    </option>
+
+                                    <option value="OFERTA">
+                                        OFERTA
+                                    </option>
+
+                                    <option value="">
+                                        SIN ETIQUETA
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="productCategory">
+                                    Categoría
+                                </label>
+
+                                <select
+                                    class="form-control"
+                                    id="productCategory"
+                                >
+
+                                    <option value="Remeras">
+                                        Remeras
+                                    </option>
+
+                                    <option value="Pantalones">
+                                        Pantalones
+                                    </option>
+
+                                    <option value="Buzos">
+                                        Buzos
+                                    </option>
+
+                                    <option value="Camperas">
+                                        Camperas
+                                    </option>
+
+                                    <option value="Accesorios">
+                                        Accesorios
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Imagen del producto
+                            </label>
+
+
+                            <label
+                                class="image-upload"
+                                for="productImage"
+                            >
+
+                                <input
+                                    type="file"
+                                    id="productImage"
+                                    accept="image/*"
+                                >
+
+
+                                <div
+                                    class="upload-content"
+                                    id="uploadContent"
+                                >
+
+                                    <div class="upload-icon">
+                                        📷
+                                    </div>
+
+                                    <div class="upload-title">
+                                        Hacé clic para seleccionar
+                                        una imagen
+                                    </div>
+
+                                    <div class="upload-subtitle">
+                                        JPG, PNG o WEBP
+                                    </div>
+
+                                </div>
+
+
+                                <img
+                                    class="image-preview"
+                                    id="imagePreview"
+                                    alt="Vista previa"
+                                >
+
+                            </label>
+
+                        </div>
+
+
+                        <button
+                            class="primary-button"
+                            type="submit"
+                        >
+                            AGREGAR PRODUCTO
+                        </button>
+
+                    </form>
+
+                </section>
+
+
+                <!-- ==================================
+                     PRODUCTOS
+                =================================== -->
+
+                <section class="admin-card">
+
+                    <div class="card-heading">
+
+                        <h2>
+                            Productos
+                        </h2>
+
+                        <p>
+                            Productos actualmente publicados.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="products-list"
+                        id="productsList"
+                    >
+
+                        <div class="empty-state">
+                            Cargando productos...
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- ==========================================
+         JAVASCRIPT TEMPORAL
+    =========================================== -->
+
+    <script>
+
+        const loginScreen =
+            document.getElementById("loginScreen");
+
+        const adminApp =
+            document.getElementById("adminApp");
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+        const logoutButton =
+            document.getElementById("logoutButton");
+
+        const productImage =
+            document.getElementById("productImage");
+
+        const imagePreview =
+            document.getElementById("imagePreview");
+
+        const uploadContent =
+            document.getElementById("uploadContent");
+
+
+        /*
+         * PREVISUALIZACIÓN DE IMAGEN
+         */
+
+        productImage.addEventListener(
+            "change",
+            function () {
+
+                const file = this.files[0];
+
+                if (!file) {
+                    return;
+                }
+
+                const reader =
+                    new FileReader();
+
+                reader.onload =
+                    function (event) {
+
+                        imagePreview.src =
+                            event.target.result;
+
+                        imagePreview.style.display =
+                            "block";
+
+                        uploadContent.style.display =
+                            "none";
+
+                    };
+
+                reader.readAsDataURL(file);
+
+            }
+        );
+
+
+        /*
+         * ESTO ES SOLO VISUAL POR AHORA.
+         *
+         * En el siguiente paso conectamos:
+         *
+         * Supabase Auth
+         * Supabase Storage
+         * tabla products
+         *
+         */
+
+        loginForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+                alert(
+                    "El diseño del Panel Admin está listo. Ahora vamos a conectarlo con Supabase."
+                );
+
+            }
+        );
+
+
+        logoutButton.addEventListener(
+            "click",
+            function () {
+
+                adminApp.style.display =
+                    "none";
+
+                loginScreen.style.display =
+                    "flex";
+
+            }
+        );
+
+
+        /*
+         * DEMO VISUAL
+         */
+
+        function showAdminDemo() {
+
+            loginScreen.style.display =
+                "none";
+
+            adminApp.style.display =
+                "block";
+
+            document.getElementById(
+                "adminUserName"
+            ).textContent =
+                "Administrador";
+
+            document.getElementById(
+                "adminUserEmail"
+            ).textContent =
+                "007imported";
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>
