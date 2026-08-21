@@ -2,831 +2,2192 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>007imported — Indumentaria urbana</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="description"
-        content="007imported — Indumentaria y accesorios. Venta mayorista y minorista. Envíos a todo el país.">
+    <title>007imported — Indumentaria</title>
 
-    <meta name="theme-color" content="#080808">
+    <meta
+        name="description"
+        content="007imported — Indumentaria y accesorios seleccionados."
+    >
 
     <!-- FAVICON -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link
+        rel="icon"
+        type="image/x-icon"
+        href="favicon.ico"
+    >
 
+    <!-- FUENTE -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+        rel="stylesheet"
+    >
 
-    <link rel="stylesheet" href="css/style.css">
 
-    <script type="module" src="js/app.js" defer></script>
+    <style>
+
+        /* ==================================================
+           RESET
+        ================================================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        :root {
+
+            --black: #070707;
+            --dark: #0b0b0b;
+            --dark-2: #101010;
+            --card: #141414;
+
+            --border: #292929;
+
+            --white: #f5f5f5;
+            --gray: #8b8b8b;
+
+            --green: #c7ff00;
+
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            background: var(--black);
+
+            color: var(--white);
+
+            font-family:
+                Inter,
+                Arial,
+                sans-serif;
+
+            min-height: 100vh;
+
+            overflow-x: hidden;
+
+        }
+
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+
+        button {
+            cursor: pointer;
+        }
+
+
+        img {
+            max-width: 100%;
+        }
+
+
+
+        /* ==================================================
+           HEADER
+        ================================================== */
+
+        .site-header {
+
+            height: 110px;
+
+            width: 100%;
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            z-index: 1000;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 5vw;
+
+            background:
+                rgba(7, 7, 7, .94);
+
+            border-bottom:
+                1px solid rgba(255,255,255,.07);
+
+            backdrop-filter:
+                blur(14px);
+
+        }
+
+
+        /*
+           LOGO GRANDE A LA IZQUIERDA
+        */
+
+        .site-logo {
+
+            width: 120px;
+            height: 120px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            z-index: 20;
+
+        }
+
+
+        .site-logo img {
+
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: contain;
+
+        }
+
+
+        /*
+           NAVEGACIÓN
+        */
+
+        .main-nav {
+
+            flex: 1;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 38px;
+
+            margin-left: 30px;
+
+        }
+
+
+        .main-nav a {
+
+            color: #cfcfcf;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            transition: .2s;
+
+        }
+
+
+        .main-nav a:hover {
+
+            color: var(--green);
+
+        }
+
+
+        /*
+           ACCIONES DERECHA
+        */
+
+        .header-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 25px;
+
+        }
+
+
+        .instagram-link {
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            color: #d0d0d0;
+
+        }
+
+
+        .instagram-link:hover {
+
+            color: var(--green);
+
+        }
+
+
+        .cart-button {
+
+            border: 0;
+
+            background: transparent;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .cart-count {
+
+            width: 22px;
+            height: 22px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+            color: #050505;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+        }
+
+
+
+        /* ==================================================
+           MOBILE MENU
+        ================================================== */
+
+        .mobile-menu-button {
+
+            display: none;
+
+            border: 1px solid var(--border);
+
+            background: transparent;
+
+            color: white;
+
+            width: 42px;
+            height: 42px;
+
+            font-size: 18px;
+
+        }
+
+
+
+        /* ==================================================
+           HERO
+        ================================================== */
+
+        .hero {
+
+            min-height: 100vh;
+
+            padding:
+
+                180px
+                7vw
+                90px;
+
+            display: flex;
+
+            align-items: center;
+
+            position: relative;
+
+            overflow: hidden;
+
+            background:
+
+                radial-gradient(
+                    circle at 75% 45%,
+                    rgba(199,255,0,.08),
+                    transparent 30%
+                ),
+
+                linear-gradient(
+                    90deg,
+                    #070707,
+                    #080808
+                );
+
+        }
+
+
+        /*
+           GRID DE FONDO
+        */
+
+        .hero::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background-image:
+
+                linear-gradient(
+                    rgba(255,255,255,.025) 1px,
+                    transparent 1px
+                ),
+
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.025) 1px,
+                    transparent 1px
+                );
+
+            background-size:
+                54px 54px;
+
+            pointer-events: none;
+
+        }
+
+
+        /*
+           LOGO GIGANTE DECORATIVO
+        */
+
+        .hero-watermark {
+
+            position: absolute;
+
+            right: -3vw;
+
+            bottom: -8vw;
+
+            font-size: 35vw;
+
+            line-height: .7;
+
+            font-weight: 900;
+
+            letter-spacing: -5vw;
+
+            color:
+
+                rgba(
+                    199,
+                    255,
+                    0,
+                    .025
+                );
+
+            pointer-events: none;
+
+            user-select: none;
+
+        }
+
+
+        .hero-content {
+
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 850px;
+
+        }
+
+
+        .hero-label {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: var(--green);
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .hero-label::before {
+
+            content: "";
+
+            width: 22px;
+
+            height: 2px;
+
+            background: var(--green);
+
+        }
+
+
+        .hero h1 {
+
+            font-size:
+
+                clamp(
+                    60px,
+                    10vw,
+                    150px
+                );
+
+            line-height: .82;
+
+            letter-spacing: -8px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .hero h1 span {
+
+            color: var(--green);
+
+            display: block;
+
+        }
+
+
+        .hero-description {
+
+            max-width: 520px;
+
+            margin-top: 35px;
+
+            color: #b7b7b7;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+        }
+
+
+        .hero-buttons {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 32px;
+
+        }
+
+
+        .button-primary {
+
+            min-height: 48px;
+
+            padding: 0 25px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: 0;
+
+            background: var(--green);
+
+            color: #050505;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .button-primary:hover {
+
+            filter: brightness(.9);
+
+        }
+
+
+        .button-secondary {
+
+            min-height: 48px;
+
+            padding: 0 25px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: 1px solid #3a3a3a;
+
+            background: transparent;
+
+            color: white;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .button-secondary:hover {
+
+            border-color: var(--green);
+
+            color: var(--green);
+
+        }
+
+
+
+        /* ==================================================
+           CATALOGO
+        ================================================== */
+
+        .catalog {
+
+            padding: 120px 7vw 150px;
+
+            background: var(--black);
+
+        }
+
+
+        .section-heading {
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-between;
+
+            gap: 30px;
+
+            margin-bottom: 45px;
+
+        }
+
+
+        .section-label {
+
+            color: var(--green);
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .section-heading h2 {
+
+            font-size:
+
+                clamp(
+                    40px,
+                    6vw,
+                    75px
+                );
+
+            line-height: .9;
+
+            letter-spacing: -4px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .section-description {
+
+            max-width: 350px;
+
+            color: var(--gray);
+
+            font-size: 12px;
+
+            line-height: 1.7;
+
+        }
+
+
+
+        /* ==================================================
+           TOOLS
+        ================================================== */
+
+        .catalog-tools {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .search-box {
+
+            width: 340px;
+
+            position: relative;
+
+        }
+
+
+        .search-box input {
+
+            width: 100%;
+
+            height: 48px;
+
+            padding: 0 15px;
+
+            background: var(--dark-2);
+
+            color: white;
+
+            border: 1px solid var(--border);
+
+            outline: none;
+
+            font-size: 11px;
+
+        }
+
+
+        .search-box input:focus {
+
+            border-color: var(--green);
+
+        }
+
+
+        .product-total {
+
+            color: var(--gray);
+
+            font-size: 11px;
+
+        }
+
+
+
+        /* ==================================================
+           PRODUCT GRID
+        ================================================== */
+
+        .products-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+
+        }
+
+
+        .product-card {
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            overflow: hidden;
+
+            transition:
+                transform .2s,
+                border-color .2s;
+
+        }
+
+
+        .product-card:hover {
+
+            transform:
+                translateY(-4px);
+
+            border-color:
+                #444;
+
+        }
+
+
+        .product-image {
+
+            width: 100%;
+
+            aspect-ratio: 1 / 1.1;
+
+            background: #101010;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+        .product-image img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition:
+                transform .35s;
+
+        }
+
+
+        .product-card:hover
+        .product-image img {
+
+            transform: scale(1.04);
+
+        }
+
+
+        .product-no-image {
+
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 35px;
+
+        }
+
+
+        .product-no-image img {
+
+            object-fit: contain;
+
+            opacity: .8;
+
+        }
+
+
+        .stock-label {
+
+            position: absolute;
+
+            left: 10px;
+
+            top: 10px;
+
+            background: var(--green);
+
+            color: #050505;
+
+            padding: 6px 8px;
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .out-of-stock {
+
+            background: #333;
+
+            color: #aaa;
+
+        }
+
+
+        .product-info {
+
+            padding: 18px;
+
+        }
+
+
+        .product-category {
+
+            color: var(--gray);
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .product-name {
+
+            margin-top: 8px;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            line-height: 1.3;
+
+        }
+
+
+        .product-description {
+
+            color: var(--gray);
+
+            font-size: 10px;
+
+            line-height: 1.5;
+
+            margin-top: 8px;
+
+            min-height: 30px;
+
+        }
+
+
+        .product-bottom {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-top: 15px;
+
+        }
+
+
+        .product-price {
+
+            color: var(--green);
+
+            font-size: 16px;
+
+            font-weight: 900;
+
+        }
+
+
+        .add-button {
+
+            width: 38px;
+            height: 38px;
+
+            border: 1px solid var(--border);
+
+            background: transparent;
+
+            color: white;
+
+            font-size: 18px;
+
+        }
+
+
+        .add-button:hover {
+
+            background: var(--green);
+
+            border-color: var(--green);
+
+            color: #050505;
+
+        }
+
+
+        .add-button:disabled {
+
+            opacity: .3;
+
+            cursor: not-allowed;
+
+        }
+
+
+
+        /* ==================================================
+           LOADING / EMPTY
+        ================================================== */
+
+        .catalog-message {
+
+            grid-column: 1 / -1;
+
+            padding: 80px 20px;
+
+            text-align: center;
+
+            border: 1px dashed var(--border);
+
+            color: var(--gray);
+
+            font-size: 12px;
+
+        }
+
+
+
+        /* ==================================================
+           NOSOTROS
+        ================================================== */
+
+        .about {
+
+            padding: 120px 7vw;
+
+            background: #0b0b0b;
+
+            border-top: 1px solid var(--border);
+
+            border-bottom: 1px solid var(--border);
+
+        }
+
+
+        .about-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 80px;
+
+            align-items: center;
+
+        }
+
+
+        .about h2 {
+
+            font-size:
+                clamp(
+                    45px,
+                    7vw,
+                    90px
+                );
+
+            line-height: .88;
+
+            letter-spacing: -5px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .about h2 span {
+
+            color: var(--green);
+
+        }
+
+
+        .about-text {
+
+            color: #aaa;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+
+        }
+
+
+
+        /* ==================================================
+           CONTACTO
+        ================================================== */
+
+        .contact {
+
+            padding: 130px 7vw;
+
+            text-align: center;
+
+        }
+
+
+        .contact h2 {
+
+            font-size:
+                clamp(
+                    45px,
+                    7vw,
+                    90px
+                );
+
+            line-height: .9;
+
+            letter-spacing: -5px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .contact h2 span {
+
+            color: var(--green);
+
+        }
+
+
+        .contact p {
+
+            max-width: 550px;
+
+            margin: 25px auto 30px;
+
+            color: var(--gray);
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+        }
+
+
+
+        /* ==================================================
+           FOOTER
+        ================================================== */
+
+        .footer {
+
+            padding: 35px 7vw;
+
+            border-top: 1px solid var(--border);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            color: var(--gray);
+
+            font-size: 10px;
+
+        }
+
+
+        .footer strong {
+
+            color: white;
+
+        }
+
+
+
+        /* ==================================================
+           CARRITO
+        ================================================== */
+
+        .cart-overlay {
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                rgba(0,0,0,.7);
+
+            z-index: 2000;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition: .25s;
+
+        }
+
+
+        .cart-overlay.open {
+
+            opacity: 1;
+
+            pointer-events: auto;
+
+        }
+
+
+        .cart-panel {
+
+            position: absolute;
+
+            right: 0;
+            top: 0;
+
+            height: 100%;
+
+            width: min(
+                450px,
+                100%
+            );
+
+            background: #101010;
+
+            border-left: 1px solid var(--border);
+
+            transform:
+                translateX(100%);
+
+            transition: .3s;
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+        .cart-overlay.open
+        .cart-panel {
+
+            transform:
+                translateX(0);
+
+        }
+
+
+        .cart-header {
+
+            height: 80px;
+
+            padding: 0 25px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            border-bottom: 1px solid var(--border);
+
+        }
+
+
+        .cart-header h3 {
+
+            font-size: 14px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .cart-close {
+
+            width: 38px;
+            height: 38px;
+
+            background: transparent;
+
+            border: 1px solid var(--border);
+
+            color: white;
+
+            font-size: 18px;
+
+        }
+
+
+        .cart-items {
+
+            flex: 1;
+
+            overflow-y: auto;
+
+            padding: 20px;
+
+        }
+
+
+        .cart-empty {
+
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            color: var(--gray);
+
+            font-size: 12px;
+
+        }
+
+
+        .cart-item {
+
+            display: grid;
+
+            grid-template-columns:
+                65px 1fr auto;
+
+            gap: 12px;
+
+            align-items: center;
+
+            padding: 12px 0;
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .cart-item-image {
+
+            width: 65px;
+            height: 65px;
+
+            background: #181818;
+
+            overflow: hidden;
+
+        }
+
+
+        .cart-item-image img {
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+        }
+
+
+        .cart-item-name {
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+        }
+
+
+        .cart-item-price {
+
+            color: var(--green);
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            margin-top: 5px;
+
+        }
+
+
+        .cart-remove {
+
+            width: 28px;
+            height: 28px;
+
+            border: 1px solid var(--border);
+
+            background: transparent;
+
+            color: #aaa;
+
+        }
+
+
+        .cart-remove:hover {
+
+            color: #ff4545;
+
+            border-color: #ff4545;
+
+        }
+
+
+        .cart-footer {
+
+            padding: 20px;
+
+            border-top: 1px solid var(--border);
+
+        }
+
+
+        .cart-total {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .cart-total span:first-child {
+
+            color: var(--gray);
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .cart-total strong {
+
+            color: var(--green);
+
+            font-size: 20px;
+
+        }
+
+
+        .whatsapp-button {
+
+            width: 100%;
+
+            min-height: 52px;
+
+            background: var(--green);
+
+            border: 0;
+
+            color: #050505;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+        }
+
+
+
+        /* ==================================================
+           TOAST
+        ================================================== */
+
+        .toast {
+
+            position: fixed;
+
+            left: 50%;
+
+            bottom: 25px;
+
+            transform:
+                translate(-50%, 100px);
+
+            opacity: 0;
+
+            z-index: 5000;
+
+            background: white;
+
+            color: black;
+
+            padding: 14px 20px;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            transition: .25s;
+
+        }
+
+
+        .toast.show {
+
+            transform:
+                translate(-50%, 0);
+
+            opacity: 1;
+
+        }
+
+
+
+        /* ==================================================
+           RESPONSIVE
+        ================================================== */
+
+        @media (max-width: 1100px) {
+
+            .products-grid {
+
+                grid-template-columns:
+                    repeat(3, 1fr);
+
+            }
+
+
+            .main-nav {
+
+                gap: 20px;
+
+            }
+
+        }
+
+
+
+        @media (max-width: 800px) {
+
+            .site-header {
+
+                height: 82px;
+
+                padding: 0 18px;
+
+            }
+
+
+            .site-logo {
+
+                width: 82px;
+                height: 82px;
+
+            }
+
+
+            .main-nav {
+
+                display: none;
+
+            }
+
+
+            .header-actions {
+
+                margin-left: auto;
+
+                gap: 15px;
+
+            }
+
+
+            .instagram-link {
+
+                display: none;
+
+            }
+
+
+            .mobile-menu-button {
+
+                display: block;
+
+            }
+
+
+            .hero {
+
+                padding:
+                    145px 25px
+                    80px;
+
+            }
+
+
+            .hero h1 {
+
+                letter-spacing: -4px;
+
+            }
+
+
+            .hero-description {
+
+                font-size: 12px;
+
+            }
+
+
+            .catalog {
+
+                padding:
+                    80px 20px
+                    100px;
+
+            }
+
+
+            .section-heading {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+            }
+
+
+            .catalog-tools {
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+            }
+
+
+            .search-box {
+
+                width: 100%;
+
+            }
+
+
+            .products-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                gap: 10px;
+
+            }
+
+
+            .product-info {
+
+                padding: 13px;
+
+            }
+
+
+            .product-description {
+
+                display: none;
+
+            }
+
+
+            .about {
+
+                padding:
+                    80px 20px;
+
+            }
+
+
+            .about-grid {
+
+                grid-template-columns: 1fr;
+
+                gap: 40px;
+
+            }
+
+
+            .contact {
+
+                padding:
+                    90px 20px;
+
+            }
+
+
+            .footer {
+
+                padding:
+                    25px 20px;
+
+                flex-direction: column;
+
+                gap: 10px;
+
+            }
+
+        }
+
+
+
+        @media (max-width: 480px) {
+
+            .site-logo {
+
+                width: 72px;
+                height: 72px;
+
+            }
+
+
+            .header-actions {
+
+                gap: 8px;
+
+            }
+
+
+            .cart-button {
+
+                font-size: 9px;
+
+            }
+
+
+            .hero {
+
+                padding-top: 125px;
+
+            }
+
+
+            .hero h1 {
+
+                font-size:
+                    55px;
+
+            }
+
+
+            .hero-buttons {
+
+                flex-direction: column;
+
+                align-items: stretch;
+
+            }
+
+
+            .products-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+
+            .product-price {
+
+                font-size: 13px;
+
+            }
+
+
+            .add-button {
+
+                width: 34px;
+                height: 34px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-    <!-- =====================================================
+
+    <!-- ==================================================
          HEADER
-    ====================================================== -->
+    ================================================== -->
 
-    <header class="site-header" id="siteHeader">
+    <header class="site-header">
 
-        <div class="header-inner">
+        <!-- LOGO GRANDE IZQUIERDA -->
 
-            <a href="#inicio" class="brand" aria-label="007imported inicio">
-                <span class="brand-mark">007</span>
-                <span class="brand-name">IMPORTED</span>
+        <a
+            href="#inicio"
+            class="site-logo"
+            aria-label="007imported"
+        >
+
+            <img
+                src="007imported-logo-circle.png"
+                alt="007imported"
+            >
+
+        </a>
+
+
+        <!-- NAVEGACIÓN -->
+
+        <nav class="main-nav">
+
+            <a href="#inicio">
+                Inicio
             </a>
 
-            <nav class="desktop-nav" aria-label="Navegación principal">
-                <a href="#inicio">Inicio</a>
-                <a href="#catalogo">Catálogo</a>
-                <a href="#nosotros">Nosotros</a>
-                <a href="#contacto">Contacto</a>
-            </nav>
+            <a href="#catalogo">
+                Catálogo
+            </a>
 
-            <div class="header-actions">
+            <a href="#nosotros">
+                Nosotros
+            </a>
 
-                <a
-                    href="https://www.instagram.com/007imported/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="header-instagram"
-                    aria-label="Instagram 007imported"
+            <a href="#contacto">
+                Contacto
+            </a>
+
+        </nav>
+
+
+        <!-- ACCIONES -->
+
+        <div class="header-actions">
+
+            <a
+                class="instagram-link"
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Instagram
+            </a>
+
+
+            <button
+                class="cart-button"
+                id="cartButton"
+                type="button"
+            >
+
+                <span>
+                    Carrito
+                </span>
+
+                <span
+                    class="cart-count"
+                    id="cartCount"
                 >
-                    Instagram
-                </a>
+                    0
+                </span>
 
-                <button
-                    class="cart-button"
-                    id="cartButton"
-                    type="button"
-                    aria-label="Abrir carrito"
-                >
-                    <span>Carrito</span>
-                    <span class="cart-count" id="cartCount">0</span>
-                </button>
-
-                <button
-                    class="menu-button"
-                    id="menuButton"
-                    type="button"
-                    aria-label="Abrir menú"
-                    aria-expanded="false"
-                >
-                    <span></span>
-                    <span></span>
-                </button>
-
-            </div>
-
-        </div>
+            </button>
 
 
-        <!-- MENÚ MOBILE -->
-
-        <div class="mobile-menu" id="mobileMenu">
-
-            <nav aria-label="Navegación móvil">
-
-                <a href="#inicio">Inicio</a>
-                <a href="#catalogo">Catálogo</a>
-                <a href="#nosotros">Nosotros</a>
-                <a href="#contacto">Contacto</a>
-
-                <a
-                    href="https://www.instagram.com/007imported/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Instagram ↗
-                </a>
-
-                <a
-                    href="https://wa.me/5491173854862"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    WhatsApp ↗
-                </a>
-
-            </nav>
+            <button
+                class="mobile-menu-button"
+                id="mobileMenuButton"
+                type="button"
+                aria-label="Abrir menú"
+            >
+                ☰
+            </button>
 
         </div>
 
     </header>
 
 
-    <main>
 
-        <!-- =====================================================
-             HERO
-        ====================================================== -->
+    <!-- ==================================================
+         HERO
+    ================================================== -->
 
-        <section class="hero" id="inicio">
+    <section
+        class="hero"
+        id="inicio"
+    >
 
-            <div class="hero-background"></div>
+        <div class="hero-watermark">
+            007
+        </div>
 
-            <div class="hero-content">
 
-                <div class="hero-eyebrow">
-                    <span></span>
-                    007IMPORTED
-                </div>
+        <div class="hero-content">
 
-                <h1>
-                    VESTITE
-                    <br>
-                    <strong>DISTINTO.</strong>
-                </h1>
-
-                <p>
-                    Indumentaria y accesorios seleccionados.
-                    Venta mayorista y minorista.
-                </p>
-
-                <div class="hero-buttons">
-
-                    <a
-                        href="#catalogo"
-                        class="button button-primary"
-                    >
-                        Ver catálogo
-                    </a>
-
-                    <a
-                        href="https://wa.me/5491173854862?text=Hola%21%20Quer%C3%ADa%20consultar%20por%20007imported."
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="button button-outline"
-                    >
-                        Consultar por WhatsApp
-                    </a>
-
-                </div>
-
+            <div class="hero-label">
+                007IMPORTED
             </div>
 
-            <div class="hero-scroll">
-                <span>SCROLL</span>
-                <span class="hero-scroll-line"></span>
-            </div>
 
-        </section>
+            <h1>
+
+                VESTITE
+
+                <span>
+                    DISTINTO.
+                </span>
+
+            </h1>
 
 
-        <!-- =====================================================
-             TICKER
-        ====================================================== -->
+            <p class="hero-description">
 
-        <div class="ticker">
+                Indumentaria y accesorios seleccionados.
+                Venta mayorista y minorista.
 
-            <div class="ticker-track">
+            </p>
 
-                <span>007IMPORTED</span>
-                <span>INDUMENTARIA</span>
-                <span>ACCESORIOS</span>
-                <span>MAYORISTA</span>
-                <span>MINORISTA</span>
-                <span>ENVÍOS</span>
 
-                <span>007IMPORTED</span>
-                <span>INDUMENTARIA</span>
-                <span>ACCESORIOS</span>
-                <span>MAYORISTA</span>
-                <span>MINORISTA</span>
-                <span>ENVÍOS</span>
+            <div class="hero-buttons">
+
+                <a
+                    href="#catalogo"
+                    class="button-primary"
+                >
+                    VER CATÁLOGO
+                </a>
+
+
+                <a
+                    href="https://wa.me/5490000000000"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="button-secondary"
+                >
+                    CONSULTAR POR WHATSAPP
+                </a>
 
             </div>
 
         </div>
 
+    </section>
 
-        <!-- =====================================================
-             CATÁLOGO
-        ====================================================== -->
 
-        <section class="catalog-section" id="catalogo">
 
-            <div class="section-container">
+    <!-- ==================================================
+         CATÁLOGO
+    ================================================== -->
 
-                <div class="catalog-top">
+    <section
+        class="catalog"
+        id="catalogo"
+    >
 
-                    <div>
+        <div class="section-heading">
 
-                        <span class="section-number">01</span>
+            <div>
 
-                        <h2>
-                            CATÁLOGO
-                            <br>
-                            <strong>007IMPORTED</strong>
-                        </h2>
-
-                    </div>
-
-                    <div class="catalog-tools">
-
-                        <div class="search-box">
-
-                            <input
-                                type="search"
-                                id="searchInput"
-                                placeholder="Buscar producto..."
-                                autocomplete="off"
-                                aria-label="Buscar productos"
-                            >
-
-                            <span class="search-icon">⌕</span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- FILTROS -->
-
-                <div
-                    class="catalog-filters"
-                    id="categoryFilters"
-                >
-
-                    <button
-                        type="button"
-                        class="filter-button active"
-                        data-category="Todos"
-                    >
-                        Todos
-                    </button>
-
-                    <button
-                        type="button"
-                        class="filter-button"
-                        data-category="Remeras"
-                    >
-                        Remeras
-                    </button>
-
-                    <button
-                        type="button"
-                        class="filter-button"
-                        data-category="Pantalones"
-                    >
-                        Pantalones
-                    </button>
-
-                    <button
-                        type="button"
-                        class="filter-button"
-                        data-category="Buzos"
-                    >
-                        Buzos
-                    </button>
-
-                    <button
-                        type="button"
-                        class="filter-button"
-                        data-category="Camperas"
-                    >
-                        Camperas
-                    </button>
-
-                    <button
-                        type="button"
-                        class="filter-button"
-                        data-category="Accesorios"
-                    >
-                        Accesorios
-                    </button>
-
-                </div>
-
-
-                <!-- PRODUCTOS -->
-
-                <div
-                    class="products-grid"
-                    id="productsGrid"
-                    aria-live="polite"
-                >
-                </div>
-
-
-                <!-- ESTADO SIN PRODUCTOS -->
-
-                <div
-                    class="empty-products"
-                    id="emptyProducts"
-                    hidden
-                >
-
-                    <div class="empty-icon">×</div>
-
-                    <h3>No encontramos productos</h3>
-
-                    <p>
-                        Probá con otra búsqueda o categoría.
-                    </p>
-
-                </div>
-
-
-                <!-- LOADING -->
-
-                <div
-                    class="products-loading"
-                    id="productsLoading"
-                >
-
-                    <div class="loading-spinner"></div>
-
-                    <span>Cargando catálogo...</span>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             NOSOTROS
-        ====================================================== -->
-
-        <section
-            class="about-section"
-            id="nosotros"
-        >
-
-            <div class="section-container">
-
-                <div class="about-grid">
-
-                    <div class="about-title">
-
-                        <span class="section-number">02</span>
-
-                        <h2>
-                            MÁS QUE
-                            <br>
-                            <strong>ROPA.</strong>
-                        </h2>
-
-                    </div>
-
-
-                    <div class="about-content">
-
-                        <p class="about-lead">
-
-                            Somos
-                            <strong>007imported</strong>.
-
-                            Una propuesta de indumentaria y accesorios
-                            pensada para quienes buscan prendas con
-                            personalidad.
-
-                        </p>
-
-
-                        <p>
-
-                            Trabajamos con venta mayorista y minorista,
-                            ofreciendo productos seleccionados y
-                            atención personalizada para cada cliente.
-
-                        </p>
-
-
-                        <div class="about-features">
-
-                            <div class="feature">
-
-                                <span class="feature-number">
-                                    01
-                                </span>
-
-                                <div>
-
-                                    <h3>
-                                        Mayorista
-                                    </h3>
-
-                                    <p>
-                                        Opciones para tu emprendimiento
-                                        o local.
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="feature">
-
-                                <span class="feature-number">
-                                    02
-                                </span>
-
-                                <div>
-
-                                    <h3>
-                                        Minorista
-                                    </h3>
-
-                                    <p>
-                                        Comprá tus prendas favoritas
-                                        de forma individual.
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="feature">
-
-                                <span class="feature-number">
-                                    03
-                                </span>
-
-                                <div>
-
-                                    <h3>
-                                        Envíos
-                                    </h3>
-
-                                    <p>
-                                        Consultanos por envíos y
-                                        disponibilidad.
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             BANNER
-        ====================================================== -->
-
-        <section class="statement-section">
-
-            <div class="statement-container">
-
-                <span class="statement-small">
+                <div class="section-label">
                     007IMPORTED
-                </span>
+                </div>
 
                 <h2>
-                    TU ESTILO.
-                    <br>
-                    <span>NUESTRAS PRENDAS.</span>
+                    CATÁLOGO
                 </h2>
 
-                <a
-                    href="https://www.instagram.com/007imported/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="statement-link"
+            </div>
+
+
+            <p class="section-description">
+
+                Explorá nuestros productos disponibles.
+                Encontrá tu próximo look.
+
+            </p>
+
+        </div>
+
+
+        <div class="catalog-tools">
+
+            <div class="search-box">
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Buscar producto..."
+                    autocomplete="off"
                 >
-                    Seguinos en Instagram ↗
-                </a>
 
             </div>
 
-        </section>
+
+            <div
+                class="product-total"
+                id="productTotal"
+            >
+                Cargando productos...
+            </div>
+
+        </div>
 
 
-        <!-- =====================================================
-             CONTACTO
-        ====================================================== -->
-
-        <section
-            class="contact-section"
-            id="contacto"
+        <div
+            class="products-grid"
+            id="productsGrid"
         >
 
-            <div class="section-container">
+            <div class="catalog-message">
 
-                <div class="contact-grid">
-
-                    <div>
-
-                        <span class="section-number">
-                            03
-                        </span>
-
-                        <h2>
-                            ¿TENÉS
-                            <br>
-                            <strong>ALGUNA DUDA?</strong>
-                        </h2>
-
-                        <p>
-                            Escribinos y te ayudamos con productos,
-                            precios, talles, disponibilidad,
-                            mayorista y envíos.
-                        </p>
-
-                    </div>
-
-
-                    <div class="contact-actions">
-
-                        <a
-                            href="https://wa.me/5491173854862"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="contact-button"
-                        >
-                            <span>WhatsApp</span>
-                            <span>↗</span>
-                        </a>
-
-
-                        <a
-                            href="https://www.instagram.com/007imported/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="contact-button"
-                        >
-                            <span>Instagram</span>
-                            <span>↗</span>
-                        </a>
-
-                    </div>
-
-                </div>
+                Cargando productos...
 
             </div>
 
-        </section>
+        </div>
 
-    </main>
+    </section>
 
 
-    <!-- =====================================================
+
+    <!-- ==================================================
+         NOSOTROS
+    ================================================== -->
+
+    <section
+        class="about"
+        id="nosotros"
+    >
+
+        <div class="about-grid">
+
+            <div>
+
+                <div class="section-label">
+                    SOBRE 007IMPORTED
+                </div>
+
+                <h2>
+
+                    ESTILO
+
+                    <span>
+                        SIN REGLAS.
+                    </span>
+
+                </h2>
+
+            </div>
+
+
+            <div class="about-text">
+
+                <p>
+
+                    Somos una tienda de indumentaria y
+                    accesorios seleccionados para quienes
+                    buscan vestirse diferente.
+
+                </p>
+
+                <br>
+
+                <p>
+
+                    Trabajamos con productos seleccionados
+                    y atención personalizada tanto para
+                    compras minoristas como mayoristas.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         CONTACTO
+    ================================================== -->
+
+    <section
+        class="contact"
+        id="contacto"
+    >
+
+        <div class="section-label">
+            CONTACTO
+        </div>
+
+
+        <h2>
+
+            ¿BUSCÁS
+
+            <span>
+                ALGO?
+            </span>
+
+        </h2>
+
+
+        <p>
+
+            Escribinos y consultanos por disponibilidad,
+            precios mayoristas o cualquier producto
+            que estés buscando.
+
+        </p>
+
+
+        <a
+            href="https://wa.me/5490000000000"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="button-primary"
+        >
+            HABLAR POR WHATSAPP
+        </a>
+
+    </section>
+
+
+
+    <!-- ==================================================
          FOOTER
-    ====================================================== -->
+    ================================================== -->
 
-    <footer class="site-footer">
+    <footer class="footer">
 
-        <div class="footer-container">
+        <div>
 
-            <div class="footer-main">
+            © 2026
+            <strong>
+                007IMPORTED
+            </strong>
 
-                <div class="footer-brand">
-
-                    <a
-                        href="#inicio"
-                        class="brand footer-logo"
-                    >
-                        <span class="brand-mark">
-                            007
-                        </span>
-
-                        <span class="brand-name">
-                            IMPORTED
-                        </span>
-                    </a>
-
-                    <p>
-                        Indumentaria urbana.
-                        Mayorista y minorista.
-                    </p>
-
-                </div>
+        </div>
 
 
-                <div class="footer-links">
-
-                    <div>
-
-                        <span class="footer-heading">
-                            Navegación
-                        </span>
-
-                        <a href="#inicio">
-                            Inicio
-                        </a>
-
-                        <a href="#catalogo">
-                            Catálogo
-                        </a>
-
-                        <a href="#nosotros">
-                            Nosotros
-                        </a>
-
-                        <a href="#contacto">
-                            Contacto
-                        </a>
-
-                    </div>
-
-
-                    <div>
-
-                        <span class="footer-heading">
-                            Social
-                        </span>
-
-                        <a
-                            href="https://www.instagram.com/007imported/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Instagram ↗
-                        </a>
-
-                        <a
-                            href="https://wa.me/5491173854862"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            WhatsApp ↗
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="footer-bottom">
-
-                <span>
-                    © 2026 007imported
-                </span>
-
-                <span>
-                    Todos los derechos reservados.
-                </span>
-
-            </div>
-
+        <div>
+            INDUMENTARIA & ACCESORIOS
         </div>
 
     </footer>
 
 
-    <!-- =====================================================
-         MODAL PRODUCTO
-    ====================================================== -->
+
+    <!-- ==================================================
+         CARRITO
+    ================================================== -->
 
     <div
-        class="product-modal"
-        id="productModal"
-        aria-hidden="true"
+        class="cart-overlay"
+        id="cartOverlay"
     >
-
-        <div
-            class="modal-overlay"
-            id="modalOverlay"
-        ></div>
-
-
-        <div class="modal-content">
-
-            <button
-                type="button"
-                class="modal-close"
-                id="modalClose"
-                aria-label="Cerrar"
-            >
-                ×
-            </button>
-
-
-            <div class="modal-product-grid">
-
-                <div class="modal-product-image">
-
-                    <img
-                        id="modalProductImage"
-                        src=""
-                        alt=""
-                    >
-
-                </div>
-
-
-                <div class="modal-product-info">
-
-                    <span
-                        class="modal-product-category"
-                        id="modalProductCategory"
-                    >
-                        Producto
-                    </span>
-
-
-                    <h2 id="modalProductName">
-                        Producto
-                    </h2>
-
-
-                    <div
-                        class="modal-product-price"
-                        id="modalProductPrice"
-                    >
-                        $0
-                    </div>
-
-
-                    <p
-                        class="modal-product-description"
-                        id="modalProductDescription"
-                    ></p>
-
-
-                    <div class="modal-product-actions">
-
-                        <button
-                            type="button"
-                            class="button button-primary"
-                            id="modalAddToCart"
-                        >
-                            Agregar al carrito
-                        </button>
-
-
-                        <a
-                            href="#"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="button button-outline"
-                            id="modalWhatsapp"
-                        >
-                            Consultar por WhatsApp
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         CARRITO
-    ====================================================== -->
-
-    <aside
-        class="cart-drawer"
-        id="cartDrawer"
-        aria-hidden="true"
-    >
-
-        <div
-            class="cart-overlay"
-            id="cartOverlay"
-        ></div>
-
 
         <div class="cart-panel">
 
             <div class="cart-header">
 
-                <div>
-
-                    <span class="cart-label">
-                        TU COMPRA
-                    </span>
-
-                    <h2>
-                        Carrito
-                    </h2>
-
-                </div>
+                <h3>
+                    Tu carrito
+                </h3>
 
 
                 <button
-                    type="button"
                     class="cart-close"
                     id="cartClose"
-                    aria-label="Cerrar carrito"
+                    type="button"
                 >
                     ×
                 </button>
@@ -838,41 +2199,17 @@
                 class="cart-items"
                 id="cartItems"
             >
-            </div>
 
+                <div class="cart-empty">
 
-            <div
-                class="cart-empty"
-                id="cartEmpty"
-            >
+                    Tu carrito está vacío.
 
-                <span>
-                    01
-                </span>
-
-                <h3>
-                    Tu carrito está vacío
-                </h3>
-
-                <p>
-                    Agregá productos para comenzar tu compra.
-                </p>
-
-                <button
-                    type="button"
-                    class="button button-outline"
-                    id="continueShopping"
-                >
-                    Ver productos
-                </button>
+                </div>
 
             </div>
 
 
-            <div
-                class="cart-footer"
-                id="cartFooter"
-            >
+            <div class="cart-footer">
 
                 <div class="cart-total">
 
@@ -888,77 +2225,1199 @@
 
 
                 <button
+                    class="whatsapp-button"
+                    id="whatsappButton"
                     type="button"
-                    class="checkout-button"
-                    id="checkoutButton"
                 >
-                    Finalizar por WhatsApp ↗
+                    CONSULTAR POR WHATSAPP
                 </button>
-
-
-                <p class="cart-note">
-
-                    Al finalizar se abrirá WhatsApp
-                    con el detalle de tu pedido.
-
-                </p>
 
             </div>
 
         </div>
 
-    </aside>
+    </div>
 
 
-    <!-- =====================================================
+
+    <!-- ==================================================
          TOAST
-    ====================================================== -->
+    ================================================== -->
 
     <div
         class="toast"
         id="toast"
-        role="status"
-        aria-live="polite"
-    >
-
-        <span class="toast-icon">
-            ✓
-        </span>
-
-        <span id="toastMessage">
-            Producto agregado
-        </span>
-
-    </div>
+    ></div>
 
 
-    <!-- =====================================================
-         AÑO
-    ====================================================== -->
 
-    <script>
+    <!-- ==================================================
+         JAVASCRIPT
+    ================================================== -->
 
-        document.addEventListener(
-            "DOMContentLoaded",
-            () => {
+    <script type="module">
 
-                const yearElements =
-                    document.querySelectorAll(
-                        ".current-year"
+        import { supabase }
+            from "./js/supabase.js";
+
+
+        /* ==================================================
+           ELEMENTOS
+        ================================================== */
+
+        const productsGrid =
+            document.querySelector(
+                "#productsGrid"
+            );
+
+
+        const productTotal =
+            document.querySelector(
+                "#productTotal"
+            );
+
+
+        const searchInput =
+            document.querySelector(
+                "#searchInput"
+            );
+
+
+        const cartButton =
+            document.querySelector(
+                "#cartButton"
+            );
+
+
+        const cartCount =
+            document.querySelector(
+                "#cartCount"
+            );
+
+
+        const cartOverlay =
+            document.querySelector(
+                "#cartOverlay"
+            );
+
+
+        const cartClose =
+            document.querySelector(
+                "#cartClose"
+            );
+
+
+        const cartItems =
+            document.querySelector(
+                "#cartItems"
+            );
+
+
+        const cartTotal =
+            document.querySelector(
+                "#cartTotal"
+            );
+
+
+        const whatsappButton =
+            document.querySelector(
+                "#whatsappButton"
+            );
+
+
+        const toast =
+            document.querySelector(
+                "#toast"
+            );
+
+
+        const mobileMenuButton =
+            document.querySelector(
+                "#mobileMenuButton"
+            );
+
+
+        let products = [];
+
+
+        let cart = [];
+
+
+        /* ==================================================
+           CONFIGURACIÓN
+        ================================================== */
+
+        /*
+           CAMBIÁ ESTE NÚMERO POR TU WHATSAPP REAL.
+
+           Formato:
+           549 + código de área + número
+
+           Ejemplo:
+           5491123456789
+        */
+
+        const WHATSAPP_NUMBER =
+            "5490000000000";
+
+
+
+        /* ==================================================
+           ESCAPE HTML
+        ================================================== */
+
+        function escapeHtml(value) {
+
+            return String(
+                value ?? ""
+            )
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+
+        /* ==================================================
+           PRECIO
+        ================================================== */
+
+        function formatPrice(value) {
+
+            return (
+
+                "$" +
+
+                Number(
+                    value || 0
+                ).toLocaleString(
+                    "es-AR"
+                )
+
+            );
+
+        }
+
+
+
+        /* ==================================================
+           TOAST
+        ================================================== */
+
+        function showToast(
+            message
+        ) {
+
+            toast.textContent =
+                message;
+
+            toast.classList.add(
+                "show"
+            );
+
+
+            setTimeout(
+                () => {
+
+                    toast.classList.remove(
+                        "show"
+                    );
+
+                },
+                2500
+            );
+
+        }
+
+
+
+        /* ==================================================
+           OBTENER IMAGEN
+        ================================================== */
+
+        function getProductImage(
+            product
+        ) {
+
+            if (
+                Array.isArray(
+                    product.images
+                ) &&
+                product.images.length
+            ) {
+
+                return product.images[0];
+
+            }
+
+
+            if (
+                product.image
+            ) {
+
+                return product.image;
+
+            }
+
+
+            return "";
+
+        }
+
+
+
+        /* ==================================================
+           CARGAR PRODUCTOS
+        ================================================== */
+
+        async function loadProducts() {
+
+            productsGrid.innerHTML = `
+
+                <div class="catalog-message">
+                    Cargando productos...
+                </div>
+
+            `;
+
+
+            const {
+                data,
+                error
+            } =
+                await supabase
+                    .from("products")
+                    .select("*")
+                    .order(
+                        "created_at",
+                        {
+                            ascending: false
+                        }
                     );
 
 
-                yearElements.forEach(
-                    element => {
+            if (error) {
 
-                        element.textContent =
-                            new Date().getFullYear();
+                console.error(
+                    "Error cargando productos:",
+                    error
+                );
+
+
+                productsGrid.innerHTML = `
+
+                    <div class="catalog-message">
+
+                        No se pudieron cargar
+                        los productos.
+
+                    </div>
+
+                `;
+
+
+                productTotal.textContent =
+                    "Error cargando productos";
+
+
+                return;
+
+            }
+
+
+            products =
+                data || [];
+
+
+            renderProducts(
+                products
+            );
+
+        }
+
+
+
+        /* ==================================================
+           RENDER PRODUCTOS
+        ================================================== */
+
+        function renderProducts(
+            list
+        ) {
+
+            productTotal.textContent =
+
+                `${list.length} producto${list.length === 1 ? "" : "s"}`;
+
+
+            if (!list.length) {
+
+                productsGrid.innerHTML = `
+
+                    <div class="catalog-message">
+
+                        No encontramos productos.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            productsGrid.innerHTML = "";
+
+
+            list.forEach(
+                product => {
+
+                    const card =
+                        createProductCard(
+                            product
+                        );
+
+
+                    productsGrid.appendChild(
+                        card
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* ==================================================
+           PRODUCT CARD
+        ================================================== */
+
+        function createProductCard(
+            product
+        ) {
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "product-card";
+
+
+            const image =
+                getProductImage(
+                    product
+                );
+
+
+            const stock =
+                Number(
+                    product.stock || 0
+                );
+
+
+            const hasStock =
+                stock > 0;
+
+
+            const images =
+                Array.isArray(
+                    product.images
+                )
+                    ?
+                    product.images
+                    :
+                    [];
+
+
+            const imageCount =
+                images.length;
+
+
+            card.innerHTML = `
+
+                <div class="product-image">
+
+                    ${
+                        image
+
+                        ?
+
+                        `
+
+                        <img
+                            src="${escapeHtml(image)}"
+                            alt="${escapeHtml(
+                                product.name ||
+                                "Producto"
+                            )}"
+                            loading="lazy"
+                        >
+
+                        `
+
+                        :
+
+                        `
+
+                        <div class="product-no-image">
+
+                            <img
+                                src="007imported-logo-circle.png"
+                                alt="007imported"
+                            >
+
+                        </div>
+
+                        `
+                    }
+
+
+                    <div
+                        class="stock-label
+                        ${!hasStock
+                            ? "out-of-stock"
+                            : ""
+                        }"
+                    >
+
+                        ${
+                            hasStock
+                                ?
+                                "Disponible"
+                                :
+                                "Sin stock"
+                        }
+
+                    </div>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <div class="product-category">
+
+                        ${escapeHtml(
+                            product.category ||
+                            "Indumentaria"
+                        )}
+
+                    </div>
+
+
+                    <div class="product-name">
+
+                        ${escapeHtml(
+                            product.name ||
+                            "Producto"
+                        )}
+
+                    </div>
+
+
+                    <div class="product-description">
+
+                        ${escapeHtml(
+                            product.description ||
+                            ""
+                        )}
+
+                    </div>
+
+
+                    <div class="product-bottom">
+
+                        <div class="product-price">
+
+                            ${formatPrice(
+                                product.price
+                            )}
+
+                        </div>
+
+
+                        <button
+                            class="add-button"
+                            type="button"
+                            ${!hasStock ? "disabled" : ""}
+                            title="Agregar al carrito"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            const addButton =
+                card.querySelector(
+                    ".add-button"
+                );
+
+
+            if (addButton) {
+
+                addButton.addEventListener(
+                    "click",
+                    () => {
+
+                        addToCart(
+                            product
+                        );
 
                     }
                 );
 
             }
+
+
+            return card;
+
+        }
+
+
+
+        /* ==================================================
+           BUSCADOR
+        ================================================== */
+
+        searchInput.addEventListener(
+            "input",
+            () => {
+
+                const query =
+                    searchInput.value
+                        .trim()
+                        .toLowerCase();
+
+
+                if (!query) {
+
+                    renderProducts(
+                        products
+                    );
+
+                    return;
+
+                }
+
+
+                const filtered =
+                    products.filter(
+                        product => {
+
+                            const name =
+                                String(
+                                    product.name ||
+                                    ""
+                                ).toLowerCase();
+
+
+                            const category =
+                                String(
+                                    product.category ||
+                                    ""
+                                ).toLowerCase();
+
+
+                            const description =
+                                String(
+                                    product.description ||
+                                    ""
+                                ).toLowerCase();
+
+
+                            return (
+
+                                name.includes(
+                                    query
+                                )
+
+                                ||
+
+                                category.includes(
+                                    query
+                                )
+
+                                ||
+
+                                description.includes(
+                                    query
+                                )
+
+                            );
+
+                        }
+                    );
+
+
+                renderProducts(
+                    filtered
+                );
+
+            }
         );
+
+
+
+        /* ==================================================
+           CARRITO
+        ================================================== */
+
+        function addToCart(
+            product
+        ) {
+
+            const existing =
+                cart.find(
+                    item =>
+                        item.id === product.id
+                );
+
+
+            if (existing) {
+
+                existing.quantity += 1;
+
+            } else {
+
+                cart.push({
+
+                    id:
+                        product.id,
+
+                    name:
+                        product.name,
+
+                    price:
+                        Number(
+                            product.price || 0
+                        ),
+
+                    image:
+                        getProductImage(
+                            product
+                        ),
+
+                    quantity:
+                        1
+
+                });
+
+            }
+
+
+            saveCart();
+
+            renderCart();
+
+            showToast(
+                "Producto agregado al carrito."
+            );
+
+        }
+
+
+
+        function removeFromCart(
+            id
+        ) {
+
+            cart =
+                cart.filter(
+                    item =>
+                        item.id !== id
+                );
+
+
+            saveCart();
+
+            renderCart();
+
+        }
+
+
+
+        function saveCart() {
+
+            localStorage.setItem(
+                "007imported_cart",
+                JSON.stringify(
+                    cart
+                )
+            );
+
+        }
+
+
+
+        function loadCart() {
+
+            try {
+
+                const saved =
+                    localStorage.getItem(
+                        "007imported_cart"
+                    );
+
+
+                if (saved) {
+
+                    cart =
+                        JSON.parse(
+                            saved
+                        );
+
+                }
+
+            } catch {
+
+                cart = [];
+
+            }
+
+
+            renderCart();
+
+        }
+
+
+
+        /* ==================================================
+           RENDER CARRITO
+        ================================================== */
+
+        function renderCart() {
+
+            const totalQuantity =
+                cart.reduce(
+                    (
+                        total,
+                        item
+                    ) =>
+                        total +
+                        item.quantity,
+                    0
+                );
+
+
+            cartCount.textContent =
+                totalQuantity;
+
+
+            if (!cart.length) {
+
+                cartItems.innerHTML = `
+
+                    <div class="cart-empty">
+
+                        Tu carrito está vacío.
+
+                    </div>
+
+                `;
+
+
+                cartTotal.textContent =
+                    "$0";
+
+
+                return;
+
+            }
+
+
+            cartItems.innerHTML = "";
+
+
+            let total = 0;
+
+
+            cart.forEach(
+                item => {
+
+                    total +=
+                        item.price *
+                        item.quantity;
+
+
+                    const element =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    element.className =
+                        "cart-item";
+
+
+                    element.innerHTML = `
+
+                        <div class="cart-item-image">
+
+                            ${
+                                item.image
+
+                                ?
+
+                                `
+
+                                <img
+                                    src="${escapeHtml(
+                                        item.image
+                                    )}"
+                                    alt="${escapeHtml(
+                                        item.name
+                                    )}"
+                                >
+
+                                `
+
+                                :
+
+                                `
+
+                                <img
+                                    src="007imported-logo-circle.png"
+                                    alt="007imported"
+                                >
+
+                                `
+                            }
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="cart-item-name">
+
+                                ${escapeHtml(
+                                    item.name
+                                )}
+
+                            </div>
+
+
+                            <div class="cart-item-price">
+
+                                ${formatPrice(
+                                    item.price
+                                )}
+
+                                ×
+
+                                ${item.quantity}
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="cart-remove"
+                            type="button"
+                            data-id="${escapeHtml(
+                                item.id
+                            )}"
+                        >
+                            ×
+                        </button>
+
+                    `;
+
+
+                    element
+                        .querySelector(
+                            ".cart-remove"
+                        )
+                        .addEventListener(
+                            "click",
+                            () => {
+
+                                removeFromCart(
+                                    item.id
+                                );
+
+                            }
+                        );
+
+
+                    cartItems.appendChild(
+                        element
+                    );
+
+                }
+            );
+
+
+            cartTotal.textContent =
+                formatPrice(
+                    total
+                );
+
+        }
+
+
+
+        /* ==================================================
+           ABRIR CARRITO
+        ================================================== */
+
+        function openCart() {
+
+            cartOverlay.classList.add(
+                "open"
+            );
+
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+
+
+        /* ==================================================
+           CERRAR CARRITO
+        ================================================== */
+
+        function closeCart() {
+
+            cartOverlay.classList.remove(
+                "open"
+            );
+
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        cartButton.addEventListener(
+            "click",
+            openCart
+        );
+
+
+        cartClose.addEventListener(
+            "click",
+            closeCart
+        );
+
+
+        cartOverlay.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target ===
+                    cartOverlay
+                ) {
+
+                    closeCart();
+
+                }
+
+            }
+        );
+
+
+
+        /* ==================================================
+           WHATSAPP
+        ================================================== */
+
+        whatsappButton.addEventListener(
+            "click",
+            () => {
+
+                if (!cart.length) {
+
+                    showToast(
+                        "El carrito está vacío."
+                    );
+
+                    return;
+
+                }
+
+
+                let message =
+                    "Hola! Quiero consultar por estos productos de 007imported:%0A%0A";
+
+
+                let total = 0;
+
+
+                cart.forEach(
+                    item => {
+
+                        const subtotal =
+                            item.price *
+                            item.quantity;
+
+
+                        total +=
+                            subtotal;
+
+
+                        message +=
+
+                            `• ${item.name} x${item.quantity} — ${formatPrice(subtotal)}%0A`;
+
+                    }
+                );
+
+
+                message +=
+
+                    `%0ATotal estimado: ${formatPrice(total)}`;
+
+
+                const url =
+                    `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+
+
+                window.open(
+                    url,
+                    "_blank"
+                );
+
+            }
+        );
+
+
+
+        /* ==================================================
+           MENÚ MOBILE
+        ================================================== */
+
+        mobileMenuButton.addEventListener(
+            "click",
+            () => {
+
+                const nav =
+                    document.querySelector(
+                        ".main-nav"
+                    );
+
+
+                if (
+                    nav.style.display ===
+                    "flex"
+                ) {
+
+                    nav.style.display =
+                        "none";
+
+                } else {
+
+                    nav.style.position =
+                        "absolute";
+
+                    nav.style.top =
+                        "82px";
+
+                    nav.style.left =
+                        "0";
+
+                    nav.style.right =
+                        "0";
+
+                    nav.style.padding =
+                        "25px";
+
+                    nav.style.background =
+                        "#0b0b0b";
+
+                    nav.style.borderBottom =
+                        "1px solid #292929";
+
+                    nav.style.flexDirection =
+                        "column";
+
+                    nav.style.display =
+                        "flex";
+
+                }
+
+            }
+        );
+
+
+
+        /* ==================================================
+           CERRAR MENÚ AL HACER CLICK
+        ================================================== */
+
+        document
+            .querySelectorAll(
+                ".main-nav a"
+            )
+            .forEach(
+                link => {
+
+                    link.addEventListener(
+                        "click",
+                        () => {
+
+                            if (
+                                window.innerWidth <=
+                                800
+                            ) {
+
+                                document
+                                    .querySelector(
+                                        ".main-nav"
+                                    )
+                                    .style.display =
+                                    "none";
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+
+        /* ==================================================
+           INICIAR
+        ================================================== */
+
+        loadCart();
+
+        loadProducts();
 
     </script>
 
