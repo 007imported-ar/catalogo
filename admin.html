@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,12 +10,28 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>007imported — Panel Admin</title>
+    <title>007imported — Admin</title>
 
     <link
         rel="icon"
         type="image/x-icon"
         href="favicon.ico"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
     >
 
     <style>
@@ -26,541 +43,970 @@
         }
 
         :root {
-            --bg: #0b0b0b;
-            --panel: #151515;
-            --panel-2: #191919;
-            --border: #303030;
-            --text: #f5f5f5;
-            --muted: #8d8d8d;
-            --accent: #c8ff00;
-            --danger: #ff3b30;
-        }
 
-        html {
-            scroll-behavior: smooth;
+            --black: #080808;
+            --dark: #101010;
+            --card: #151515;
+            --card-2: #1b1b1b;
+
+            --border: #2c2c2c;
+
+            --white: #f5f5f5;
+            --gray: #8b8b8b;
+
+            --green: #c7ff00;
+
+            --red: #ff4545;
+
         }
 
         body {
-            background: var(--bg);
-            color: var(--text);
+
+            background: var(--black);
+
+            color: var(--white);
+
             font-family:
                 Inter,
                 Arial,
-                Helvetica,
                 sans-serif;
+
             min-height: 100vh;
+
         }
+
 
         button,
         input,
         textarea,
         select {
-            font: inherit;
+
+            font-family: inherit;
+
         }
+
 
         button {
+
             cursor: pointer;
+
         }
 
-        /* =========================
+
+        /* =====================================
            LOGIN
-        ========================= */
+        ====================================== */
 
         .login-screen {
+
             min-height: 100vh;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
-            padding: 24px;
+
+            padding: 25px;
+
         }
 
-        .login-box {
+
+        .login-card {
+
             width: 100%;
+
             max-width: 430px;
-            background: var(--panel);
+
+            background: var(--card);
+
             border: 1px solid var(--border);
-            padding: 42px;
+
+            padding: 40px;
+
         }
 
-        .login-logo {
-            font-size: 34px;
+
+        .logo {
+
+            margin-bottom: 45px;
+
+        }
+
+
+        .logo-main {
+
+            font-size: 38px;
+
             font-weight: 900;
-            letter-spacing: -2px;
-            margin-bottom: 8px;
+
+            letter-spacing: -3px;
+
         }
 
-        .login-logo span {
-            display: block;
-            font-size: 15px;
-            letter-spacing: 5px;
-            color: var(--accent);
-        }
 
-        .login-title {
-            margin-top: 40px;
-            font-size: 26px;
+        .logo-sub {
+
+            margin-top: 4px;
+
+            color: var(--green);
+
+            font-size: 12px;
+
             font-weight: 800;
+
+            letter-spacing: 5px;
+
         }
 
-        .login-subtitle {
+
+        .login-card h1 {
+
+            font-size: 28px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .login-card > p {
+
+            color: var(--gray);
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
             margin-top: 10px;
-            color: var(--muted);
-            line-height: 1.5;
+
+            margin-bottom: 30px;
+
         }
 
-        /* =========================
-           ADMIN
-        ========================= */
+
+        /* =====================================
+           ADMIN APP
+        ====================================== */
 
         .admin-app {
+
             display: none;
+
             min-height: 100vh;
+
         }
+
+
+        /* =====================================
+           HEADER
+        ====================================== */
 
         .admin-header {
-            height: 90px;
-            border-bottom: 1px solid var(--border);
+
+            height: 82px;
+
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
-            padding: 0 42px;
+
+            padding: 0 35px;
+
+            border-bottom: 1px solid var(--border);
+
+            background: rgba(8,8,8,.96);
+
             position: sticky;
+
             top: 0;
-            z-index: 20;
-            background: rgba(11, 11, 11, .96);
-            backdrop-filter: blur(12px);
+
+            z-index: 100;
+
         }
 
-        .admin-brand {
+
+        .admin-logo {
+
             display: flex;
+
             align-items: center;
-            gap: 16px;
+
+            gap: 15px;
+
         }
 
-        .admin-brand-mark {
-            width: 48px;
-            height: 48px;
+
+        .admin-logo-box {
+
+            width: 44px;
+
+            height: 44px;
+
             border: 1px solid var(--border);
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
+            font-size: 15px;
+
             font-weight: 900;
-            font-size: 18px;
+
         }
 
-        .admin-brand-text strong {
+
+        .admin-logo-text strong {
+
             display: block;
-            font-size: 18px;
+
+            font-size: 15px;
+
             font-weight: 900;
+
         }
 
-        .admin-brand-text span {
+
+        .admin-logo-text span {
+
             display: block;
+
             margin-top: 3px;
-            color: var(--muted);
-            font-size: 12px;
-            letter-spacing: 1px;
+
+            color: var(--gray);
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
         }
+
 
         .admin-user {
+
             display: flex;
+
             align-items: center;
-            gap: 18px;
+
+            gap: 20px;
+
         }
 
-        .user-info {
+
+        .admin-user-info {
+
             text-align: right;
+
         }
 
-        .user-info strong {
+
+        .admin-user-info strong {
+
             display: block;
-            font-size: 14px;
+
+            font-size: 13px;
+
         }
 
-        .user-info span {
-            color: var(--muted);
-            font-size: 12px;
+
+        .admin-user-info span {
+
+            display: block;
+
+            color: var(--gray);
+
+            font-size: 11px;
+
+            margin-top: 3px;
+
         }
+
 
         .logout-button {
-            border: 1px solid var(--border);
+
             background: transparent;
+
+            border: 1px solid var(--border);
+
             color: white;
-            padding: 12px 18px;
-            font-weight: 700;
+
+            padding: 11px 15px;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: .5px;
+
         }
+
 
         .logout-button:hover {
-            border-color: var(--accent);
-            color: var(--accent);
+
+            border-color: var(--green);
+
+            color: var(--green);
+
         }
 
-        /* =========================
+
+        /* =====================================
            CONTENT
-        ========================= */
+        ====================================== */
 
-        .admin-content {
-            width: 100%;
-            max-width: 1200px;
+        .admin-container {
+
+            max-width: 1250px;
+
             margin: auto;
-            padding: 50px 30px 100px;
+
+            padding: 50px 25px 100px;
+
         }
 
-        .page-heading {
+
+        .heading {
+
             margin-bottom: 35px;
+
         }
 
-        .page-heading small {
-            display: block;
-            color: var(--accent);
-            font-size: 12px;
+
+        .heading-label {
+
+            color: var(--green);
+
+            font-size: 11px;
+
             font-weight: 800;
+
             letter-spacing: 3px;
-            margin-bottom: 10px;
+
+            margin-bottom: 12px;
+
         }
 
-        .page-heading h1 {
-            font-size: clamp(32px, 5vw, 52px);
-            line-height: .95;
+
+        .heading h1 {
+
+            font-size: clamp(35px, 6vw, 60px);
+
+            line-height: .92;
+
+            letter-spacing: -3px;
+
             font-weight: 900;
-            letter-spacing: -2px;
+
         }
 
-        .page-heading p {
-            margin-top: 15px;
-            color: var(--muted);
+
+        .heading p {
+
+            color: var(--gray);
+
+            font-size: 13px;
+
+            margin-top: 16px;
+
         }
 
-        /* =========================
+
+        /* =====================================
            GRID
-        ========================= */
+        ====================================== */
 
         .admin-grid {
+
             display: grid;
-            grid-template-columns: minmax(0, 1.4fr) minmax(300px, .6fr);
-            gap: 24px;
-            align-items: start;
+
+            grid-template-columns:
+                minmax(0, 1.25fr)
+                minmax(350px, .75fr);
+
+            gap: 20px;
+
         }
 
-        .admin-card {
-            background: var(--panel);
+
+        .panel {
+
+            background: var(--card);
+
             border: 1px solid var(--border);
-            padding: 32px;
+
+            padding: 30px;
+
         }
 
-        .card-heading {
-            margin-bottom: 30px;
-        }
 
-        .card-heading h2 {
-            font-size: 20px;
-            font-weight: 900;
-            text-transform: uppercase;
-        }
+        .panel-header {
 
-        .card-heading p {
-            margin-top: 7px;
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        /* =========================
-           FORM
-        ========================= */
-
-        .form-group {
-            margin-bottom: 22px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 9px;
-            color: #999;
-            font-size: 13px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: .5px;
-        }
-
-        .form-control {
-            width: 100%;
-            min-height: 56px;
-            padding: 15px 16px;
-            background: #181818;
-            border: 1px solid #343434;
-            color: white;
-            outline: none;
-            border-radius: 0;
-        }
-
-        .form-control:focus {
-            border-color: var(--accent);
-        }
-
-        textarea.form-control {
-            min-height: 130px;
-            resize: vertical;
-        }
-
-        select.form-control {
-            appearance: auto;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-        }
-
-        /* =========================
-           IMAGE
-        ========================= */
-
-        .image-upload {
-            border: 1px dashed #4a4a4a;
-            min-height: 210px;
             display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .panel-header h2 {
+
+            font-size: 18px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .panel-header p {
+
+            margin-top: 6px;
+
+            color: var(--gray);
+
+            font-size: 12px;
+
+        }
+
+
+        /* =====================================
+           FORM
+        ====================================== */
+
+        .field {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .field label {
+
+            display: block;
+
+            color: #aaa;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .input {
+
+            width: 100%;
+
+            min-height: 53px;
+
+            padding: 14px 15px;
+
+            color: white;
+
+            background: #101010;
+
+            border: 1px solid var(--border);
+
+            outline: none;
+
+            border-radius: 0;
+
+        }
+
+
+        .input:focus {
+
+            border-color: var(--green);
+
+        }
+
+
+        textarea.input {
+
+            min-height: 120px;
+
+            resize: vertical;
+
+        }
+
+
+        .two-columns {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+
+        }
+
+
+        /* =====================================
+           IMAGE
+        ====================================== */
+
+        .upload {
+
+            position: relative;
+
+            min-height: 220px;
+
+            background: #0e0e0e;
+
+            border: 1px dashed #3c3c3c;
+
+            display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             text-align: center;
-            padding: 25px;
-            background: #111;
-            transition: .2s;
+
+            overflow: hidden;
+
+            cursor: pointer;
+
         }
 
-        .image-upload:hover {
-            border-color: var(--accent);
+
+        .upload:hover {
+
+            border-color: var(--green);
+
         }
 
-        .image-upload input {
+
+        .upload input {
+
             display: none;
+
         }
 
-        .upload-content {
-            color: var(--muted);
+
+        .upload-text {
+
+            color: var(--gray);
+
         }
+
 
         .upload-icon {
-            font-size: 35px;
+
+            font-size: 34px;
+
             margin-bottom: 12px;
+
         }
+
 
         .upload-title {
-            color: #aaa;
-            font-size: 14px;
+
+            color: #ccc;
+
+            font-size: 11px;
+
             font-weight: 800;
+
             text-transform: uppercase;
+
         }
 
-        .upload-subtitle {
-            margin-top: 8px;
-            font-size: 12px;
+
+        .upload-info {
+
+            margin-top: 7px;
+
+            font-size: 10px;
+
         }
 
-        .image-preview {
+
+        .preview {
+
             display: none;
+
             width: 100%;
-            max-height: 280px;
+
+            height: 100%;
+
+            min-height: 220px;
+
             object-fit: contain;
+
         }
 
-        /* =========================
+
+        /* =====================================
            BUTTONS
-        ========================= */
+        ====================================== */
 
-        .primary-button {
+        .save-button {
+
             width: 100%;
-            min-height: 58px;
+
+            min-height: 57px;
+
             border: 0;
-            background: var(--accent);
+
+            background: var(--green);
+
             color: #050505;
+
+            font-size: 11px;
+
             font-weight: 900;
+
             text-transform: uppercase;
-            letter-spacing: .5px;
+
         }
 
-        .primary-button:hover {
+
+        .save-button:hover {
+
             filter: brightness(.9);
+
         }
 
-        .secondary-button {
+
+        .cancel-button {
+
             width: 100%;
-            min-height: 52px;
+
+            min-height: 50px;
+
+            margin-top: 10px;
+
             border: 1px solid var(--border);
+
             background: transparent;
+
             color: white;
-            font-weight: 700;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            display: none;
+
         }
 
-        .secondary-button:hover {
-            border-color: var(--accent);
-        }
 
-        /* =========================
-           PRODUCTS
-        ========================= */
+        /* =====================================
+           PRODUCT LIST
+        ====================================== */
 
-        .products-list {
+        .products {
+
             display: flex;
+
             flex-direction: column;
-            gap: 12px;
+
+            gap: 10px;
+
+            max-height: 650px;
+
+            overflow-y: auto;
+
         }
 
-        .product-item {
+
+        .product {
+
             display: flex;
+
             align-items: center;
-            gap: 14px;
-            padding: 14px;
-            background: var(--panel-2);
+
+            gap: 12px;
+
+            padding: 12px;
+
+            background: var(--card-2);
+
             border: 1px solid var(--border);
+
         }
+
 
         .product-image {
+
             width: 65px;
+
             height: 65px;
+
             background: #222;
+
             flex-shrink: 0;
+
             overflow: hidden;
+
         }
+
 
         .product-image img {
+
             width: 100%;
+
             height: 100%;
+
             object-fit: cover;
+
         }
 
-        .product-info {
-            min-width: 0;
+
+        .product-data {
+
             flex: 1;
+
+            min-width: 0;
+
         }
 
-        .product-info strong {
+
+        .product-data strong {
+
             display: block;
+
             white-space: nowrap;
+
             overflow: hidden;
+
             text-overflow: ellipsis;
-            font-size: 14px;
+
+            font-size: 13px;
+
         }
 
-        .product-info span {
-            display: block;
+
+        .product-category {
+
+            color: var(--gray);
+
+            font-size: 10px;
+
             margin-top: 5px;
-            color: var(--muted);
-            font-size: 12px;
+
         }
+
 
         .product-price {
-            color: var(--accent) !important;
+
+            color: var(--green);
+
+            font-size: 12px;
+
             font-weight: 800;
+
+            margin-top: 4px;
+
         }
+
 
         .product-actions {
+
             display: flex;
-            gap: 6px;
+
+            gap: 5px;
+
         }
 
-        .icon-button {
-            width: 38px;
-            height: 38px;
-            border: 1px solid var(--border);
+
+        .action {
+
+            width: 36px;
+
+            height: 36px;
+
             background: transparent;
+
+            border: 1px solid var(--border);
+
             color: white;
-        }
 
-        .icon-button:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .icon-button.delete:hover {
-            border-color: var(--danger);
-            color: var(--danger);
-        }
-
-        .empty-state {
-            padding: 30px 15px;
-            text-align: center;
-            border: 1px dashed var(--border);
-            color: var(--muted);
             font-size: 13px;
+
         }
 
-        /* =========================
+
+        .action:hover {
+
+            border-color: var(--green);
+
+            color: var(--green);
+
+        }
+
+
+        .action.delete:hover {
+
+            border-color: var(--red);
+
+            color: var(--red);
+
+        }
+
+
+        .empty {
+
+            padding: 40px 15px;
+
+            border: 1px dashed var(--border);
+
+            text-align: center;
+
+            color: var(--gray);
+
+            font-size: 12px;
+
+        }
+
+
+        /* =====================================
+           TOAST
+        ====================================== */
+
+        .toast {
+
+            position: fixed;
+
+            right: 25px;
+
+            bottom: 25px;
+
+            z-index: 500;
+
+            padding: 15px 20px;
+
+            background: white;
+
+            color: black;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            transform: translateY(100px);
+
+            opacity: 0;
+
+            transition: .25s;
+
+        }
+
+
+        .toast.show {
+
+            transform: translateY(0);
+
+            opacity: 1;
+
+        }
+
+
+        .toast.error {
+
+            background: var(--red);
+
+            color: white;
+
+        }
+
+
+        /* =====================================
            RESPONSIVE
-        ========================= */
+        ====================================== */
 
-        @media (max-width: 850px) {
-
-            .admin-header {
-                height: auto;
-                min-height: 82px;
-                padding: 18px 20px;
-            }
-
-            .admin-user {
-                gap: 10px;
-            }
-
-            .user-info {
-                display: none;
-            }
-
-            .logout-button {
-                padding: 10px 12px;
-                font-size: 11px;
-            }
-
-            .admin-content {
-                padding: 35px 15px 80px;
-            }
+        @media (max-width: 900px) {
 
             .admin-grid {
+
                 grid-template-columns: 1fr;
+
             }
 
-            .admin-card {
-                padding: 25px 20px;
-            }
         }
 
-        @media (max-width: 550px) {
 
-            .login-box {
-                padding: 30px 22px;
+        @media (max-width: 600px) {
+
+            .admin-header {
+
+                padding: 0 15px;
+
             }
 
-            .admin-brand-mark {
-                width: 40px;
-                height: 40px;
+
+            .admin-user-info {
+
+                display: none;
+
             }
 
-            .admin-brand-text strong {
-                font-size: 15px;
+
+            .admin-container {
+
+                padding: 35px 15px 70px;
+
             }
 
-            .admin-brand-text span {
-                font-size: 10px;
+
+            .panel {
+
+                padding: 22px 18px;
+
             }
 
-            .form-row {
+
+            .two-columns {
+
                 grid-template-columns: 1fr;
+
                 gap: 0;
+
             }
 
-            .product-item {
-                align-items: flex-start;
+
+            .login-card {
+
+                padding: 28px 22px;
+
             }
+
 
             .product-actions {
+
                 flex-direction: column;
+
             }
 
-            .page-heading h1 {
-                font-size: 38px;
+
+            .action {
+
+                width: 34px;
+
+                height: 34px;
+
             }
+
         }
 
     </style>
+
 </head>
 
 
@@ -576,33 +1022,44 @@
         id="loginScreen"
     >
 
-        <div class="login-box">
+        <div class="login-card">
 
-            <div class="login-logo">
-                007
-                <span>IMPORTED</span>
+            <div class="logo">
+
+                <div class="logo-main">
+                    007
+                </div>
+
+                <div class="logo-sub">
+                    IMPORTED
+                </div>
+
             </div>
 
-            <h1 class="login-title">
-                PANEL ADMIN
+
+            <h1>
+                Panel Admin
             </h1>
 
-            <p class="login-subtitle">
+
+            <p>
                 Ingresá con tu cuenta para administrar
-                los productos de 007imported.
+                el catálogo de 007imported.
             </p>
+
 
             <form id="loginForm">
 
-                <div class="form-group">
 
-                    <label for="loginEmail">
+                <div class="field">
+
+                    <label for="email">
                         Email
                     </label>
 
                     <input
-                        class="form-control"
-                        id="loginEmail"
+                        class="input"
+                        id="email"
                         type="email"
                         placeholder="tu@email.com"
                         required
@@ -611,15 +1068,15 @@
                 </div>
 
 
-                <div class="form-group">
+                <div class="field">
 
-                    <label for="loginPassword">
+                    <label for="password">
                         Contraseña
                     </label>
 
                     <input
-                        class="form-control"
-                        id="loginPassword"
+                        class="input"
+                        id="password"
                         type="password"
                         placeholder="••••••••"
                         required
@@ -629,10 +1086,11 @@
 
 
                 <button
-                    class="primary-button"
+                    class="save-button"
                     type="submit"
+                    id="loginButton"
                 >
-                    Iniciar sesión
+                    INICIAR SESIÓN
                 </button>
 
             </form>
@@ -643,7 +1101,7 @@
 
 
     <!-- ==========================================
-         ADMIN APP
+         ADMIN
     =========================================== -->
 
     <div
@@ -652,17 +1110,16 @@
     >
 
 
-        <!-- HEADER -->
-
         <header class="admin-header">
 
-            <div class="admin-brand">
 
-                <div class="admin-brand-mark">
+            <div class="admin-logo">
+
+                <div class="admin-logo-box">
                     007
                 </div>
 
-                <div class="admin-brand-text">
+                <div class="admin-logo-text">
 
                     <strong>
                         PANEL ADMIN
@@ -679,13 +1136,13 @@
 
             <div class="admin-user">
 
-                <div class="user-info">
+                <div class="admin-user-info">
 
-                    <strong id="adminUserName">
+                    <strong id="userName">
                         Administrador
                     </strong>
 
-                    <span id="adminUserEmail">
+                    <span id="userEmail">
                         -
                     </span>
 
@@ -705,16 +1162,14 @@
         </header>
 
 
-        <!-- CONTENIDO -->
-
-        <main class="admin-content">
+        <main class="admin-container">
 
 
-            <div class="page-heading">
+            <div class="heading">
 
-                <small>
+                <div class="heading-label">
                     ADMINISTRACIÓN
-                </small>
+                </div>
 
                 <h1>
                     GESTIONÁ<br>
@@ -722,8 +1177,8 @@
                 </h1>
 
                 <p>
-                    Agregá y administrá los productos
-                    que aparecen en tu tienda.
+                    Agregá, editá y eliminá productos
+                    de tu tienda.
                 </p>
 
             </div>
@@ -732,21 +1187,25 @@
             <div class="admin-grid">
 
 
-                <!-- ==================================
-                     NUEVO PRODUCTO
-                =================================== -->
+                <!-- =================================
+                     FORMULARIO
+                ================================== -->
 
-                <section class="admin-card">
+                <section class="panel">
 
-                    <div class="card-heading">
+                    <div class="panel-header">
 
-                        <h2>
-                            Nuevo producto
-                        </h2>
+                        <div>
 
-                        <p>
-                            Completá los datos del producto.
-                        </p>
+                            <h2 id="formTitle">
+                                Nuevo producto
+                            </h2>
+
+                            <p>
+                                Completá los datos del producto.
+                            </p>
+
+                        </div>
 
                     </div>
 
@@ -754,89 +1213,98 @@
                     <form id="productForm">
 
 
-                        <div class="form-group">
+                        <input
+                            type="hidden"
+                            id="productId"
+                        >
+
+
+                        <div class="field">
 
                             <label for="productName">
                                 Nombre
                             </label>
 
                             <input
-                                class="form-control"
+                                class="input"
                                 id="productName"
                                 type="text"
-                                placeholder="Ej: Remera Nueva"
+                                placeholder="Ej: Remera Oversize"
                                 required
                             >
 
                         </div>
 
 
-                        <div class="form-row">
+                        <div class="two-columns">
 
-                            <div class="form-group">
+
+                            <div class="field">
 
                                 <label for="productPrice">
                                     Precio ($)
                                 </label>
 
                                 <input
-                                    class="form-control"
+                                    class="input"
                                     id="productPrice"
                                     type="number"
                                     min="0"
                                     step="1"
-                                    placeholder="Ej: 25000"
+                                    placeholder="25000"
                                     required
                                 >
 
                             </div>
 
 
-                            <div class="form-group">
+                            <div class="field">
 
                                 <label for="productStock">
                                     Stock
                                 </label>
 
                                 <input
-                                    class="form-control"
+                                    class="input"
                                     id="productStock"
                                     type="number"
                                     min="0"
                                     step="1"
-                                    placeholder="Ej: 10"
+                                    placeholder="10"
                                 >
 
                             </div>
 
+
                         </div>
 
 
-                        <div class="form-group">
+                        <div class="field">
 
                             <label for="productDescription">
                                 Descripción
                             </label>
 
                             <textarea
-                                class="form-control"
+                                class="input"
                                 id="productDescription"
-                                placeholder="Ej: Conjunto premium compuesto por hoodie y pantalón."
+                                placeholder="Descripción del producto..."
                             ></textarea>
 
                         </div>
 
 
-                        <div class="form-row">
+                        <div class="two-columns">
 
-                            <div class="form-group">
+
+                            <div class="field">
 
                                 <label for="productLabel">
                                     Etiqueta
                                 </label>
 
                                 <select
-                                    class="form-control"
+                                    class="input"
                                     id="productLabel"
                                 >
 
@@ -861,14 +1329,14 @@
                             </div>
 
 
-                            <div class="form-group">
+                            <div class="field">
 
                                 <label for="productCategory">
                                     Categoría
                                 </label>
 
                                 <select
-                                    class="form-control"
+                                    class="input"
                                     id="productCategory"
                                 >
 
@@ -896,43 +1364,44 @@
 
                             </div>
 
+
                         </div>
 
 
-                        <div class="form-group">
+                        <div class="field">
 
                             <label>
-                                Imagen del producto
+                                Imagen
                             </label>
 
 
                             <label
-                                class="image-upload"
+                                class="upload"
                                 for="productImage"
                             >
 
+
                                 <input
-                                    type="file"
                                     id="productImage"
+                                    type="file"
                                     accept="image/*"
                                 >
 
 
                                 <div
-                                    class="upload-content"
-                                    id="uploadContent"
+                                    class="upload-text"
+                                    id="uploadText"
                                 >
 
                                     <div class="upload-icon">
-                                        📷
+                                        +
                                     </div>
 
                                     <div class="upload-title">
-                                        Hacé clic para seleccionar
-                                        una imagen
+                                        Seleccionar imagen
                                     </div>
 
-                                    <div class="upload-subtitle">
+                                    <div class="upload-info">
                                         JPG, PNG o WEBP
                                     </div>
 
@@ -940,7 +1409,7 @@
 
 
                                 <img
-                                    class="image-preview"
+                                    class="preview"
                                     id="imagePreview"
                                     alt="Vista previa"
                                 >
@@ -951,48 +1420,64 @@
 
 
                         <button
-                            class="primary-button"
+                            class="save-button"
                             type="submit"
+                            id="saveButton"
                         >
                             AGREGAR PRODUCTO
                         </button>
+
+
+                        <button
+                            class="cancel-button"
+                            type="button"
+                            id="cancelEdit"
+                        >
+                            CANCELAR EDICIÓN
+                        </button>
+
 
                     </form>
 
                 </section>
 
 
-                <!-- ==================================
+                <!-- =================================
                      PRODUCTOS
-                =================================== -->
+                ================================== -->
 
-                <section class="admin-card">
+                <section class="panel">
 
-                    <div class="card-heading">
+                    <div class="panel-header">
 
-                        <h2>
-                            Productos
-                        </h2>
+                        <div>
 
-                        <p>
-                            Productos actualmente publicados.
-                        </p>
+                            <h2>
+                                Productos
+                            </h2>
+
+                            <p id="productCount">
+                                Cargando...
+                            </p>
+
+                        </div>
 
                     </div>
 
 
                     <div
-                        class="products-list"
+                        class="products"
                         id="productsList"
                     >
 
-                        <div class="empty-state">
+                        <div class="empty">
                             Cargando productos...
                         </div>
 
                     </div>
 
                 </section>
+
 
             </div>
 
@@ -1001,115 +1486,140 @@
     </div>
 
 
+    <!-- TOAST -->
+
+    <div
+        class="toast"
+        id="toast"
+    ></div>
+
+
     <!-- ==========================================
-         JAVASCRIPT TEMPORAL
+         JAVASCRIPT
     =========================================== -->
 
-    <script>
+    <script type="module">
+
+        import { supabase }
+            from "./js/supabase.js";
+
+
+        /* =====================================
+           ELEMENTOS
+        ====================================== */
 
         const loginScreen =
-            document.getElementById("loginScreen");
+            document.querySelector("#loginScreen");
 
         const adminApp =
-            document.getElementById("adminApp");
+            document.querySelector("#adminApp");
 
         const loginForm =
-            document.getElementById("loginForm");
+            document.querySelector("#loginForm");
+
+        const loginButton =
+            document.querySelector("#loginButton");
 
         const logoutButton =
-            document.getElementById("logoutButton");
+            document.querySelector("#logoutButton");
+
+        const productForm =
+            document.querySelector("#productForm");
+
+        const productsList =
+            document.querySelector("#productsList");
+
+        const productCount =
+            document.querySelector("#productCount");
 
         const productImage =
-            document.getElementById("productImage");
+            document.querySelector("#productImage");
 
         const imagePreview =
-            document.getElementById("imagePreview");
+            document.querySelector("#imagePreview");
 
-        const uploadContent =
-            document.getElementById("uploadContent");
+        const uploadText =
+            document.querySelector("#uploadText");
+
+        const saveButton =
+            document.querySelector("#saveButton");
+
+        const cancelEdit =
+            document.querySelector("#cancelEdit");
+
+        const formTitle =
+            document.querySelector("#formTitle");
+
+        const toast =
+            document.querySelector("#toast");
 
 
-        /*
-         * PREVISUALIZACIÓN DE IMAGEN
-         */
+        let editingProduct = null;
 
-        productImage.addEventListener(
-            "change",
-            function () {
 
-                const file = this.files[0];
+        /* =====================================
+           TOAST
+        ====================================== */
 
-                if (!file) {
-                    return;
-                }
+        function showToast(
+            message,
+            error = false
+        ) {
 
-                const reader =
-                    new FileReader();
+            toast.textContent =
+                message;
 
-                reader.onload =
-                    function (event) {
+            toast.classList.toggle(
+                "error",
+                error
+            );
 
-                        imagePreview.src =
-                            event.target.result;
+            toast.classList.add("show");
 
-                        imagePreview.style.display =
-                            "block";
+            setTimeout(() => {
 
-                        uploadContent.style.display =
-                            "none";
+                toast.classList.remove(
+                    "show"
+                );
 
-                    };
+            }, 3000);
 
-                reader.readAsDataURL(file);
+        }
+
+
+        /* =====================================
+           SESIÓN
+        ====================================== */
+
+        async function checkSession() {
+
+            const {
+                data,
+                error
+            } = await supabase.auth.getSession();
+
+
+            if (error) {
+
+                console.error(error);
+
+                return;
 
             }
-        );
 
 
-        /*
-         * ESTO ES SOLO VISUAL POR AHORA.
-         *
-         * En el siguiente paso conectamos:
-         *
-         * Supabase Auth
-         * Supabase Storage
-         * tabla products
-         *
-         */
+            if (data.session) {
 
-        loginForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-                alert(
-                    "El diseño del Panel Admin está listo. Ahora vamos a conectarlo con Supabase."
+                showAdmin(
+                    data.session.user
                 );
 
             }
-        );
+
+        }
 
 
-        logoutButton.addEventListener(
-            "click",
-            function () {
-
-                adminApp.style.display =
-                    "none";
-
-                loginScreen.style.display =
-                    "flex";
-
-            }
-        );
-
-
-        /*
-         * DEMO VISUAL
-         */
-
-        function showAdminDemo() {
+        function showAdmin(user) {
 
             loginScreen.style.display =
                 "none";
@@ -1117,18 +1627,862 @@
             adminApp.style.display =
                 "block";
 
-            document.getElementById(
-                "adminUserName"
-            ).textContent =
-                "Administrador";
 
-            document.getElementById(
-                "adminUserEmail"
+            document.querySelector(
+                "#userEmail"
             ).textContent =
-                "007imported";
+                user.email || "";
+
+
+            loadProducts();
 
         }
 
+
+        function showLogin() {
+
+            loginScreen.style.display =
+                "flex";
+
+            adminApp.style.display =
+                "none";
+
+        }
+
+
+        /* =====================================
+           LOGIN
+        ====================================== */
+
+        loginForm.addEventListener(
+            "submit",
+            async event => {
+
+                event.preventDefault();
+
+
+                const email =
+                    document.querySelector(
+                        "#email"
+                    ).value.trim();
+
+
+                const password =
+                    document.querySelector(
+                        "#password"
+                    ).value;
+
+
+                loginButton.disabled =
+                    true;
+
+                loginButton.textContent =
+                    "INGRESANDO...";
+
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabase.auth.signInWithPassword({
+                        email,
+                        password
+                    });
+
+
+                loginButton.disabled =
+                    false;
+
+                loginButton.textContent =
+                    "INICIAR SESIÓN";
+
+
+                if (error) {
+
+                    console.error(error);
+
+                    showToast(
+                        "Email o contraseña incorrectos.",
+                        true
+                    );
+
+                    return;
+
+                }
+
+
+                showAdmin(
+                    data.user
+                );
+
+            }
+        );
+
+
+        /* =====================================
+           LOGOUT
+        ====================================== */
+
+        logoutButton.addEventListener(
+            "click",
+            async () => {
+
+                await supabase.auth.signOut();
+
+                showLogin();
+
+            }
+        );
+
+
+        /* =====================================
+           SESIÓN CAMBIÓ
+        ====================================== */
+
+        supabase.auth.onAuthStateChange(
+            (event, session) => {
+
+                if (session) {
+
+                    showAdmin(
+                        session.user
+                    );
+
+                } else {
+
+                    showLogin();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================
+           IMAGEN PREVIEW
+        ====================================== */
+
+        productImage.addEventListener(
+            "change",
+            () => {
+
+                const file =
+                    productImage.files[0];
+
+
+                if (!file) {
+                    return;
+                }
+
+
+                const reader =
+                    new FileReader();
+
+
+                reader.onload =
+                    event => {
+
+                        imagePreview.src =
+                            event.target.result;
+
+                        imagePreview.style.display =
+                            "block";
+
+                        uploadText.style.display =
+                            "none";
+
+                    };
+
+
+                reader.readAsDataURL(file);
+
+            }
+        );
+
+
+        /* =====================================
+           CARGAR PRODUCTOS
+        ====================================== */
+
+        async function loadProducts() {
+
+            productsList.innerHTML = `
+                <div class="empty">
+                    Cargando productos...
+                </div>
+            `;
+
+
+            const {
+                data,
+                error
+            } =
+                await supabase
+                    .from("products")
+                    .select("*")
+                    .order(
+                        "created_at",
+                        {
+                            ascending: false
+                        }
+                    );
+
+
+            if (error) {
+
+                console.error(error);
+
+                productsList.innerHTML = `
+                    <div class="empty">
+                        No se pudieron cargar los productos.
+                    </div>
+                `;
+
+                return;
+
+            }
+
+
+            productCount.textContent =
+                `${data.length} producto${data.length === 1 ? "" : "s"}`;
+
+
+            if (!data.length) {
+
+                productsList.innerHTML = `
+                    <div class="empty">
+                        Todavía no hay productos.
+                    </div>
+                `;
+
+                return;
+
+            }
+
+
+            productsList.innerHTML = "";
+
+
+            data.forEach(product => {
+
+                productsList.appendChild(
+                    createProductElement(
+                        product
+                    )
+                );
+
+            });
+
+        }
+
+
+        /* =====================================
+           PRODUCT ELEMENT
+        ====================================== */
+
+        function createProductElement(
+            product
+        ) {
+
+            const element =
+                document.createElement(
+                    "div"
+                );
+
+
+            element.className =
+                "product";
+
+
+            const image =
+                product.image ||
+                "";
+
+
+            element.innerHTML = `
+
+                <div class="product-image">
+
+                    ${
+                        image
+
+                        ?
+
+                        `
+                        <img
+                            src="${escapeHtml(image)}"
+                            alt=""
+                        >
+                        `
+
+                        :
+
+                        `
+                        <div
+                            style="
+                                width:100%;
+                                height:100%;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                                color:#555;
+                                font-size:20px;
+                            "
+                        >
+                            007
+                        </div>
+                        `
+                    }
+
+                </div>
+
+
+                <div class="product-data">
+
+                    <strong>
+                        ${escapeHtml(
+                            product.name || "Sin nombre"
+                        )}
+                    </strong>
+
+                    <div class="product-category">
+                        ${escapeHtml(
+                            product.category || "Sin categoría"
+                        )}
+                    </div>
+
+                    <div class="product-price">
+                        ${formatPrice(
+                            product.price
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="product-actions">
+
+                    <button
+                        class="action edit"
+                        type="button"
+                        title="Editar"
+                    >
+                        ✎
+                    </button>
+
+                    <button
+                        class="action delete"
+                        type="button"
+                        title="Eliminar"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            `;
+
+
+            element
+                .querySelector(".edit")
+                .addEventListener(
+                    "click",
+                    () => {
+
+                        editProduct(
+                            product
+                        );
+
+                    }
+                );
+
+
+            element
+                .querySelector(".delete")
+                .addEventListener(
+                    "click",
+                    () => {
+
+                        deleteProduct(
+                            product
+                        );
+
+                    }
+                );
+
+
+            return element;
+
+        }
+
+
+        /* =====================================
+           CREAR / EDITAR
+        ====================================== */
+
+        productForm.addEventListener(
+            "submit",
+            async event => {
+
+                event.preventDefault();
+
+
+                saveButton.disabled =
+                    true;
+
+                saveButton.textContent =
+                    "GUARDANDO...";
+
+
+                try {
+
+                    const name =
+                        document.querySelector(
+                            "#productName"
+                        ).value.trim();
+
+
+                    const price =
+                        Number(
+                            document.querySelector(
+                                "#productPrice"
+                            ).value
+                        );
+
+
+                    const stock =
+                        Number(
+                            document.querySelector(
+                                "#productStock"
+                            ).value || 0
+                        );
+
+
+                    const description =
+                        document.querySelector(
+                            "#productDescription"
+                        ).value.trim();
+
+
+                    const label =
+                        document.querySelector(
+                            "#productLabel"
+                        ).value;
+
+
+                    const category =
+                        document.querySelector(
+                            "#productCategory"
+                        ).value;
+
+
+                    const imageFile =
+                        productImage.files[0];
+
+
+                    let imageUrl =
+                        editingProduct?.image ||
+                        null;
+
+
+                    /*
+                     * Si seleccionaste una imagen,
+                     * la convertimos a Data URL.
+                     *
+                     * Esto permite probar el panel
+                     * sin crear todavía un bucket.
+                     */
+
+                    if (imageFile) {
+
+                        imageUrl =
+                            await fileToDataUrl(
+                                imageFile
+                            );
+
+                    }
+
+
+                    const productData = {
+
+                        name,
+
+                        price,
+
+                        description,
+
+                        category,
+
+                        image:
+                            imageUrl,
+
+                        label,
+
+                        stock
+
+                    };
+
+
+                    let result;
+
+
+                    if (editingProduct) {
+
+                        result =
+                            await supabase
+                                .from("products")
+                                .update(
+                                    productData
+                                )
+                                .eq(
+                                    "id",
+                                    editingProduct.id
+                                );
+
+                    } else {
+
+                        result =
+                            await supabase
+                                .from("products")
+                                .insert(
+                                    productData
+                                );
+
+                    }
+
+
+                    if (result.error) {
+
+                        throw result.error;
+
+                    }
+
+
+                    showToast(
+                        editingProduct
+                            ? "Producto actualizado."
+                            : "Producto agregado."
+                    );
+
+
+                    resetForm();
+
+                    await loadProducts();
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Error guardando producto:",
+                        error
+                    );
+
+
+                    showToast(
+                        "No se pudo guardar el producto.",
+                        true
+                    );
+
+                } finally {
+
+                    saveButton.disabled =
+                        false;
+
+                    saveButton.textContent =
+                        editingProduct
+                            ? "GUARDAR CAMBIOS"
+                            : "AGREGAR PRODUCTO";
+
+                }
+
+            }
+        );
+
+
+        /* =====================================
+           EDITAR
+        ====================================== */
+
+        function editProduct(
+            product
+        ) {
+
+            editingProduct =
+                product;
+
+
+            formTitle.textContent =
+                "Editar producto";
+
+
+            saveButton.textContent =
+                "GUARDAR CAMBIOS";
+
+
+            cancelEdit.style.display =
+                "block";
+
+
+            document.querySelector(
+                "#productName"
+            ).value =
+                product.name || "";
+
+
+            document.querySelector(
+                "#productPrice"
+            ).value =
+                product.price || "";
+
+
+            document.querySelector(
+                "#productStock"
+            ).value =
+                product.stock || "";
+
+
+            document.querySelector(
+                "#productDescription"
+            ).value =
+                product.description || "";
+
+
+            document.querySelector(
+                "#productLabel"
+            ).value =
+                product.label || "";
+
+
+            document.querySelector(
+                "#productCategory"
+            ).value =
+                product.category || "Remeras";
+
+
+            if (product.image) {
+
+                imagePreview.src =
+                    product.image;
+
+                imagePreview.style.display =
+                    "block";
+
+                uploadText.style.display =
+                    "none";
+
+            }
+
+
+            document.querySelector(
+                "#productName"
+            ).focus();
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* =====================================
+           CANCELAR
+        ====================================== */
+
+        cancelEdit.addEventListener(
+            "click",
+            resetForm
+        );
+
+
+        function resetForm() {
+
+            editingProduct =
+                null;
+
+
+            productForm.reset();
+
+
+            formTitle.textContent =
+                "Nuevo producto";
+
+
+            saveButton.textContent =
+                "AGREGAR PRODUCTO";
+
+
+            cancelEdit.style.display =
+                "none";
+
+
+            imagePreview.src =
+                "";
+
+            imagePreview.style.display =
+                "none";
+
+            uploadText.style.display =
+                "block";
+
+        }
+
+
+        /* =====================================
+           ELIMINAR
+        ====================================== */
+
+        async function deleteProduct(
+            product
+        ) {
+
+            const confirmed =
+                confirm(
+                    `¿Querés eliminar "${product.name}"?`
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            const {
+                error
+            } =
+                await supabase
+                    .from("products")
+                    .delete()
+                    .eq(
+                        "id",
+                        product.id
+                    );
+
+
+            if (error) {
+
+                console.error(error);
+
+                showToast(
+                    "No se pudo eliminar el producto.",
+                    true
+                );
+
+                return;
+
+            }
+
+
+            showToast(
+                "Producto eliminado."
+            );
+
+
+            loadProducts();
+
+        }
+
+
+        /* =====================================
+           DATA URL
+        ====================================== */
+
+        function fileToDataUrl(
+            file
+        ) {
+
+            return new Promise(
+                (
+                    resolve,
+                    reject
+                ) => {
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        () =>
+                            resolve(
+                                reader.result
+                            );
+
+
+                    reader.onerror =
+                        reject;
+
+
+                    reader.readAsDataURL(
+                        file
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================
+           PRECIO
+        ====================================== */
+
+        function formatPrice(
+            value
+        ) {
+
+            return (
+                "$" +
+                Number(
+                    value || 0
+                ).toLocaleString(
+                    "es-AR"
+                )
+            );
+
+        }
+
+
+        /* =====================================
+           ESCAPE
+        ====================================== */
+
+        function escapeHtml(
+            value
+        ) {
+
+            return String(
+                value ?? ""
+            )
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        /* =====================================
+           INICIAR
+        ====================================== */
+
+        checkSession();
 
     </script>
 
