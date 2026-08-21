@@ -1,7 +1,6 @@
 import { supabase } from "./supabase.js";
 import { STORE } from "./config.js";
 
-
 /* =====================================================
    ESTADO
 ===================================================== */
@@ -46,9 +45,10 @@ function setupLinks() {
         .querySelectorAll('a[href*="instagram.com"]')
         .forEach(link => {
 
-            if (STORE.instagram) {
-                link.href = STORE.instagram;
-            }
+            link.href = STORE.instagram;
+
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
 
         });
 
@@ -57,13 +57,14 @@ function setupLinks() {
         .querySelectorAll('a[href*="wa.me"]')
         .forEach(link => {
 
-            if (!STORE.whatsapp) return;
-
             const message =
                 "Hola! Quería consultar por 007imported.";
 
             link.href =
                 `https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(message)}`;
+
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
 
         });
 
@@ -144,37 +145,42 @@ function setupCategories() {
         );
 
 
-    if (!buttons.length) {
-        return;
-    }
-
-
     buttons.forEach(button => {
 
-        button.addEventListener("click", event => {
-
-            event.preventDefault();
-
+        button.addEventListener("click", () => {
 
             const category =
-                button.dataset.category ||
-                "Todos";
+                button.dataset.category || "Todos";
+
+            state.category = category;
 
 
-            state.category =
-                normalizeCategory(category);
+            document
+                .querySelectorAll(".category-card")
+                .forEach(item => {
+
+                    item.classList.toggle(
+                        "active",
+                        item.dataset.category === category
+                    );
+
+                });
 
 
-            updateCategoryButtons();
+            document
+                .querySelectorAll(".filter-button")
+                .forEach(item => {
+
+                    item.classList.toggle(
+                        "active",
+                        item.dataset.category === category
+                    );
+
+                });
 
 
             renderProducts();
 
-
-            /*
-             * Si se presionó una tarjeta grande
-             * de categorías, bajamos al catálogo.
-             */
 
             if (
                 button.classList.contains(
@@ -186,7 +192,6 @@ function setupCategories() {
                     document.querySelector(
                         "#catalogo"
                     );
-
 
                 if (catalog) {
 
@@ -202,91 +207,6 @@ function setupCategories() {
         });
 
     });
-
-}
-
-
-/* =====================================================
-   ACTUALIZAR BOTONES
-===================================================== */
-
-function updateCategoryButtons() {
-
-    document
-        .querySelectorAll(".category-card")
-        .forEach(button => {
-
-            const buttonCategory =
-                normalizeCategory(
-                    button.dataset.category
-                );
-
-
-            button.classList.toggle(
-                "active",
-                buttonCategory === state.category
-            );
-
-        });
-
-
-    document
-        .querySelectorAll(".filter-button")
-        .forEach(button => {
-
-            const buttonCategory =
-                normalizeCategory(
-                    button.dataset.category
-                );
-
-
-            button.classList.toggle(
-                "active",
-                buttonCategory === state.category
-            );
-
-        });
-
-}
-
-
-/* =====================================================
-   NORMALIZAR CATEGORÍA
-===================================================== */
-
-function normalizeCategory(value) {
-
-    const category =
-        String(value || "")
-            .trim()
-            .toLowerCase();
-
-
-    const categories = {
-        "todos": "Todos",
-        "todo": "Todos",
-
-        "remeras": "Remeras",
-        "remera": "Remeras",
-
-        "pantalones": "Pantalones",
-        "pantalon": "Pantalones",
-
-        "buzos": "Buzos",
-        "buzo": "Buzos",
-
-        "camperas": "Camperas",
-        "campera": "Camperas",
-
-        "accesorios": "Accesorios",
-        "accesorio": "Accesorios"
-    };
-
-
-    return (
-        categories[category] ||
-        String(value || "").trim()
-    );
 
 }
 
@@ -313,10 +233,9 @@ function setupSearch() {
         event => {
 
             state.search =
-                String(event.target.value || "")
+                event.target.value
                     .trim()
                     .toLowerCase();
-
 
             renderProducts();
 
@@ -342,51 +261,27 @@ async function loadProducts() {
             "#emptyProducts"
         );
 
-    const grid =
-        document.querySelector(
-            "#productsGrid"
-        );
-
 
     if (loading) {
         loading.hidden = false;
     }
-
 
     if (empty) {
         empty.hidden = true;
     }
 
 
-    if (grid) {
-        grid.innerHTML = "";
-    }
-
-
     try {
 
-        /*
-         * IMPORTANTE:
-         *
-         * No usamos:
-         *
-         * .order("created_at")
-         *
-         * porque si created_at no existe,
-         * Supabase rompe toda la consulta.
-         */
-
-        const result =
-            await supabase
-                .from("products")
-                .select("*");
-
-
-        const data =
-            result.data;
-
-        const error =
-            result.error;
+        const {
+            data,
+            error
+        } = await supabase
+            .from("products")
+            .select("*")
+            .order("created_at", {
+                ascending: false
+            });
 
 
         if (error) {
@@ -400,53 +295,13 @@ async function loadProducts() {
                 : [];
 
 
-        /*
-         * Ordenamos solamente si existe
-         * una fecha válida.
-         */
-
-        state.products.sort(
-            (a, b) => {
-
-                const dateA =
-                    new Date(
-                        a.created_at ||
-                        a.createdAt ||
-                        0
-                    ).getTime();
-
-
-                const dateB =
-                    new Date(
-                        b.created_at ||
-                        b.createdAt ||
-                        0
-                    ).getTime();
-
-
-                if (
-                    !Number.isNaN(dateA) &&
-                    !Number.isNaN(dateB)
-                ) {
-
-                    return dateB - dateA;
-
-                }
-
-
-                return 0;
-
-            }
-        );
-
-
         renderProducts();
 
 
     } catch (error) {
 
         console.error(
-            "ERROR CARGANDO PRODUCTOS:",
+            "Error cargando productos:",
             error
         );
 
@@ -457,13 +312,10 @@ async function loadProducts() {
         renderProducts();
 
 
-        /*
-         * Mostramos el error real en la página
-         * para no dejar "Cargando catálogo..."
-         * infinitamente.
-         */
+        showToast(
+            "No se pudo cargar el catálogo."
+        );
 
-        showCatalogError(error);
 
     } finally {
 
@@ -477,131 +329,57 @@ async function loadProducts() {
 
 
 /* =====================================================
-   ERROR DEL CATÁLOGO
-===================================================== */
-
-function showCatalogError(error) {
-
-    const grid =
-        document.querySelector(
-            "#productsGrid"
-        );
-
-    const empty =
-        document.querySelector(
-            "#emptyProducts"
-        );
-
-
-    if (!grid) {
-        return;
-    }
-
-
-    const message =
-        error?.message ||
-        "No se pudo cargar el catálogo.";
-
-
-    grid.innerHTML = `
-
-        <div class="catalog-error">
-
-            <div class="empty-icon">×</div>
-
-            <h3>
-                No se pudo cargar el catálogo
-            </h3>
-
-            <p>
-                ${escapeHtml(message)}
-            </p>
-
-            <button
-                type="button"
-                class="button button-primary"
-                id="retryProducts"
-            >
-                Reintentar
-            </button>
-
-        </div>
-
-    `;
-
-
-    if (empty) {
-        empty.hidden = true;
-    }
-
-
-    const retry =
-        document.querySelector(
-            "#retryProducts"
-        );
-
-
-    if (retry) {
-
-        retry.addEventListener(
-            "click",
-            loadProducts
-        );
-
-    }
-
-}
-
-
-/* =====================================================
    FILTRAR PRODUCTOS
 ===================================================== */
 
 function getFilteredProducts() {
 
-    return state.products.filter(
-        product => {
+    return state.products.filter(product => {
 
-            const productCategory =
-                normalizeCategory(
-                    product.category ||
-                    product.categoria ||
-                    ""
-                );
-
-
-            const categoryMatch =
-                state.category === "Todos" ||
-                productCategory ===
-                    state.category;
-
-
-            const text = [
-
-                getProductName(product),
-
-                getProductDescription(product),
-
-                productCategory
-
-            ]
-                .filter(Boolean)
-                .join(" ")
+        const category =
+            String(
+                product.category || ""
+            )
+                .trim()
                 .toLowerCase();
 
 
-            const searchMatch =
-                !state.search ||
-                text.includes(state.search);
+        const selectedCategory =
+            String(
+                state.category || "Todos"
+            )
+                .trim()
+                .toLowerCase();
 
 
-            return (
-                categoryMatch &&
-                searchMatch
-            );
+        const categoryMatch =
+            selectedCategory === "todos" ||
+            category === selectedCategory;
 
-        }
-    );
+
+        const text = [
+
+            product.name,
+            product.description,
+            product.category
+
+        ]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase();
+
+
+        const searchMatch =
+            !state.search ||
+            text.includes(state.search);
+
+
+        return (
+            categoryMatch &&
+            searchMatch
+        );
+
+    });
 
 }
 
@@ -663,13 +441,15 @@ function renderProducts() {
 
 
 /* =====================================================
-   CREAR TARJETA
+   TARJETA DE PRODUCTO
 ===================================================== */
 
 function createProductCard(product) {
 
     const article =
-        document.createElement("article");
+        document.createElement(
+            "article"
+        );
 
 
     article.className =
@@ -677,19 +457,8 @@ function createProductCard(product) {
 
 
     const image =
-        getProductImage(product);
-
-
-    const name =
-        getProductName(product);
-
-
-    const category =
-        getProductCategory(product);
-
-
-    const price =
-        getProductPrice(product);
+        product.image ||
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80";
 
 
     article.innerHTML = `
@@ -697,33 +466,54 @@ function createProductCard(product) {
         <button
             type="button"
             class="product-card-button"
-            aria-label="Ver ${escapeAttribute(name)}"
+            aria-label="Ver ${escapeAttribute(
+                product.name || "producto"
+            )}"
         >
 
-            <div class="product-image-wrap">
+            <div class="product-image">
 
                 <img
                     src="${escapeAttribute(image)}"
-                    alt="${escapeAttribute(name)}"
-                    class="product-image"
+                    alt="${escapeAttribute(
+                        product.name || "Producto"
+                    )}"
                     loading="lazy"
                 >
 
             </div>
 
 
-            <div class="product-card-info">
+            <div class="product-info">
 
-                <div class="product-card-category">
-                    ${escapeHtml(category)}
-                </div>
+                <span class="product-category">
+                    ${escapeHtml(
+                        product.category || "Producto"
+                    )}
+                </span>
 
-                <h3 class="product-card-name">
-                    ${escapeHtml(name)}
+
+                <h3 class="product-name">
+                    ${escapeHtml(
+                        product.name || "Producto"
+                    )}
                 </h3>
 
-                <div class="product-card-price">
-                    ${formatPrice(price)}
+
+                <div class="product-bottom">
+
+                    <div class="product-price">
+                        ${formatPrice(product.price)}
+                    </div>
+
+
+                    <span
+                        class="product-button"
+                        aria-hidden="true"
+                    >
+                        +
+                    </span>
+
                 </div>
 
             </div>
@@ -743,76 +533,15 @@ function createProductCard(product) {
 
         button.addEventListener(
             "click",
-            () => openProductModal(product)
+            () => {
+                openProductModal(product);
+            }
         );
 
     }
 
 
     return article;
-
-}
-
-
-/* =====================================================
-   DATOS DEL PRODUCTO
-===================================================== */
-
-function getProductName(product) {
-
-    return String(
-        product.name ||
-        product.nombre ||
-        "Producto"
-    );
-
-}
-
-
-function getProductCategory(product) {
-
-    return normalizeCategory(
-        product.category ||
-        product.categoria ||
-        "Producto"
-    );
-
-}
-
-
-function getProductDescription(product) {
-
-    return String(
-        product.description ||
-        product.descripcion ||
-        ""
-    );
-
-}
-
-
-function getProductPrice(product) {
-
-    return Number(
-        product.price ??
-        product.precio ??
-        0
-    ) || 0;
-
-}
-
-
-function getProductImage(product) {
-
-    return (
-        product.image ||
-        product.image_url ||
-        product.imagen ||
-        product.imagen_url ||
-        product.url_imagen ||
-        product.photo ||
-        ""
-    );
 
 }
 
@@ -887,12 +616,13 @@ function setupModal() {
         "keydown",
         event => {
 
-            if (event.key === "Escape") {
-
-                closeProductModal();
-                closeCart();
-
+            if (event.key !== "Escape") {
+                return;
             }
+
+
+            closeProductModal();
+            closeCart();
 
         }
     );
@@ -906,8 +636,7 @@ function setupModal() {
 
 function openProductModal(product) {
 
-    selectedProduct =
-        product;
+    selectedProduct = product;
 
 
     const modal =
@@ -953,23 +682,8 @@ function openProductModal(product) {
 
 
     const productImage =
-        getProductImage(product);
-
-
-    const productName =
-        getProductName(product);
-
-
-    const productCategory =
-        getProductCategory(product);
-
-
-    const productPrice =
-        getProductPrice(product);
-
-
-    const productDescription =
-        getProductDescription(product);
+        product.image ||
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80";
 
 
     if (image) {
@@ -978,7 +692,8 @@ function openProductModal(product) {
             productImage;
 
         image.alt =
-            productName;
+            product.name ||
+            "Producto";
 
     }
 
@@ -986,7 +701,8 @@ function openProductModal(product) {
     if (category) {
 
         category.textContent =
-            productCategory;
+            product.category ||
+            "Producto";
 
     }
 
@@ -994,7 +710,8 @@ function openProductModal(product) {
     if (name) {
 
         name.textContent =
-            productName;
+            product.name ||
+            "Producto";
 
     }
 
@@ -1003,7 +720,7 @@ function openProductModal(product) {
 
         price.textContent =
             formatPrice(
-                productPrice
+                product.price
             );
 
     }
@@ -1012,28 +729,28 @@ function openProductModal(product) {
     if (description) {
 
         description.textContent =
-            productDescription ||
+            product.description ||
             "Consultanos por disponibilidad, talles y colores.";
 
     }
 
 
-    if (whatsapp && STORE.whatsapp) {
+    if (whatsapp) {
 
         const message =
-            `Hola! Quería consultar por ${productName}. ` +
-            `Precio: ${formatPrice(productPrice)}.`;
+            `Hola! Quería consultar por ${product.name || "este producto"}. ` +
+            `Precio: ${formatPrice(product.price)}.`;
 
         whatsapp.href =
             `https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(message)}`;
 
+        whatsapp.target = "_blank";
+        whatsapp.rel = "noopener noreferrer";
+
     }
 
 
-    modal.classList.add(
-        "active"
-    );
-
+    modal.classList.add("active");
 
     modal.setAttribute(
         "aria-hidden",
@@ -1042,7 +759,7 @@ function openProductModal(product) {
 
 
     document.body.classList.add(
-        "modal-open"
+        "no-scroll"
     );
 
 }
@@ -1076,13 +793,18 @@ function closeProductModal() {
     );
 
 
-    document.body.classList.remove(
-        "modal-open"
-    );
+    selectedProduct = null;
 
 
-    selectedProduct =
-        null;
+    if (!document.querySelector(
+        "#cartDrawer.active"
+    )) {
+
+        document.body.classList.remove(
+            "no-scroll"
+        );
+
+    }
 
 }
 
@@ -1205,25 +927,30 @@ function loadCart() {
             );
 
 
-        const parsed =
-            saved
-                ? JSON.parse(saved)
-                : [];
+        if (!saved) {
+
+            state.cart = [];
+
+        } else {
+
+            const parsed =
+                JSON.parse(saved);
 
 
-        state.cart =
-            Array.isArray(parsed)
-                ? parsed
-                : [];
+            state.cart =
+                Array.isArray(parsed)
+                    ? parsed
+                    : [];
+
+        }
 
 
     } catch (error) {
 
-        console.error(
-            "Error cargando carrito:",
+        console.warn(
+            "No se pudo cargar el carrito:",
             error
         );
-
 
         state.cart = [];
 
@@ -1245,15 +972,13 @@ function saveCart() {
 
         localStorage.setItem(
             "007imported_cart",
-            JSON.stringify(
-                state.cart
-            )
+            JSON.stringify(state.cart)
         );
 
     } catch (error) {
 
-        console.error(
-            "Error guardando carrito:",
+        console.warn(
+            "No se pudo guardar el carrito:",
             error
         );
 
@@ -1271,17 +996,11 @@ function saveCart() {
 
 function addToCartProduct(product) {
 
-    const id =
-        product.id ??
-        product.ID ??
-        getProductName(product);
-
-
     const existing =
         state.cart.find(
             item =>
                 String(item.id) ===
-                String(id)
+                String(product.id)
         );
 
 
@@ -1293,16 +1012,17 @@ function addToCartProduct(product) {
 
         state.cart.push({
 
-            id: id,
+            id: product.id,
 
             name:
-                getProductName(product),
+                product.name ||
+                "Producto",
 
             price:
-                getProductPrice(product),
+                Number(product.price) || 0,
 
             image:
-                getProductImage(product),
+                product.image || "",
 
             quantity: 1
 
@@ -1315,7 +1035,7 @@ function addToCartProduct(product) {
 
 
     showToast(
-        `${getProductName(product)} agregado al carrito`
+        `${product.name || "Producto"} agregado al carrito`
     );
 
 
@@ -1365,8 +1085,7 @@ function changeQuantity(
     }
 
 
-    item.quantity +=
-        amount;
+    item.quantity += amount;
 
 
     if (item.quantity <= 0) {
@@ -1424,10 +1143,7 @@ function renderCart() {
         state.cart.reduce(
             (sum, item) =>
                 sum +
-                (
-                    Number(item.quantity) ||
-                    0
-                ),
+                (Number(item.quantity) || 0),
             0
         );
 
@@ -1437,12 +1153,8 @@ function renderCart() {
             (sum, item) =>
                 sum +
                 (
-                    Number(item.price) ||
-                    0
-                ) *
-                (
-                    Number(item.quantity) ||
-                    0
+                    (Number(item.price) || 0) *
+                    (Number(item.quantity) || 0)
                 ),
             0
         );
@@ -1509,23 +1221,20 @@ function renderCart() {
 
         const image =
             item.image ||
-            "";
+            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=300&q=80";
 
 
         element.innerHTML = `
 
             <div class="cart-item-image">
 
-                ${
-                    image
-                        ? `
-                            <img
-                                src="${escapeAttribute(image)}"
-                                alt="${escapeAttribute(item.name)}"
-                            >
-                        `
-                        : ""
-                }
+                <img
+                    src="${escapeAttribute(image)}"
+                    alt="${escapeAttribute(
+                        item.name || "Producto"
+                    )}"
+                    loading="lazy"
+                >
 
             </div>
 
@@ -1533,44 +1242,53 @@ function renderCart() {
             <div class="cart-item-info">
 
                 <h3>
-                    ${escapeHtml(item.name)}
+                    ${escapeHtml(
+                        item.name || "Producto"
+                    )}
                 </h3>
 
-                <strong>
+
+                <div class="cart-item-price">
                     ${formatPrice(item.price)}
-                </strong>
+                </div>
 
 
-                <div class="cart-item-controls">
+                <div class="cart-item-quantity">
 
                     <button
                         type="button"
                         data-action="decrease"
+                        aria-label="Disminuir cantidad"
                     >
                         −
                     </button>
 
+
                     <span>
-                        ${item.quantity}
+                        ${Number(item.quantity) || 0}
                     </span>
+
 
                     <button
                         type="button"
                         data-action="increase"
+                        aria-label="Aumentar cantidad"
                     >
                         +
-                    </button>
-
-                    <button
-                        type="button"
-                        data-action="remove"
-                    >
-                        Eliminar
                     </button>
 
                 </div>
 
             </div>
+
+
+            <button
+                type="button"
+                class="cart-item-remove"
+                data-action="remove"
+            >
+                Eliminar
+            </button>
 
         `;
 
@@ -1678,6 +1396,11 @@ function openCart() {
         "false"
     );
 
+
+    document.body.classList.add(
+        "no-scroll"
+    );
+
 }
 
 
@@ -1708,6 +1431,17 @@ function closeCart() {
         "true"
     );
 
+
+    if (!document.querySelector(
+        "#productModal.active"
+    )) {
+
+        document.body.classList.remove(
+            "no-scroll"
+        );
+
+    }
+
 }
 
 
@@ -1728,17 +1462,6 @@ function checkoutWhatsApp() {
     }
 
 
-    if (!STORE.whatsapp) {
-
-        showToast(
-            "WhatsApp no está configurado."
-        );
-
-        return;
-
-    }
-
-
     let message =
         "Hola! Quiero hacer un pedido en 007imported.\n\n";
 
@@ -1751,7 +1474,6 @@ function checkoutWhatsApp() {
         const price =
             Number(item.price) || 0;
 
-
         const quantity =
             Number(item.quantity) || 0;
 
@@ -1760,8 +1482,7 @@ function checkoutWhatsApp() {
             price * quantity;
 
 
-        total +=
-            subtotal;
+        total += subtotal;
 
 
         message +=
@@ -1844,29 +1565,24 @@ function showToast(message) {
 
 
     toastTimer =
-        setTimeout(
-            () => {
+        setTimeout(() => {
 
-                toast.classList.remove(
-                    "show"
-                );
+            toast.classList.remove(
+                "show"
+            );
 
-            },
-            2500
-        );
+        }, 2500);
 
 }
 
 
 /* =====================================================
-   ESCAPE HTML
+   SEGURIDAD
 ===================================================== */
 
 function escapeHtml(value) {
 
-    return String(
-        value ?? ""
-    )
+    return String(value ?? "")
         .replace(
             /&/g,
             "&amp;"
