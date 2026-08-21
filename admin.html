@@ -18,21 +18,8 @@
         href="favicon.ico"
     >
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
@@ -85,6 +72,7 @@
         button {
             cursor: pointer;
         }
+
 
         /* =====================================
            LOGIN
@@ -148,6 +136,7 @@
             margin-bottom: 30px;
         }
 
+
         /* =====================================
            ADMIN APP
         ====================================== */
@@ -156,6 +145,7 @@
             display: none;
             min-height: 100vh;
         }
+
 
         /* =====================================
            HEADER
@@ -264,6 +254,7 @@
             color: var(--green);
         }
 
+
         /* =====================================
            CONTENT
         ====================================== */
@@ -308,6 +299,7 @@
 
             margin-top: 16px;
         }
+
 
         /* =====================================
            GRID
@@ -354,6 +346,7 @@
 
             font-size: 12px;
         }
+
 
         /* =====================================
            FORM
@@ -413,8 +406,9 @@
             gap: 15px;
         }
 
+
         /* =====================================
-           IMAGE
+           IMÁGENES
         ====================================== */
 
         .upload {
@@ -466,19 +460,117 @@
 
         .upload-info {
             margin-top: 7px;
+
             font-size: 10px;
         }
 
-        .preview {
-            display: none;
+        .image-previews {
+            display: grid;
 
+            grid-template-columns:
+                repeat(
+                    auto-fill,
+                    minmax(100px, 1fr)
+                );
+
+            gap: 10px;
+
+            margin-top: 15px;
+        }
+
+        .image-preview-item {
+            position: relative;
+
+            aspect-ratio: 1 / 1;
+
+            background: #101010;
+
+            border: 1px solid var(--border);
+
+            overflow: hidden;
+        }
+
+        .image-preview-item img {
             width: 100%;
             height: 100%;
 
-            min-height: 220px;
+            object-fit: cover;
 
-            object-fit: contain;
+            display: block;
         }
+
+        .image-preview-number {
+            position: absolute;
+
+            left: 6px;
+            top: 6px;
+
+            background: var(--green);
+
+            color: #050505;
+
+            font-size: 9px;
+            font-weight: 900;
+
+            padding: 4px 6px;
+        }
+
+        .image-preview-delete {
+            position: absolute;
+
+            right: 5px;
+            top: 5px;
+
+            width: 27px;
+            height: 27px;
+
+            border: 1px solid rgba(255,255,255,.15);
+
+            background: rgba(0,0,0,.75);
+
+            color: white;
+
+            font-size: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-preview-delete:hover {
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        .image-main-label {
+            position: absolute;
+
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            padding: 6px;
+
+            background: rgba(0,0,0,.75);
+
+            color: var(--green);
+
+            font-size: 8px;
+            font-weight: 900;
+
+            text-align: center;
+
+            letter-spacing: 1px;
+        }
+
+        .image-count {
+            margin-top: 8px;
+
+            color: var(--gray);
+
+            font-size: 10px;
+        }
+
 
         /* =====================================
            BUTTONS
@@ -534,6 +626,7 @@
             color: var(--green);
         }
 
+
         /* =====================================
            PRODUCT LIST
         ====================================== */
@@ -573,6 +666,8 @@
             flex-shrink: 0;
 
             overflow: hidden;
+
+            position: relative;
         }
 
         .product-image img {
@@ -580,6 +675,22 @@
             height: 100%;
 
             object-fit: cover;
+        }
+
+        .product-image-count {
+            position: absolute;
+
+            right: 4px;
+            bottom: 4px;
+
+            background: rgba(0,0,0,.8);
+
+            color: white;
+
+            padding: 3px 5px;
+
+            font-size: 8px;
+            font-weight: 800;
         }
 
         .product-data {
@@ -663,6 +774,7 @@
             font-size: 12px;
         }
 
+
         /* =====================================
            TOAST
         ====================================== */
@@ -700,6 +812,7 @@
             background: var(--red);
             color: white;
         }
+
 
         /* =====================================
            RESPONSIVE
@@ -747,6 +860,11 @@
             .action {
                 width: 34px;
                 height: 34px;
+            }
+
+            .image-previews {
+                grid-template-columns:
+                    repeat(3, 1fr);
             }
 
         }
@@ -949,12 +1067,6 @@
                     <form id="productForm">
 
 
-                        <input
-                            type="hidden"
-                            id="productId"
-                        >
-
-
                         <div class="field">
 
                             <label for="productName">
@@ -1030,14 +1142,6 @@
                         </div>
 
 
-                        <!--
-                            SE ELIMINÓ COMPLETAMENTE
-                            EL CAMPO LABEL PORQUE
-                            SUPABASE INDICA QUE
-                            products NO TIENE ESA COLUMNA.
-                        -->
-
-
                         <div class="field">
 
                             <label for="productCategory">
@@ -1074,10 +1178,14 @@
                         </div>
 
 
+                        <!-- =================================
+                             IMÁGENES
+                        ================================== -->
+
                         <div class="field">
 
                             <label>
-                                Imagen
+                                Imágenes del producto
                             </label>
 
 
@@ -1086,11 +1194,11 @@
                                 for="productImage"
                             >
 
-
                                 <input
                                     id="productImage"
                                     type="file"
                                     accept="image/*"
+                                    multiple
                                 >
 
 
@@ -1104,23 +1212,30 @@
                                     </div>
 
                                     <div class="upload-title">
-                                        Seleccionar imagen
+                                        Seleccionar imágenes
                                     </div>
 
                                     <div class="upload-info">
-                                        JPG, PNG o WEBP
+                                        Podés seleccionar varias a la vez
                                     </div>
 
                                 </div>
 
-
-                                <img
-                                    class="preview"
-                                    id="imagePreview"
-                                    alt="Vista previa"
-                                >
-
                             </label>
+
+
+                            <div
+                                class="image-previews"
+                                id="imagePreviews"
+                            ></div>
+
+
+                            <div
+                                class="image-count"
+                                id="imageCount"
+                            >
+                                0 imágenes seleccionadas
+                            </div>
 
                         </div>
 
@@ -1241,8 +1356,11 @@
         const productImage =
             document.querySelector("#productImage");
 
-        const imagePreview =
-            document.querySelector("#imagePreview");
+        const imagePreviews =
+            document.querySelector("#imagePreviews");
+
+        const imageCount =
+            document.querySelector("#imageCount");
 
         const uploadText =
             document.querySelector("#uploadText");
@@ -1260,6 +1378,22 @@
             document.querySelector("#toast");
 
 
+        /*
+         * Imágenes que ya estaban guardadas
+         * en el producto.
+         */
+        let existingImages = [];
+
+
+        /*
+         * Imágenes nuevas seleccionadas.
+         */
+        let newImageFiles = [];
+
+
+        /*
+         * Producto que estamos editando.
+         */
         let editingProduct = null;
 
 
@@ -1283,6 +1417,7 @@
             toast.classList.add(
                 "show"
             );
+
 
             setTimeout(() => {
 
@@ -1507,64 +1642,307 @@
 
 
         /* =====================================
-           IMAGEN PREVIEW
+           SELECCIONAR IMÁGENES
         ====================================== */
 
         productImage.addEventListener(
             "change",
             () => {
 
-                const file =
-                    productImage.files[0];
+                const files =
+                    Array.from(
+                        productImage.files || []
+                    );
 
 
-                if (!file) {
+                if (!files.length) {
 
                     return;
 
                 }
 
 
-                if (!file.type.startsWith("image/")) {
+                const validFiles =
+                    files.filter(
+                        file =>
+                            file.type.startsWith(
+                                "image/"
+                            )
+                    );
+
+
+                if (
+                    validFiles.length !==
+                    files.length
+                ) {
 
                     showToast(
-                        "El archivo seleccionado no es una imagen.",
+                        "Algunos archivos no eran imágenes.",
                         true
                     );
 
-                    productImage.value =
-                        "";
-
-                    return;
-
                 }
 
 
-                const reader =
-                    new FileReader();
-
-
-                reader.onload =
-                    event => {
-
-                        imagePreview.src =
-                            event.target.result;
-
-                        imagePreview.style.display =
-                            "block";
-
-                        uploadText.style.display =
-                            "none";
-
-                    };
-
-
-                reader.readAsDataURL(
-                    file
+                /*
+                 * Agregamos las nuevas imágenes
+                 * a las que ya había seleccionado.
+                 */
+                newImageFiles.push(
+                    ...validFiles
                 );
+
+
+                /*
+                 * Limpiamos el input para que
+                 * se pueda volver a seleccionar
+                 * el mismo archivo.
+                 */
+                productImage.value =
+                    "";
+
+
+                renderImagePreviews();
 
             }
         );
+
+
+        /* =====================================
+           RENDER IMÁGENES
+        ====================================== */
+
+        function renderImagePreviews() {
+
+            imagePreviews.innerHTML =
+                "";
+
+
+            /*
+             * IMÁGENES EXISTENTES
+             */
+
+            existingImages.forEach(
+                (
+                    image,
+                    index
+                ) => {
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    item.className =
+                        "image-preview-item";
+
+
+                    item.innerHTML = `
+
+                        <img
+                            src="${escapeHtml(image)}"
+                            alt="Imagen ${index + 1}"
+                        >
+
+                        <div
+                            class="image-preview-number"
+                        >
+                            ${index + 1}
+                        </div>
+
+                        <button
+                            type="button"
+                            class="image-preview-delete"
+                            title="Eliminar imagen"
+                        >
+                            ×
+                        </button>
+
+                        ${
+                            index === 0
+                                ?
+                                `
+                                <div
+                                    class="image-main-label"
+                                >
+                                    PORTADA
+                                </div>
+                                `
+                                :
+                                ""
+                        }
+
+                    `;
+
+
+                    item
+                        .querySelector(
+                            ".image-preview-delete"
+                        )
+                        .addEventListener(
+                            "click",
+                            () => {
+
+                                existingImages.splice(
+                                    index,
+                                    1
+                                );
+
+                                renderImagePreviews();
+
+                            }
+                        );
+
+
+                    imagePreviews.appendChild(
+                        item
+                    );
+
+                }
+            );
+
+
+            /*
+             * IMÁGENES NUEVAS
+             */
+
+            newImageFiles.forEach(
+                (
+                    file,
+                    index
+                ) => {
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    item.className =
+                        "image-preview-item";
+
+
+                    const url =
+                        URL.createObjectURL(
+                            file
+                        );
+
+
+                    item.innerHTML = `
+
+                        <img
+                            src="${url}"
+                            alt="Nueva imagen"
+                        >
+
+                        <div
+                            class="image-preview-number"
+                        >
+                            ${existingImages.length + index + 1}
+                        </div>
+
+                        <button
+                            type="button"
+                            class="image-preview-delete"
+                            title="Eliminar imagen"
+                        >
+                            ×
+                        </button>
+
+                        ${
+                            existingImages.length === 0 &&
+                            index === 0
+                                ?
+                                `
+                                <div
+                                    class="image-main-label"
+                                >
+                                    PORTADA
+                                </div>
+                                `
+                                :
+                                ""
+                        }
+
+                    `;
+
+
+                    item
+                        .querySelector(
+                            ".image-preview-delete"
+                        )
+                        .addEventListener(
+                            "click",
+                            () => {
+
+                                newImageFiles.splice(
+                                    index,
+                                    1
+                                );
+
+                                renderImagePreviews();
+
+                            }
+                        );
+
+
+                    imagePreviews.appendChild(
+                        item
+                    );
+
+                }
+            );
+
+
+            const total =
+                existingImages.length +
+                newImageFiles.length;
+
+
+            imageCount.textContent =
+                `${total} imagen${total === 1 ? "" : "es"} seleccionada${total === 1 ? "" : "s"}`;
+
+
+            if (total > 0) {
+
+                uploadText.innerHTML = `
+
+                    <div class="upload-icon">
+                        +
+                    </div>
+
+                    <div class="upload-title">
+                        Agregar más imágenes
+                    </div>
+
+                    <div class="upload-info">
+                        Podés seleccionar varias a la vez
+                    </div>
+
+                `;
+
+            } else {
+
+                uploadText.innerHTML = `
+
+                    <div class="upload-icon">
+                        +
+                    </div>
+
+                    <div class="upload-title">
+                        Seleccionar imágenes
+                    </div>
+
+                    <div class="upload-info">
+                        Podés seleccionar varias a la vez
+                    </div>
+
+                `;
+
+            }
+
+        }
 
 
         /* =====================================
@@ -1579,16 +1957,6 @@
                 </div>
             `;
 
-
-            /*
-             * IMPORTANTE:
-             *
-             * Usamos select("*").
-             *
-             * No pedimos "label".
-             * La columna label NO existe
-             * en tu tabla products.
-             */
 
             const {
                 data,
@@ -1686,7 +2054,27 @@
                 "product";
 
 
+            /*
+             * Compatibilidad:
+             *
+             * Si el producto tiene images,
+             * usamos la primera.
+             *
+             * Si no, usamos image.
+             */
+
+            const images =
+                Array.isArray(
+                    product.images
+                )
+                    ?
+                    product.images
+                    :
+                    [];
+
+
             const image =
+                images[0] ||
                 product.image ||
                 "";
 
@@ -1705,6 +2093,21 @@
                             src="${escapeHtml(image)}"
                             alt=""
                         >
+
+                        ${
+                            images.length > 1
+                                ?
+                                `
+                                <div
+                                    class="product-image-count"
+                                >
+                                    ${images.length} FOTOS
+                                </div>
+                                `
+                                :
+                                ""
+                        }
+
                         `
 
                         :
@@ -1887,38 +2290,57 @@
                         ).value;
 
 
-                    const imageFile =
-                        productImage.files[0];
-
-
-                    let imageUrl =
-                        editingProduct?.image ||
-                        null;
-
-
                     /*
-                     * Si seleccionaste una imagen,
-                     * la convertimos a Data URL.
+                     * Convertimos las nuevas imágenes
+                     * a Data URL.
                      */
 
-                    if (imageFile) {
+                    const newImageUrls =
+                        [];
 
-                        imageUrl =
+
+                    for (
+                        const file
+                        of newImageFiles
+                    ) {
+
+                        const url =
                             await fileToDataUrl(
-                                imageFile
+                                file
                             );
+
+
+                        newImageUrls.push(
+                            url
+                        );
 
                     }
 
 
                     /*
-                     * IMPORTANTE:
+                     * Combinamos:
                      *
-                     * NO existe "label" acá.
-                     *
-                     * Solo enviamos columnas que
-                     * estamos utilizando.
+                     * 1. imágenes existentes
+                     * 2. imágenes nuevas
                      */
+
+                    const allImages = [
+
+                        ...existingImages,
+
+                        ...newImageUrls
+
+                    ];
+
+
+                    /*
+                     * La primera imagen es la portada.
+                     */
+
+                    const imageUrl =
+                        allImages[0] ||
+                        null;
+
 
                     const productData = {
 
@@ -1932,6 +2354,9 @@
 
                         image:
                             imageUrl,
+
+                        images:
+                            allImages,
 
                         stock
 
@@ -1975,8 +2400,10 @@
 
                     showToast(
                         wasEditing
-                            ? "Producto actualizado."
-                            : "Producto agregado."
+                            ?
+                            "Producto actualizado."
+                            :
+                            "Producto agregado."
                     );
 
 
@@ -2007,9 +2434,11 @@
                         false;
 
                     saveButton.textContent =
-                        wasEditing
-                            ? "AGREGAR PRODUCTO"
-                            : "AGREGAR PRODUCTO";
+                        editingProduct
+                            ?
+                            "GUARDAR CAMBIOS"
+                            :
+                            "AGREGAR PRODUCTO";
 
                 }
 
@@ -2072,29 +2501,53 @@
                 "Remeras";
 
 
-            if (product.image) {
+            /*
+             * Cargamos las imágenes existentes.
+             *
+             * Si el producto todavía usa
+             * el sistema viejo "image",
+             * lo convertimos automáticamente
+             * en una lista de una imagen.
+             */
 
-                imagePreview.src =
-                    product.image;
+            if (
+                Array.isArray(
+                    product.images
+                )
+            ) {
 
-                imagePreview.style.display =
-                    "block";
+                existingImages =
+                    [
+                        ...product.images
+                    ];
 
-                uploadText.style.display =
-                    "none";
+            } else if (
+                product.image
+            ) {
+
+                existingImages =
+                    [
+                        product.image
+                    ];
 
             } else {
 
-                imagePreview.src =
-                    "";
-
-                imagePreview.style.display =
-                    "none";
-
-                uploadText.style.display =
-                    "block";
+                existingImages =
+                    [];
 
             }
+
+
+            /*
+             * Al entrar en edición empezamos
+             * sin imágenes nuevas.
+             */
+
+            newImageFiles =
+                [];
+
+
+            renderImagePreviews();
 
 
             document.querySelector(
@@ -2126,6 +2579,14 @@
                 null;
 
 
+            existingImages =
+                [];
+
+
+            newImageFiles =
+                [];
+
+
             productForm.reset();
 
 
@@ -2141,15 +2602,7 @@
                 "none";
 
 
-            imagePreview.src =
-                "";
-
-            imagePreview.style.display =
-                "none";
-
-
-            uploadText.style.display =
-                "block";
+            renderImagePreviews();
 
         }
 
@@ -2280,7 +2733,7 @@
 
 
         /* =====================================
-           ESCAPE
+           ESCAPE HTML
         ====================================== */
 
         function escapeHtml(
@@ -2317,6 +2770,8 @@
         /* =====================================
            INICIAR
         ====================================== */
+
+        renderImagePreviews();
 
         checkSession();
 
