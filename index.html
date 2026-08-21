@@ -10,16 +10,22 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>007imported — Indumentaria</title>
+    <meta
+        name="description"
+        content="007IMPORTED — Indumentaria y accesorios seleccionados."
+    >
 
+    <title>007IMPORTED — Indumentaria</title>
+
+    <!-- FAVICON -->
     <link
         rel="icon"
         type="image/x-icon"
         href="favicon.ico"
     >
 
+    <!-- FUENTE -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link
         rel="preconnect"
         href="https://fonts.gstatic.com"
@@ -34,26 +40,14 @@
 
     <style>
 
+        /* =====================================================
+           RESET
+        ===================================================== */
+
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-
-        :root {
-
-            --black: #050505;
-            --dark: #090909;
-            --card: #111111;
-            --card2: #151515;
-
-            --white: #f5f5f5;
-            --gray: #888888;
-            --green: #b8ff00;
-
-            --border: #242424;
-
         }
 
 
@@ -63,18 +57,31 @@
 
 
         body {
-
-            background: var(--black);
-
-            color: var(--white);
+            background: #080808;
+            color: #f4f1eb;
 
             font-family:
                 Inter,
                 Arial,
                 sans-serif;
 
-            overflow-x: hidden;
+            min-height: 100vh;
 
+            overflow-x: hidden;
+        }
+
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+
+        button,
+        a {
+            cursor: pointer;
         }
 
 
@@ -84,600 +91,616 @@
         }
 
 
-        button {
-            font-family: inherit;
-            cursor: pointer;
-        }
-
-
         img {
             max-width: 100%;
         }
 
 
-        /* =====================================
+        ::selection {
+            background: #cdbb9e;
+            color: #080808;
+        }
+
+
+        /* =====================================================
+           VARIABLES
+        ===================================================== */
+
+        :root {
+
+            --black: #080808;
+            --black-2: #0c0c0b;
+            --dark: #11100e;
+            --card: #151412;
+            --card-2: #1c1a17;
+
+            --border: #35312c;
+            --border-light: #4a443c;
+
+            --white: #f4f1eb;
+            --gray: #96918a;
+            --gray-light: #c9c2b8;
+
+            --cream: #cdbb9e;
+            --cream-light: #dfd0b7;
+
+            --red: #d9534f;
+
+            --max-width: 1250px;
+        }
+
+
+        /* =====================================================
+           BACKGROUND
+        ===================================================== */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            z-index: -1;
+
+            background:
+                radial-gradient(
+                    circle at 78% 18%,
+                    rgba(140, 111, 72, .10),
+                    transparent 32%
+                ),
+
+                radial-gradient(
+                    circle at 10% 80%,
+                    rgba(140, 111, 72, .06),
+                    transparent 30%
+                );
+        }
+
+
+        /* =====================================================
            HEADER
-        ====================================== */
+        ===================================================== */
 
         .header {
-
             position: fixed;
 
             top: 0;
             left: 0;
             right: 0;
 
-            height: 90px;
+            height: 88px;
 
             z-index: 1000;
 
             display: flex;
-
             align-items: center;
 
-            border-bottom: 1px solid rgba(255,255,255,.06);
+            border-bottom: 1px solid rgba(205, 187, 158, .14);
 
-            background:
-                rgba(5,5,5,.92);
+            background: rgba(8, 8, 8, .94);
 
-            backdrop-filter: blur(15px);
-
+            backdrop-filter: blur(14px);
         }
 
 
         .header-inner {
-
             width: 100%;
-
-            max-width: 1400px;
+            max-width: var(--max-width);
 
             margin: auto;
 
-            padding:
-                0 35px;
+            padding: 0 25px;
 
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
 
+            gap: 30px;
         }
 
 
-        /* =====================================
+        /* =====================================================
            LOGO
-        ====================================== */
+        ===================================================== */
 
         .brand {
-
             display: flex;
-
             align-items: center;
 
             gap: 14px;
 
+            flex-shrink: 0;
         }
 
 
         .brand-logo {
-
-            width: 74px;
-            height: 74px;
+            width: 58px;
+            height: 58px;
 
             object-fit: contain;
 
             display: block;
-
         }
 
 
         .brand-name {
-
-            font-size: 15px;
-
+            font-size: 17px;
             font-weight: 900;
 
-            letter-spacing: 1px;
-
+            letter-spacing: -.8px;
         }
 
 
         .brand-name span {
-
-            color: var(--green);
-
+            color: var(--cream);
         }
 
 
-        /* =====================================
+        /* =====================================================
            NAV
-        ====================================== */
+        ===================================================== */
 
         .nav {
-
             display: flex;
-
             align-items: center;
 
-            gap: 34px;
+            gap: 32px;
 
+            margin-left: auto;
         }
 
 
         .nav a {
+            position: relative;
 
-            font-size: 11px;
+            color: #d5d0c8;
 
+            font-size: 10px;
             font-weight: 800;
 
-            color: #aaa;
+            letter-spacing: .4px;
 
             transition: .2s;
+        }
 
+
+        .nav a::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: -8px;
+
+            width: 0;
+            height: 1px;
+
+            background: var(--cream);
+
+            transition: .2s;
         }
 
 
         .nav a:hover {
-
-            color: var(--green);
-
+            color: var(--cream);
         }
 
 
-        .nav-right {
+        .nav a:hover::after {
+            width: 100%;
+        }
 
+
+        /* =====================================================
+           HEADER ACTIONS
+        ===================================================== */
+
+        .header-actions {
             display: flex;
-
             align-items: center;
 
-            gap: 25px;
-
+            gap: 18px;
         }
 
 
         .instagram-link {
+            color: var(--white);
 
             font-size: 10px;
+            font-weight: 800;
 
-            font-weight: 900;
+            text-transform: uppercase;
 
-            letter-spacing: .5px;
-
+            transition: .2s;
         }
 
 
-        .cart-link {
+        .instagram-link:hover {
+            color: var(--cream);
+        }
 
+
+        .cart-button {
             display: flex;
-
             align-items: center;
 
             gap: 8px;
 
+            color: var(--white);
+
+            background: none;
+            border: 0;
+
             font-size: 10px;
+            font-weight: 800;
 
-            font-weight: 900;
-
+            text-transform: uppercase;
         }
 
 
-        .cart-number {
-
-            width: 22px;
-            height: 22px;
+        .cart-count {
+            width: 20px;
+            height: 20px;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
-            background: var(--green);
-
-            color: #050505;
-
             border-radius: 50%;
+
+            background: var(--cream);
+            color: #080808;
 
             font-size: 9px;
-
             font-weight: 900;
-
         }
 
 
-        /* =====================================
-           HERO
-        ====================================== */
-
-        .hero {
-
-            min-height: 100vh;
-
-            padding-top: 90px;
-
-            position: relative;
-
-            overflow: hidden;
-
-            display: flex;
-
-            align-items: center;
-
-        }
-
-
-        .hero::before {
-
-            content: "";
-
-            position: absolute;
-
-            inset: 0;
-
-            background-image:
-
-                linear-gradient(
-                    rgba(255,255,255,.025) 1px,
-                    transparent 1px
-                ),
-
-                linear-gradient(
-                    90deg,
-                    rgba(255,255,255,.025) 1px,
-                    transparent 1px
-                );
-
-            background-size: 54px 54px;
-
-            pointer-events: none;
-
-        }
-
-
-        .hero::after {
-
-            content: "";
-
-            position: absolute;
-
-            width: 650px;
-            height: 650px;
-
-            right: -200px;
-            bottom: -250px;
-
-            background: var(--green);
-
-            opacity: .04;
-
-            filter: blur(100px);
-
-            border-radius: 50%;
-
-        }
-
-
-        .hero-inner {
-
-            width: 100%;
-
-            max-width: 1400px;
-
-            margin: auto;
-
-            padding: 70px 35px;
-
-            position: relative;
-
-            z-index: 2;
-
-        }
-
-
-        .hero-label {
-
-            color: var(--green);
-
-            font-size: 11px;
-
-            font-weight: 900;
-
-            letter-spacing: 4px;
-
-            margin-bottom: 20px;
-
-        }
-
-
-        .hero-title {
-
-            font-size: clamp(
-                65px,
-                10vw,
-                145px
-            );
-
-            line-height: .82;
-
-            letter-spacing: -8px;
-
-            font-weight: 900;
-
-            max-width: 1000px;
-
-        }
-
-
-        .hero-title span {
-
-            display: block;
-
-            color: var(--green);
-
-        }
-
-
-        .hero-description {
-
-            max-width: 550px;
-
-            margin-top: 35px;
-
-            color: #aaa;
-
-            font-size: 14px;
-
-            line-height: 1.7;
-
-        }
-
-
-        .hero-buttons {
-
-            display: flex;
-
-            gap: 10px;
-
-            margin-top: 30px;
-
-        }
-
-
-        .button {
-
-            min-height: 48px;
-
-            padding:
-                0 25px;
-
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 10px;
-
-            font-weight: 900;
-
-            letter-spacing: .5px;
+        /* =====================================================
+           MOBILE MENU
+        ===================================================== */
+
+        .menu-button {
+            display: none;
+
+            width: 42px;
+            height: 42px;
 
             border: 1px solid var(--border);
-
-        }
-
-
-        .button-primary {
-
-            background: var(--green);
-
-            color: #050505;
-
-            border-color: var(--green);
-
-        }
-
-
-        .button-secondary {
 
             background: transparent;
 
             color: white;
 
+            font-size: 20px;
         }
 
 
-        .button-secondary:hover {
+        /* =====================================================
+           HERO
+        ===================================================== */
 
-            border-color: var(--green);
+        .hero {
+            min-height: 100vh;
 
-            color: var(--green);
+            position: relative;
 
+            display: flex;
+            align-items: center;
+
+            padding:
+                150px
+                25px
+                100px;
+
+            overflow: hidden;
         }
 
 
-        .hero-big-logo {
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 750px;
+            height: 750px;
+
+            right: -240px;
+            bottom: -330px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(150, 120, 75, .13),
+                    transparent 67%
+                );
+
+            pointer-events: none;
+        }
+
+
+        .hero::after {
+            content: "007";
 
             position: absolute;
 
             right: -50px;
+            bottom: -130px;
 
-            bottom: -180px;
+            color: rgba(205, 187, 158, .025);
 
-            width: 750px;
-
-            opacity: .035;
-
-            pointer-events: none;
-
-        }
-
-
-        /* =====================================
-           CATALOG SECTION
-        ====================================== */
-
-        .catalog {
-
-            position: relative;
-
-            padding:
-                120px 35px
-                140px;
-
-            background: #090909;
-
-        }
-
-
-        .catalog-inner {
-
-            max-width: 1400px;
-
-            margin: auto;
-
-        }
-
-
-        .section-top {
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: flex-end;
-
-            gap: 40px;
-
-            margin-bottom: 45px;
-
-        }
-
-
-        .section-number {
-
-            color: var(--green);
-
-            font-size: 10px;
+            font-size: clamp(250px, 35vw, 600px);
 
             font-weight: 900;
 
-            letter-spacing: 3px;
+            line-height: .7;
 
-            margin-bottom: 12px;
+            letter-spacing: -45px;
 
+            pointer-events: none;
+        }
+
+
+        .hero-inner {
+            width: 100%;
+            max-width: var(--max-width);
+
+            margin: auto;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .hero-label {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            color: var(--cream);
+
+            font-size: 10px;
+            font-weight: 900;
+
+            letter-spacing: 4px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .hero-label::before {
+            content: "";
+
+            width: 30px;
+            height: 2px;
+
+            background: var(--cream);
+        }
+
+
+        .hero h1 {
+            max-width: 760px;
+
+            font-size:
+                clamp(
+                    60px,
+                    9vw,
+                    125px
+                );
+
+            line-height: .82;
+
+            letter-spacing: -7px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+
+        .hero h1 span {
+            color: var(--cream);
+        }
+
+
+        .hero-description {
+            max-width: 570px;
+
+            margin-top: 35px;
+
+            color: #aaa49c;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+        }
+
+
+        .hero-buttons {
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 35px;
+        }
+
+
+        .button {
+            min-height: 52px;
+
+            padding: 0 25px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid var(--border-light);
+
+            background: transparent;
+
+            color: var(--white);
+
+            font-size: 10px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+
+            transition: .25s;
+        }
+
+
+        .button-primary {
+            background: var(--cream);
+            border-color: var(--cream);
+
+            color: #080808;
+        }
+
+
+        .button-primary:hover {
+            background: var(--cream-light);
+            border-color: var(--cream-light);
+
+            transform: translateY(-2px);
+        }
+
+
+        .button-secondary:hover {
+            color: var(--cream);
+
+            border-color: var(--cream);
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           SECTIONS
+        ===================================================== */
+
+        .section {
+            width: 100%;
+
+            padding:
+                120px 25px;
+        }
+
+
+        .section-inner {
+            width: 100%;
+            max-width: var(--max-width);
+
+            margin: auto;
+        }
+
+
+        .section-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 30px;
+
+            margin-bottom: 45px;
+        }
+
+
+        .section-label {
+            color: var(--cream);
+
+            font-size: 10px;
+            font-weight: 900;
+
+            letter-spacing: 4px;
+
+            margin-bottom: 13px;
         }
 
 
         .section-title {
+            font-size:
+                clamp(
+                    40px,
+                    6vw,
+                    72px
+                );
 
-            font-size: clamp(
-                45px,
-                7vw,
-                85px
-            );
+            line-height: .9;
 
-            line-height: .85;
-
-            letter-spacing: -5px;
+            letter-spacing: -4px;
 
             font-weight: 900;
 
-        }
-
-
-        .section-title span {
-
-            color: var(--green);
-
+            text-transform: uppercase;
         }
 
 
         .section-description {
+            max-width: 360px;
 
-            max-width: 350px;
-
-            color: #777;
+            color: var(--gray);
 
             font-size: 12px;
 
             line-height: 1.7;
-
-            margin-bottom: 5px;
-
         }
 
 
-        /* =====================================
-           CATEGORÍAS
-        ====================================== */
+        /* =====================================================
+           CATEGORIES
+        ===================================================== */
 
         .categories {
-
             display: grid;
 
             grid-template-columns:
                 repeat(3, 1fr);
 
             gap: 5px;
-
-            margin-bottom: 60px;
-
         }
 
 
         .category {
-
-            min-height: 170px;
-
             position: relative;
 
-            overflow: hidden;
-
-            border: 1px solid var(--border);
-
-            background: #101010;
+            min-height: 190px;
 
             padding: 22px;
 
             display: flex;
-
             flex-direction: column;
-
             justify-content: space-between;
 
-            text-align: left;
+            border: 1px solid var(--border);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #171614,
+                    #10100f
+                );
 
             color: white;
+
+            overflow: hidden;
+
+            text-align: left;
 
             transition:
                 border-color .25s,
                 transform .25s,
                 background .25s;
-
         }
 
 
-        .category:hover {
-
-            border-color: var(--green);
-
-            transform: translateY(-3px);
-
-        }
-
-
-        .category.active {
-
-            background: #151515;
-
-            border-color: var(--green);
-
-        }
-
-
-        .category::after {
-
+        .category::before {
             content: "";
 
             position: absolute;
@@ -686,136 +709,114 @@
             height: 120px;
 
             right: -45px;
-            bottom: -60px;
+            bottom: -55px;
 
             border-radius: 50%;
 
-            background: var(--green);
-
-            opacity: .08;
-
-            transition: .3s;
-
+            background:
+                rgba(205, 187, 158, .07);
         }
 
 
-        .category:hover::after,
-        .category.active::after {
+        .category:hover,
+        .category.active {
+            border-color: var(--cream);
 
-            opacity: .18;
+            background:
+                linear-gradient(
+                    135deg,
+                    #1c1915,
+                    #12110f
+                );
 
+            transform: translateY(-3px);
         }
 
 
         .category-number {
-
-            color: #666;
-
-            font-size: 9px;
-
-            font-weight: 800;
-
-        }
-
-
-        .category-arrow {
-
-            position: absolute;
-
-            top: 20px;
-            right: 20px;
-
-            color: var(--green);
-
-            font-size: 18px;
-
-            transition: .2s;
-
-        }
-
-
-        .category:hover .category-arrow {
-
-            transform:
-                translate(3px,-3px);
-
-        }
-
-
-        .category-name {
-
             position: relative;
 
             z-index: 2;
 
-            font-size: 23px;
+            color: #777169;
 
+            font-size: 9px;
+            font-weight: 700;
+
+            letter-spacing: 1px;
+        }
+
+
+        .category-arrow {
+            position: absolute;
+
+            right: 22px;
+            top: 22px;
+
+            color: var(--cream);
+
+            font-size: 18px;
+        }
+
+
+        .category-name {
+            position: relative;
+
+            z-index: 2;
+
+            font-size: 22px;
             font-weight: 900;
 
             letter-spacing: -1px;
 
+            text-transform: uppercase;
         }
 
 
-        /* =====================================
-           PRODUCT HEADER
-        ====================================== */
+        /* =====================================================
+           PRODUCTS
+        ===================================================== */
 
-        .products-header {
+        #productos {
+            background: #0b0b0a;
 
+            border-top: 1px solid rgba(205, 187, 158, .10);
+            border-bottom: 1px solid rgba(205, 187, 158, .10);
+        }
+
+
+        .products-toolbar {
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
 
-            padding-bottom: 20px;
-
-            border-bottom: 1px solid var(--border);
-
             margin-bottom: 25px;
-
         }
 
 
         .products-title {
+            color: var(--gray);
 
-            font-size: 13px;
-
-            font-weight: 900;
+            font-size: 11px;
+            font-weight: 700;
 
             text-transform: uppercase;
 
+            letter-spacing: 1px;
         }
 
-
-        .products-count {
-
-            color: var(--gray);
-
-            font-size: 10px;
-
-        }
-
-
-        /* =====================================
-           PRODUCTS
-        ====================================== */
 
         .products-grid {
-
             display: grid;
 
             grid-template-columns:
                 repeat(4, 1fr);
 
-            gap: 15px;
-
+            gap: 12px;
         }
 
 
-        .product {
-
+        .product-card {
             position: relative;
 
             background: var(--card);
@@ -827,376 +828,219 @@
             transition:
                 transform .25s,
                 border-color .25s;
-
         }
 
 
-        .product:hover {
-
+        .product-card:hover {
             transform: translateY(-4px);
 
-            border-color: #3a3a3a;
-
+            border-color: var(--cream);
         }
 
 
         .product-image {
-
             width: 100%;
 
             aspect-ratio: 4 / 5;
 
-            background: #151515;
+            background: #10100f;
 
             overflow: hidden;
 
             position: relative;
-
         }
 
 
         .product-image img {
-
             width: 100%;
             height: 100%;
 
-            object-fit: cover;
-
             display: block;
 
-            transition: transform .4s;
+            object-fit: cover;
 
+            transition: transform .5s;
         }
 
 
-        .product:hover
+        .product-card:hover
         .product-image img {
-
             transform: scale(1.04);
-
         }
 
 
         .product-image-placeholder {
-
             width: 100%;
             height: 100%;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
-            padding: 25px;
-
+            background: #12110f;
         }
 
 
         .product-image-placeholder img {
+            width: 65%;
+            height: 65%;
 
             object-fit: contain;
+        }
 
-            opacity: .8;
 
+        .product-category-tag {
+            position: absolute;
+
+            top: 10px;
+            left: 10px;
+
+            padding: 6px 8px;
+
+            background: rgba(8, 8, 8, .82);
+
+            color: var(--cream);
+
+            font-size: 8px;
+            font-weight: 900;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
         }
 
 
         .product-info {
-
             padding: 18px;
-
-        }
-
-
-        .product-category {
-
-            color: var(--green);
-
-            font-size: 8px;
-
-            font-weight: 900;
-
-            letter-spacing: 1.5px;
-
-            text-transform: uppercase;
-
-            margin-bottom: 8px;
-
         }
 
 
         .product-name {
+            color: var(--white);
 
             font-size: 14px;
-
             font-weight: 800;
 
-            line-height: 1.2;
-
+            line-height: 1.3;
         }
 
 
         .product-description {
+            min-height: 34px;
 
-            color: #777;
+            margin-top: 8px;
+
+            color: var(--gray);
 
             font-size: 10px;
 
             line-height: 1.5;
-
-            margin-top: 8px;
-
-            display: -webkit-box;
-
-            -webkit-line-clamp: 2;
-
-            -webkit-box-orient: vertical;
-
-            overflow: hidden;
-
         }
 
 
         .product-bottom {
-
             display: flex;
-
+            align-items: center;
             justify-content: space-between;
 
-            align-items: center;
+            gap: 10px;
 
-            margin-top: 16px;
-
-            padding-top: 13px;
-
-            border-top: 1px solid var(--border);
-
+            margin-top: 15px;
         }
 
 
         .product-price {
+            color: var(--cream);
 
-            color: var(--green);
-
-            font-size: 14px;
-
+            font-size: 15px;
             font-weight: 900;
-
         }
 
 
         .product-stock {
-
-            color: #777;
+            color: #777169;
 
             font-size: 9px;
-
         }
 
 
-        .product-whatsapp {
-
+        .product-contact {
             width: 100%;
 
-            margin-top: 12px;
+            margin-top: 13px;
 
-            min-height: 40px;
+            padding: 11px;
 
             border: 1px solid var(--border);
 
             background: transparent;
 
-            color: white;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
+            color: var(--white);
 
             font-size: 9px;
-
             font-weight: 900;
 
+            text-transform: uppercase;
+
             transition: .2s;
-
         }
 
 
-        .product-whatsapp:hover {
+        .product-contact:hover {
+            background: var(--cream);
 
-            border-color: var(--green);
+            border-color: var(--cream);
 
-            color: var(--green);
-
+            color: #080808;
         }
 
 
-        /* =====================================
+        /* =====================================================
            LOADING / EMPTY
-        ====================================== */
+        ===================================================== */
 
-        .catalog-message {
+        .products-message {
+            grid-column: 1 / -1;
 
             min-height: 220px;
 
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
-            text-align: center;
 
             border: 1px dashed var(--border);
 
-            color: #777;
+            color: var(--gray);
 
             font-size: 12px;
 
+            text-align: center;
         }
 
 
-        .loader {
-
-            width: 25px;
-            height: 25px;
-
-            border: 2px solid #333;
-
-            border-top-color: var(--green);
-
-            border-radius: 50%;
-
-            animation:
-                spin .8s linear infinite;
-
-            margin-bottom: 15px;
-
-        }
-
-
-        @keyframes spin {
-
-            to {
-                transform: rotate(360deg);
-            }
-
-        }
-
-
-        /* =====================================
+        /* =====================================================
            ABOUT
-        ====================================== */
+        ===================================================== */
 
         .about {
-
-            padding:
-                130px 35px;
-
-            border-top: 1px solid var(--border);
-
-        }
-
-
-        .about-inner {
-
-            max-width: 1400px;
-
-            margin: auto;
-
             display: grid;
 
             grid-template-columns:
                 1fr 1fr;
 
-            gap: 80px;
-
-        }
-
-
-        .about-title {
-
-            font-size: clamp(
-                45px,
-                6vw,
-                80px
-            );
-
-            line-height: .85;
-
-            letter-spacing: -5px;
-
-            font-weight: 900;
-
-        }
-
-
-        .about-title span {
-
-            color: var(--green);
-
-        }
-
-
-        .about-text {
-
-            color: #888;
-
-            font-size: 13px;
-
-            line-height: 1.8;
-
-        }
-
-
-        .about-text strong {
-
-            color: white;
-
-        }
-
-
-        /* =====================================
-           CONTACT
-        ====================================== */
-
-        .contact {
-
-            padding:
-                100px 35px;
-
-            background: #0c0c0c;
-
-            border-top: 1px solid var(--border);
-
-        }
-
-
-        .contact-inner {
-
-            max-width: 1400px;
-
-            margin: auto;
-
-            display: flex;
-
-            justify-content: space-between;
+            gap: 70px;
 
             align-items: center;
-
-            gap: 40px;
-
         }
 
 
-        .contact-title {
-
-            font-size: clamp(
-                40px,
-                6vw,
-                75px
-            );
+        .about-big {
+            font-size:
+                clamp(
+                    45px,
+                    6vw,
+                    80px
+                );
 
             line-height: .9;
 
@@ -1204,389 +1048,606 @@
 
             font-weight: 900;
 
+            text-transform: uppercase;
+        }
+
+
+        .about-big span {
+            color: var(--cream);
+        }
+
+
+        .about-text {
+            color: var(--gray);
+
+            font-size: 14px;
+
+            line-height: 1.9;
+        }
+
+
+        .about-list {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 1px;
+
+            margin-top: 30px;
+        }
+
+
+        .about-item {
+            padding: 18px;
+
+            border: 1px solid var(--border);
+
+            color: var(--gray-light);
+
+            font-size: 10px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+        }
+
+
+        .about-item span {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: var(--cream);
+
+            font-size: 9px;
+        }
+
+
+        /* =====================================================
+           CONTACT
+        ===================================================== */
+
+        .contact-section {
+            text-align: center;
+
+            padding-top: 130px;
+            padding-bottom: 130px;
+        }
+
+
+        .contact-title {
+            max-width: 800px;
+
+            margin: auto;
+
+            font-size:
+                clamp(
+                    50px,
+                    8vw,
+                    105px
+                );
+
+            line-height: .85;
+
+            letter-spacing: -6px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
         }
 
 
         .contact-title span {
-
-            color: var(--green);
-
+            color: var(--cream);
         }
 
 
-        .contact-links {
+        .contact-text {
+            max-width: 500px;
 
+            margin: 30px auto 0;
+
+            color: var(--gray);
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        .contact-buttons {
             display: flex;
+            justify-content: center;
 
-            flex-direction: column;
+            gap: 10px;
 
-            gap: 12px;
-
-            min-width: 250px;
-
+            margin-top: 30px;
         }
 
 
-        .contact-link {
-
-            padding: 17px;
-
-            border: 1px solid var(--border);
-
-            font-size: 10px;
-
-            font-weight: 900;
-
-            transition: .2s;
-
-        }
-
-
-        .contact-link:hover {
-
-            border-color: var(--green);
-
-            color: var(--green);
-
-        }
-
-
-        /* =====================================
+        /* =====================================================
            FOOTER
-        ====================================== */
+        ===================================================== */
 
         footer {
-
             padding:
-                35px;
+                45px 25px 30px;
 
             border-top: 1px solid var(--border);
 
-            color: #555;
-
-            font-size: 9px;
-
+            background: #080808;
         }
 
 
         .footer-inner {
-
-            max-width: 1400px;
+            max-width: var(--max-width);
 
             margin: auto;
+        }
 
+
+        .footer-top {
             display: flex;
-
+            align-items: center;
             justify-content: space-between;
 
+            gap: 30px;
         }
 
 
-        /* =====================================
+        .footer-logo {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .footer-logo img {
+            width: 48px;
+            height: 48px;
+
+            object-fit: contain;
+        }
+
+
+        .footer-logo strong {
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+        }
+
+
+        .footer-links a {
+            color: var(--gray);
+
+            font-size: 9px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+        }
+
+
+        .footer-links a:hover {
+            color: var(--cream);
+        }
+
+
+        .footer-marquee {
+            margin-top: 50px;
+
+            padding-top: 25px;
+
+            border-top: 1px solid var(--border);
+
+            color: var(--cream);
+
+            font-size: 11px;
+            font-weight: 900;
+
+            letter-spacing: 5px;
+
+            text-align: center;
+
+            text-transform: uppercase;
+
+            line-height: 1.8;
+        }
+
+
+        .footer-copy {
+            margin-top: 25px;
+
+            color: #57534e;
+
+            font-size: 9px;
+
+            text-align: center;
+        }
+
+
+        /* =====================================================
+           MODAL PRODUCT
+        ===================================================== */
+
+        .product-modal {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 3000;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(0,0,0,.82);
+
+            backdrop-filter: blur(10px);
+        }
+
+
+        .product-modal.show {
+            display: flex;
+        }
+
+
+        .modal-box {
+            width: 100%;
+            max-width: 900px;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+        }
+
+
+        .modal-image {
+            min-height: 550px;
+
+            background: #10100f;
+
+            overflow: hidden;
+        }
+
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        .modal-info {
+            position: relative;
+
+            padding: 45px;
+        }
+
+
+        .modal-close {
+            position: absolute;
+
+            right: 20px;
+            top: 20px;
+
+            width: 38px;
+            height: 38px;
+
+            border: 1px solid var(--border);
+
+            background: transparent;
+
+            color: white;
+
+            font-size: 18px;
+        }
+
+
+        .modal-close:hover {
+            color: var(--cream);
+
+            border-color: var(--cream);
+        }
+
+
+        .modal-category {
+            color: var(--cream);
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+        }
+
+
+        .modal-name {
+            margin-top: 15px;
+
+            font-size: 38px;
+
+            line-height: .95;
+
+            letter-spacing: -2px;
+
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+
+        .modal-price {
+            margin-top: 25px;
+
+            color: var(--cream);
+
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+
+        .modal-description {
+            margin-top: 25px;
+
+            color: var(--gray);
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+
+        .modal-whatsapp {
+            width: 100%;
+
+            margin-top: 30px;
+
+            min-height: 53px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: var(--cream);
+
+            border: 1px solid var(--cream);
+
+            color: #080808;
+
+            font-size: 10px;
+            font-weight: 900;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =====================================================
            MOBILE
-        ====================================== */
+        ===================================================== */
 
-        @media (max-width: 1000px) {
-
-            .products-grid {
-
-                grid-template-columns:
-                    repeat(3, 1fr);
-
-            }
-
-        }
-
-
-        @media (max-width: 800px) {
-
-            .header {
-
-                height: 75px;
-
-            }
-
-
-            .header-inner {
-
-                padding:
-                    0 18px;
-
-            }
-
-
-            .brand-logo {
-
-                width: 58px;
-                height: 58px;
-
-            }
-
-
-            .brand-name {
-
-                display: none;
-
-            }
-
+        @media (max-width: 950px) {
 
             .nav {
-
-                gap: 13px;
-
-            }
-
-
-            .nav a {
-
-                font-size: 8px;
-
-            }
-
-
-            .instagram-link {
-
                 display: none;
-
             }
 
-
-            .nav-right {
-
-                gap: 12px;
-
-            }
-
-
-            .hero {
-
-                padding-top: 75px;
-
-            }
-
-
-            .hero-inner {
-
-                padding:
-                    70px 22px;
-
-            }
-
-
-            .hero-title {
-
-                font-size:
-                    clamp(60px, 18vw, 100px);
-
-                letter-spacing: -5px;
-
-            }
-
-
-            .hero-big-logo {
-
-                width: 500px;
-
-                right: -180px;
-
-            }
-
-
-            .catalog {
-
-                padding:
-                    80px 20px
-                    90px;
-
-            }
-
-
-            .section-top {
-
+            .menu-button {
                 display: block;
-
             }
 
-
-            .section-description {
-
-                margin-top: 20px;
-
+            .header-actions {
+                margin-left: auto;
             }
-
-
-            .categories {
-
-                grid-template-columns:
-                    1fr 1fr;
-
-                gap: 5px;
-
-            }
-
-
-            .category {
-
-                min-height: 140px;
-
-            }
-
-
-            .category-name {
-
-                font-size: 17px;
-
-            }
-
 
             .products-grid {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
 
+            .categories {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+
+                gap: 40px;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .header {
+                height: 76px;
+            }
+
+            .header-inner {
+                padding: 0 18px;
+            }
+
+            .brand-logo {
+                width: 45px;
+                height: 45px;
+            }
+
+            .brand-name {
+                font-size: 14px;
+            }
+
+            .instagram-link {
+                display: none;
+            }
+
+            .hero {
+                min-height: 100svh;
+
+                padding:
+                    130px 20px
+                    70px;
+            }
+
+            .hero h1 {
+                font-size:
+                    clamp(
+                        58px,
+                        17vw,
+                        90px
+                    );
+
+                letter-spacing: -4px;
+            }
+
+            .hero-description {
+                font-size: 13px;
+            }
+
+            .hero-buttons {
+                display: grid;
+
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .button {
+                padding: 0 10px;
+
+                font-size: 9px;
+            }
+
+            .section {
+                padding:
+                    80px 18px;
+            }
+
+            .section-header {
+                display: block;
+            }
+
+            .section-description {
+                margin-top: 20px;
+            }
+
+            .categories {
+                grid-template-columns: 1fr 1fr;
+
+                gap: 4px;
+            }
+
+            .category {
+                min-height: 145px;
+
+                padding: 15px;
+            }
+
+            .category-name {
+                font-size: 16px;
+            }
+
+            .category-arrow {
+                right: 15px;
+                top: 15px;
+            }
+
+            .products-grid {
                 grid-template-columns:
                     repeat(2, 1fr);
 
-                gap: 8px;
-
+                gap: 6px;
             }
-
 
             .product-info {
-
-                padding: 13px;
-
+                padding: 12px;
             }
-
 
             .product-name {
-
                 font-size: 12px;
-
             }
-
-
-            .about {
-
-                padding:
-                    80px 20px;
-
-            }
-
-
-            .about-inner {
-
-                grid-template-columns:
-                    1fr;
-
-                gap: 35px;
-
-            }
-
-
-            .contact {
-
-                padding:
-                    70px 20px;
-
-            }
-
-
-            .contact-inner {
-
-                display: block;
-
-            }
-
-
-            .contact-links {
-
-                margin-top: 35px;
-
-            }
-
-
-            footer {
-
-                padding:
-                    25px 20px;
-
-            }
-
-        }
-
-
-        @media (max-width: 480px) {
-
-            .nav a:nth-child(3),
-            .nav a:nth-child(4) {
-
-                display: none;
-
-            }
-
-
-            .categories {
-
-                grid-template-columns:
-                    1fr 1fr;
-
-            }
-
-
-            .category {
-
-                min-height: 125px;
-
-                padding: 16px;
-
-            }
-
-
-            .category-name {
-
-                font-size: 14px;
-
-            }
-
-
-            .products-grid {
-
-                grid-template-columns:
-                    1fr 1fr;
-
-            }
-
 
             .product-description {
-
                 display: none;
-
             }
 
-
-            .product-bottom {
-
-                display: block;
-
+            .product-price {
+                font-size: 13px;
             }
-
 
             .product-stock {
-
-                margin-top: 5px;
-
+                display: none;
             }
 
+            .product-contact {
+                padding: 9px 5px;
 
-            .hero-buttons {
+                font-size: 8px;
+            }
 
+            .about-list {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-title {
+                letter-spacing: -4px;
+            }
+
+            .contact-buttons {
+                display: grid;
+
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
                 flex-direction: column;
 
+                align-items: flex-start;
             }
 
+            .footer-links {
+                flex-wrap: wrap;
+            }
 
-            .button {
+            .footer-marquee {
+                font-size: 9px;
 
-                width: 100%;
+                letter-spacing: 3px;
+            }
 
+            .modal-box {
+                grid-template-columns: 1fr;
+
+                max-height: 92vh;
+            }
+
+            .modal-image {
+                min-height: 330px;
+
+                max-height: 45vh;
+            }
+
+            .modal-info {
+                padding: 28px 20px;
+            }
+
+            .modal-name {
+                font-size: 30px;
             }
 
         }
@@ -1599,9 +1660,9 @@
 <body>
 
 
-    <!-- =====================================
+    <!-- =====================================================
          HEADER
-    ====================================== -->
+    ====================================================== -->
 
     <header class="header">
 
@@ -1615,12 +1676,12 @@
 
                 <img
                     src="007imported-logo-circle.png"
-                    alt="007imported"
+                    alt="007IMPORTED"
                     class="brand-logo"
                 >
 
                 <div class="brand-name">
-                    007 <span>IMPORTED</span>
+                    007<span>IMPORTED</span>
                 </div>
 
             </a>
@@ -1647,335 +1708,498 @@
             </nav>
 
 
-            <div class="nav-right">
+            <div class="header-actions">
 
                 <a
-                    class="instagram-link"
                     href="https://www.instagram.com/007imported/?hl=es"
                     target="_blank"
                     rel="noopener noreferrer"
+                    class="instagram-link"
                 >
                     INSTAGRAM
                 </a>
 
 
-                <a
-                    class="cart-link"
-                    href="#catalogo"
+                <button
+                    type="button"
+                    class="cart-button"
+                    onclick="scrollToProducts()"
                 >
 
-                    CARRITO
+                    CATÁLOGO
 
                     <span
-                        class="cart-number"
-                        id="cartCount"
+                        class="cart-count"
+                        id="headerProductCount"
                     >
                         0
                     </span>
 
-                </a>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="menu-button"
+                    onclick="toggleMobileMenu()"
+                    aria-label="Abrir menú"
+                >
+                    ☰
+                </button>
 
             </div>
-
 
         </div>
 
     </header>
 
 
+    <!-- =====================================================
+         MOBILE MENU
+    ====================================================== -->
 
-    <!-- =====================================
-         HERO
-    ====================================== -->
-
-    <section
-        class="hero"
-        id="inicio"
+    <div
+        id="mobileMenu"
+        style="
+            position:fixed;
+            top:76px;
+            left:0;
+            right:0;
+            z-index:999;
+            display:none;
+            padding:20px;
+            background:#0b0b0a;
+            border-bottom:1px solid #35312c;
+        "
     >
 
-        <div class="hero-inner">
+        <div
+            style="
+                display:flex;
+                flex-direction:column;
+                gap:18px;
+            "
+        >
 
+            <a href="#inicio" onclick="closeMobileMenu()">
+                INICIO
+            </a>
 
-            <div class="hero-label">
-                007IMPORTED
-            </div>
+            <a href="#catalogo" onclick="closeMobileMenu()">
+                CATÁLOGO
+            </a>
 
+            <a href="#nosotros" onclick="closeMobileMenu()">
+                NOSOTROS
+            </a>
 
-            <h1 class="hero-title">
+            <a href="#contacto" onclick="closeMobileMenu()">
+                CONTACTO
+            </a>
 
-                VESTITE
-
-                <span>
-                    DISTINTO.
-                </span>
-
-            </h1>
-
-
-            <p class="hero-description">
-
-                Indumentaria y accesorios seleccionados.
-                Encontrá tu próximo outfit y consultanos
-                directamente por WhatsApp.
-
-            </p>
-
-
-            <div class="hero-buttons">
-
-                <a
-                    href="#catalogo"
-                    class="button button-primary"
-                >
-                    VER CATÁLOGO
-                </a>
-
-
-                <a
-                    href="https://wa.me/5491173854862"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="button button-secondary"
-                >
-                    CONSULTAR POR WHATSAPP
-                </a>
-
-            </div>
-
-
-            <img
-                src="007imported-logo-circle.png"
-                alt=""
-                class="hero-big-logo"
+            <a
+                href="https://www.instagram.com/007imported/?hl=es"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="color:#cdbb9e;"
             >
+                INSTAGRAM
+            </a>
 
         </div>
 
-    </section>
+    </div>
 
 
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
 
-    <!-- =====================================
-         CATÁLOGO
-    ====================================== -->
+    <main>
 
-    <section
-        class="catalog"
-        id="catalogo"
-    >
+        <section
+            class="hero"
+            id="inicio"
+        >
 
-        <div class="catalog-inner">
+            <div class="hero-inner">
 
-
-            <div class="section-top">
-
-
-                <div>
-
-                    <div class="section-number">
-                        01
-                    </div>
-
-                    <h2 class="section-title">
-
-                        EXPLORÁ
-
-                        <span>
-                            LA COLECCIÓN
-                        </span>
-
-                    </h2>
-
+                <div class="hero-label">
+                    007IMPORTED
                 </div>
 
 
-                <p class="section-description">
+                <h1>
 
-                    Encontrá prendas y accesorios
-                    seleccionados para tu estilo.
+                    VESTITE
+
+                    <br>
+
+                    <span>
+                        DISTINTO.
+                    </span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Indumentaria y accesorios seleccionados.
+                    Venta mayorista y minorista.
 
                 </p>
 
 
-            </div>
+                <div class="hero-buttons">
+
+                    <a
+                        href="#catalogo"
+                        class="button button-primary"
+                    >
+                        VER CATÁLOGO
+                    </a>
 
 
+                    <a
+                        href="https://wa.me/5491173854862"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="button button-secondary"
+                    >
+                        WHATSAPP ↗
+                    </a>
 
-            <!-- =================================
-                 CATEGORÍAS
-            ================================== -->
-
-            <div class="categories">
-
-
-                <button
-                    class="category active"
-                    data-category="Todos"
-                    type="button"
-                >
-
-                    <span class="category-number">
-                        01
-                    </span>
-
-                    <span class="category-arrow">
-                        ↗
-                    </span>
-
-                    <span class="category-name">
-                        TODO
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="category"
-                    data-category="Remeras"
-                    type="button"
-                >
-
-                    <span class="category-number">
-                        02
-                    </span>
-
-                    <span class="category-arrow">
-                        ↗
-                    </span>
-
-                    <span class="category-name">
-                        REMERAS
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="category"
-                    data-category="Pantalones"
-                    type="button"
-                >
-
-                    <span class="category-number">
-                        03
-                    </span>
-
-                    <span class="category-arrow">
-                        ↗
-                    </span>
-
-                    <span class="category-name">
-                        PANTALONES
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="category"
-                    data-category="Buzos"
-                    type="button"
-                >
-
-                    <span class="category-number">
-                        04
-                    </span>
-
-                    <span class="category-arrow">
-                        ↗
-                    </span>
-
-                    <span class="category-name">
-                        BUZOS
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="category"
-                    data-category="Camperas"
-                    type="button"
-                >
-
-                    <span class="category-number">
-                        05
-                    </span>
-
-                    <span class="category-arrow">
-                        ↗
-                    </span>
-
-                    <span class="category-name">
-                        CAMPERAS
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="category"
-                    data-category="Accesorios"
-                    type="button"
-                >
-
-                    <span class="category-number">
-                        06
-                    </span>
-
-                    <span class="category-arrow">
-                        ↗
-                    </span>
-
-                    <span class="category-name">
-                        ACCESORIOS
-                    </span>
-
-                </button>
-
-
-            </div>
-
-
-
-            <!-- =================================
-                 PRODUCTOS
-            ================================== -->
-
-            <div class="products-header">
-
-                <div class="products-title">
-                    Productos
-                </div>
-
-                <div
-                    class="products-count"
-                    id="productsCount"
-                >
-                    Cargando...
                 </div>
 
             </div>
 
+        </section>
 
-            <div
-                class="products-grid"
-                id="productsGrid"
-            >
 
-                <div
-                    class="catalog-message"
-                    style="grid-column:1/-1"
-                >
+        <!-- =================================================
+             CATALOGO / CATEGORIAS
+        ================================================== -->
+
+        <section
+            class="section"
+            id="catalogo"
+        >
+
+            <div class="section-inner">
+
+
+                <div class="section-header">
 
                     <div>
 
-                        <div
-                            class="loader"
-                            style="margin-left:auto;margin-right:auto"
-                        ></div>
+                        <div class="section-label">
+                            01 — COLECCIÓN
+                        </div>
 
-                        Cargando catálogo...
+                        <h2 class="section-title">
+
+                            EXPLORÁ
+
+                            <br>
+
+                            <span style="color:#cdbb9e;">
+                                LA COLECCIÓN
+                            </span>
+
+                        </h2>
+
+                    </div>
+
+
+                    <p class="section-description">
+
+                        Encontrá prendas y accesorios
+                        seleccionados para tu estilo.
+
+                    </p>
+
+                </div>
+
+
+                <!-- CATEGORIAS -->
+
+                <div class="categories">
+
+
+                    <button
+                        class="category active"
+                        data-category="Todos"
+                        onclick="filterCategory('Todos', this)"
+                    >
+
+                        <span class="category-number">
+                            01
+                        </span>
+
+                        <span class="category-arrow">
+                            ↗
+                        </span>
+
+                        <span class="category-name">
+                            TODO
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="category"
+                        data-category="Remeras"
+                        onclick="filterCategory('Remeras', this)"
+                    >
+
+                        <span class="category-number">
+                            02
+                        </span>
+
+                        <span class="category-arrow">
+                            ↗
+                        </span>
+
+                        <span class="category-name">
+                            REMERAS
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="category"
+                        data-category="Pantalones"
+                        onclick="filterCategory('Pantalones', this)"
+                    >
+
+                        <span class="category-number">
+                            03
+                        </span>
+
+                        <span class="category-arrow">
+                            ↗
+                        </span>
+
+                        <span class="category-name">
+                            PANTALONES
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="category"
+                        data-category="Buzos"
+                        onclick="filterCategory('Buzos', this)"
+                    >
+
+                        <span class="category-number">
+                            04
+                        </span>
+
+                        <span class="category-arrow">
+                            ↗
+                        </span>
+
+                        <span class="category-name">
+                            BUZOS
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="category"
+                        data-category="Camperas"
+                        onclick="filterCategory('Camperas', this)"
+                    >
+
+                        <span class="category-number">
+                            05
+                        </span>
+
+                        <span class="category-arrow">
+                            ↗
+                        </span>
+
+                        <span class="category-name">
+                            CAMPERAS
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="category"
+                        data-category="Accesorios"
+                        onclick="filterCategory('Accesorios', this)"
+                    >
+
+                        <span class="category-number">
+                            06
+                        </span>
+
+                        <span class="category-arrow">
+                            ↗
+                        </span>
+
+                        <span class="category-name">
+                            ACCESORIOS
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PRODUCTOS
+        ================================================== -->
+
+        <section
+            class="section"
+            id="productos"
+        >
+
+            <div class="section-inner">
+
+
+                <div class="products-toolbar">
+
+                    <div
+                        class="products-title"
+                        id="productsTitle"
+                    >
+                        TODOS LOS PRODUCTOS
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="products-grid"
+                    id="productsGrid"
+                >
+
+                    <div class="products-message">
+                        Cargando productos...
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             NOSOTROS
+        ================================================== -->
+
+        <section
+            class="section"
+            id="nosotros"
+        >
+
+            <div class="section-inner">
+
+                <div class="about">
+
+
+                    <div>
+
+                        <div class="section-label">
+                            02 — NOSOTROS
+                        </div>
+
+                        <div class="about-big">
+
+                            VESTITE
+
+                            <br>
+
+                            <span>
+                                DISTINTO.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <p class="about-text">
+
+                            En 007IMPORTED seleccionamos
+                            indumentaria y accesorios
+                            pensando en quienes buscan
+                            algo diferente.
+
+                            <br><br>
+
+                            Trabajamos con venta mayorista
+                            y minorista, ofreciendo productos
+                            seleccionados y una atención
+                            personalizada.
+
+                        </p>
+
+
+                        <div class="about-list">
+
+                            <div class="about-item">
+
+                                <span>
+                                    01
+                                </span>
+
+                                INDUMENTARIA
+
+                            </div>
+
+
+                            <div class="about-item">
+
+                                <span>
+                                    02
+                                </span>
+
+                                ACCESORIOS
+
+                            </div>
+
+
+                            <div class="about-item">
+
+                                <span>
+                                    03
+                                </span>
+
+                                MAYORISTA
+
+                            </div>
+
+
+                            <div class="about-item">
+
+                                <span>
+                                    04
+                                </span>
+
+                                MINORISTA
+
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -1983,306 +2207,415 @@
 
             </div>
 
-
-        </div>
-
-    </section>
+        </section>
 
 
+        <!-- =================================================
+             CONTACTO
+        ================================================== -->
 
-    <!-- =====================================
-         NOSOTROS
-    ====================================== -->
+        <section
+            class="section contact-section"
+            id="contacto"
+        >
 
-    <section
-        class="about"
-        id="nosotros"
-    >
+            <div class="section-inner">
 
-        <div class="about-inner">
-
-
-            <h2 class="about-title">
-
-                MÁS QUE
-
-                <span>
-                    ROPA.
-                </span>
-
-            </h2>
+                <div class="section-label">
+                    03 — CONTACTO
+                </div>
 
 
-            <div class="about-text">
+                <h2 class="contact-title">
 
-                <p>
+                    ¿BUSCÁS
 
-                    En <strong>007imported</strong>
-                    buscamos prendas y accesorios que
-                    tengan personalidad.
+                    <br>
 
-                </p>
+                    <span>
+                        ALGO?
+                    </span>
 
-                <br>
+                </h2>
 
-                <p>
 
-                    Nuestra colección está pensada para
-                    quienes quieren vestirse diferente,
-                    combinando estilo, comodidad y actitud.
+                <p class="contact-text">
+
+                    Escribinos por WhatsApp para
+                    consultar disponibilidad, precios
+                    mayoristas o cualquier producto
+                    de nuestro catálogo.
 
                 </p>
 
-            </div>
+
+                <div class="contact-buttons">
+
+                    <a
+                        href="https://wa.me/5491173854862"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="button button-primary"
+                    >
+                        HABLAR POR WHATSAPP ↗
+                    </a>
 
 
-        </div>
+                    <a
+                        href="https://www.instagram.com/007imported/?hl=es"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="button button-secondary"
+                    >
+                        INSTAGRAM ↗
+                    </a>
 
-    </section>
-
-
-
-    <!-- =====================================
-         CONTACTO
-    ====================================== -->
-
-    <section
-        class="contact"
-        id="contacto"
-    >
-
-        <div class="contact-inner">
-
-
-            <h2 class="contact-title">
-
-                ¿TENÉS
-
-                <span>
-                    DUDAS?
-                </span>
-
-            </h2>
-
-
-            <div class="contact-links">
-
-
-                <a
-                    href="https://wa.me/5491173854862"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="contact-link"
-                >
-                    WHATSAPP →
-                </a>
-
-
-                <a
-                    href="https://www.instagram.com/007imported/?hl=es"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="contact-link"
-                >
-                    INSTAGRAM →
-                </a>
-
+                </div>
 
             </div>
 
+        </section>
 
-        </div>
-
-    </section>
-
+    </main>
 
 
-    <!-- =====================================
+    <!-- =====================================================
          FOOTER
-    ====================================== -->
+    ====================================================== -->
 
     <footer>
 
         <div class="footer-inner">
 
-            <span>
-                © 2026 007IMPORTED
-            </span>
 
-            <span>
-                VESTITE DISTINTO.
-            </span>
+            <div class="footer-top">
+
+
+                <a
+                    href="#inicio"
+                    class="footer-logo"
+                >
+
+                    <img
+                        src="007imported-logo-circle.png"
+                        alt="007IMPORTED"
+                    >
+
+                    <strong>
+                        007IMPORTED
+                    </strong>
+
+                </a>
+
+
+                <div class="footer-links">
+
+                    <a href="#inicio">
+                        Inicio
+                    </a>
+
+                    <a href="#catalogo">
+                        Catálogo
+                    </a>
+
+                    <a href="#nosotros">
+                        Nosotros
+                    </a>
+
+                    <a href="#contacto">
+                        Contacto
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-marquee">
+
+                007IMPORTED · INDUMENTARIA ·
+                ACCESORIOS · MAYORISTA ·
+                MINORISTA · ENVÍOS
+
+            </div>
+
+
+            <div class="footer-copy">
+
+                © 2026 007IMPORTED.
+                Todos los derechos reservados.
+
+            </div>
 
         </div>
 
     </footer>
 
 
+    <!-- =====================================================
+         MODAL PRODUCTO
+    ====================================================== -->
 
-    <!-- =====================================
+    <div
+        class="product-modal"
+        id="productModal"
+        onclick="closeModalOutside(event)"
+    >
+
+        <div class="modal-box">
+
+
+            <div
+                class="modal-image"
+                id="modalImage"
+            >
+            </div>
+
+
+            <div class="modal-info">
+
+                <button
+                    class="modal-close"
+                    onclick="closeProductModal()"
+                    type="button"
+                >
+                    ×
+                </button>
+
+
+                <div
+                    class="modal-category"
+                    id="modalCategory"
+                >
+                    CATEGORÍA
+                </div>
+
+
+                <h2
+                    class="modal-name"
+                    id="modalName"
+                >
+                    Producto
+                </h2>
+
+
+                <div
+                    class="modal-price"
+                    id="modalPrice"
+                >
+                    $0
+                </div>
+
+
+                <p
+                    class="modal-description"
+                    id="modalDescription"
+                >
+                </p>
+
+
+                <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="modal-whatsapp"
+                    id="modalWhatsapp"
+                >
+                    CONSULTAR POR WHATSAPP ↗
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
          JAVASCRIPT
-    ====================================== -->
+    ====================================================== -->
 
     <script type="module">
 
-
-        import {
-            supabase
-        }
-        from "./js/supabase.js";
+        import { supabase }
+            from "./js/supabase.js";
 
 
+        /* =================================================
+           CONFIGURACIÓN
+        ================================================= */
 
-        /* =====================================
+        const WHATSAPP =
+            "5491173854862";
+
+        const INSTAGRAM =
+            "https://www.instagram.com/007imported/?hl=es";
+
+
+        /* =================================================
            ELEMENTOS
-        ====================================== */
+        ================================================= */
 
         const productsGrid =
             document.querySelector(
                 "#productsGrid"
             );
 
-
-        const productsCount =
+        const productsTitle =
             document.querySelector(
-                "#productsCount"
+                "#productsTitle"
+            );
+
+        const headerProductCount =
+            document.querySelector(
+                "#headerProductCount"
+            );
+
+        const productModal =
+            document.querySelector(
+                "#productModal"
+            );
+
+        const modalImage =
+            document.querySelector(
+                "#modalImage"
+            );
+
+        const modalCategory =
+            document.querySelector(
+                "#modalCategory"
+            );
+
+        const modalName =
+            document.querySelector(
+                "#modalName"
+            );
+
+        const modalPrice =
+            document.querySelector(
+                "#modalPrice"
+            );
+
+        const modalDescription =
+            document.querySelector(
+                "#modalDescription"
+            );
+
+        const modalWhatsapp =
+            document.querySelector(
+                "#modalWhatsapp"
             );
 
 
-        const categories =
-            document.querySelectorAll(
-                ".category"
-            );
-
-
-
-        /* =====================================
+        /* =================================================
            VARIABLES
-        ====================================== */
+        ================================================= */
 
         let allProducts = [];
 
-        let selectedCategory = "Todos";
+        let currentCategory = "Todos";
 
 
+        /* =================================================
+           FORMATO PRECIO
+        ================================================= */
 
-        /* =====================================
-           WHATSAPP
-        ====================================== */
+        function formatPrice(value) {
 
-        const WHATSAPP =
-            "5491173854862";
+            return (
+                "$" +
+                Number(
+                    value || 0
+                ).toLocaleString(
+                    "es-AR"
+                )
+            );
+
+        }
 
 
-
-        /* =====================================
+        /* =================================================
            ESCAPE HTML
-        ====================================== */
+        ================================================= */
 
         function escapeHtml(value) {
 
             return String(
                 value ?? ""
             )
-
-            .replace(
-                /&/g,
-                "&amp;"
-            )
-
-            .replace(
-                /</g,
-                "&lt;"
-            )
-
-            .replace(
-                />/g,
-                "&gt;"
-            )
-
-            .replace(
-                /"/g,
-                "&quot;"
-            )
-
-            .replace(
-                /'/g,
-                "&#039;"
-            );
-
-        }
-
-
-
-        /* =====================================
-           PRECIO
-        ====================================== */
-
-        function formatPrice(value) {
-
-            return "$" +
-                Number(
-                    value || 0
-                ).toLocaleString(
-                    "es-AR"
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
                 );
 
         }
 
 
-
-        /* =====================================
+        /* =================================================
            CARGAR PRODUCTOS
-        ====================================== */
+        ================================================= */
 
         async function loadProducts() {
 
-
             productsGrid.innerHTML = `
-
-                <div
-                    class="catalog-message"
-                    style="grid-column:1/-1"
-                >
-
-                    <div>
-
-                        <div
-                            class="loader"
-                            style="
-                                margin-left:auto;
-                                margin-right:auto;
-                            "
-                        ></div>
-
-                        Cargando catálogo...
-
-                    </div>
-
+                <div class="products-message">
+                    Cargando productos...
                 </div>
-
             `;
 
 
-            const {
-                data,
-                error
-            } = await supabase
+            try {
 
-                .from("products")
+                const {
+                    data,
+                    error
+                } =
+                    await supabase
+                        .from("products")
+                        .select("*")
+                        .order(
+                            "created_at",
+                            {
+                                ascending: false
+                            }
+                        );
 
-                .select("*")
 
-                .order(
-                    "created_at",
-                    {
-                        ascending: false
-                    }
+                if (error) {
+                    throw error;
+                }
+
+
+                allProducts =
+                    data || [];
+
+
+                headerProductCount.textContent =
+                    allProducts.length;
+
+
+                renderProducts(
+                    currentCategory
                 );
 
 
-
-            if (error) {
+            } catch (error) {
 
                 console.error(
                     "Error cargando productos:",
@@ -2290,81 +2623,113 @@
                 );
 
 
-                productsCount.textContent =
-                    "Error";
-
-
                 productsGrid.innerHTML = `
 
-                    <div
-                        class="catalog-message"
-                        style="grid-column:1/-1"
-                    >
+                    <div class="products-message">
 
                         No se pudieron cargar
                         los productos.
-
-                        <br><br>
-
-                        ${escapeHtml(
-                            error.message
-                        )}
 
                     </div>
 
                 `;
 
-                return;
-
             }
-
-
-
-            allProducts =
-                data || [];
-
-
-
-            renderProducts();
 
         }
 
 
+        /* =================================================
+           FILTRAR CATEGORÍA
+        ================================================= */
 
-        /* =====================================
+        window.filterCategory =
+            function(
+                category,
+                button
+            ) {
+
+                currentCategory =
+                    category;
+
+
+                document
+                    .querySelectorAll(
+                        ".category"
+                    )
+                    .forEach(
+                        item => {
+
+                            item.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                if (button) {
+
+                    button.classList.add(
+                        "active"
+                    );
+
+                }
+
+
+                renderProducts(
+                    category
+                );
+
+
+                setTimeout(
+                    () => {
+
+                        document
+                            .querySelector(
+                                "#productos"
+                            )
+                            .scrollIntoView({
+                                behavior: "smooth"
+                            });
+
+                    },
+                    50
+                );
+
+            };
+
+
+        /* =================================================
            RENDER PRODUCTOS
-        ====================================== */
+        ================================================= */
 
-        function renderProducts() {
+        function renderProducts(
+            category
+        ) {
 
-
-            let products;
+            let products =
+                allProducts;
 
 
             if (
-                selectedCategory ===
-                "Todos"
+                category &&
+                category !== "Todos"
             ) {
-
-                products =
-                    allProducts;
-
-            } else {
 
                 products =
                     allProducts.filter(
                         product => {
 
-                            const category =
+                            return (
                                 String(
                                     product.category ||
                                     ""
-                                ).trim();
-
-
-                            return (
-                                category.toLowerCase() ===
-                                selectedCategory.toLowerCase()
+                                ).toLowerCase()
+                                ===
+                                String(
+                                    category
+                                ).toLowerCase()
                             );
 
                         }
@@ -2373,42 +2738,29 @@
             }
 
 
+            if (
+                category === "Todos"
+            ) {
 
-            productsCount.textContent =
+                productsTitle.textContent =
+                    "TODOS LOS PRODUCTOS";
 
-                `${products.length} producto${
-                    products.length === 1
-                        ? ""
-                        : "s"
-                }`;
+            } else {
 
+                productsTitle.textContent =
+                    category.toUpperCase();
+
+            }
 
 
             if (!products.length) {
 
                 productsGrid.innerHTML = `
 
-                    <div
-                        class="catalog-message"
-                        style="grid-column:1/-1"
-                    >
+                    <div class="products-message">
 
-                        <div>
-
-                            <strong
-                                style="
-                                    display:block;
-                                    color:white;
-                                    margin-bottom:8px;
-                                "
-                            >
-                                No hay productos
-                            </strong>
-
-                            Todavía no hay productos
-                            en esta categoría.
-
-                        </div>
+                        No hay productos
+                        disponibles en esta categoría.
 
                     </div>
 
@@ -2419,16 +2771,14 @@
             }
 
 
-
             productsGrid.innerHTML = "";
-
 
 
             products.forEach(
                 product => {
 
                     productsGrid.appendChild(
-                        createProduct(
+                        createProductCard(
                             product
                         )
                     );
@@ -2439,120 +2789,282 @@
         }
 
 
+        /* =================================================
+           CREAR TARJETA
+        ================================================= */
 
-        /* =====================================
-           CREAR PRODUCTO
-        ====================================== */
-
-        function createProduct(
+        function createProductCard(
             product
         ) {
 
-
-            const element =
+            const card =
                 document.createElement(
                     "article"
                 );
 
 
-            element.className =
-                "product";
-
+            card.className =
+                "product-card";
 
 
             const images =
-
                 Array.isArray(
                     product.images
                 )
-
                     ?
-
-                product.images
-
+                    product.images
                     :
-
-                [];
-
+                    [];
 
 
             const image =
-
                 images[0] ||
-
                 product.image ||
-
                 "";
-
-
-
-            const name =
-
-                product.name ||
-
-                "Producto";
-
-
-
-            const category =
-
-                product.category ||
-
-                "";
-
 
 
             const description =
-
                 product.description ||
+                "Consultá disponibilidad y detalles.";
 
+
+            card.innerHTML = `
+
+                <div class="product-image">
+
+                    ${
+                        image
+
+                        ?
+
+                        `
+
+                        <img
+                            src="${escapeHtml(image)}"
+                            alt="${escapeHtml(
+                                product.name ||
+                                "Producto"
+                            )}"
+                            loading="lazy"
+                        >
+
+                        `
+
+                        :
+
+                        `
+
+                        <div
+                            class="product-image-placeholder"
+                        >
+
+                            <img
+                                src="007imported-logo-circle.png"
+                                alt="007IMPORTED"
+                            >
+
+                        </div>
+
+                        `
+                    }
+
+
+                    <div class="product-category-tag">
+
+                        ${escapeHtml(
+                            product.category ||
+                            "Producto"
+                        )}
+
+                    </div>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3 class="product-name">
+
+                        ${escapeHtml(
+                            product.name ||
+                            "Producto"
+                        )}
+
+                    </h3>
+
+
+                    <p class="product-description">
+
+                        ${escapeHtml(
+                            description
+                        )}
+
+                    </p>
+
+
+                    <div class="product-bottom">
+
+                        <div class="product-price">
+
+                            ${formatPrice(
+                                product.price
+                            )}
+
+                        </div>
+
+
+                        <div class="product-stock">
+
+                            ${
+                                Number(
+                                    product.stock || 0
+                                ) > 0
+
+                                    ?
+
+                                    "DISPONIBLE"
+
+                                    :
+
+                                    "CONSULTAR"
+
+                            }
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="product-contact"
+                    >
+                        VER PRODUCTO
+                    </button>
+
+                </div>
+
+            `;
+
+
+            card
+                .querySelector(
+                    ".product-contact"
+                )
+                .addEventListener(
+                    "click",
+                    () => {
+
+                        openProductModal(
+                            product
+                        );
+
+                    }
+                );
+
+
+            card
+                .querySelector(
+                    ".product-image"
+                )
+                .addEventListener(
+                    "click",
+                    () => {
+
+                        openProductModal(
+                            product
+                        );
+
+                    }
+                );
+
+
+            return card;
+
+        }
+
+
+        /* =================================================
+           MODAL
+        ================================================= */
+
+        function openProductModal(
+            product
+        ) {
+
+            const images =
+                Array.isArray(
+                    product.images
+                )
+                    ?
+                    product.images
+                    :
+                    [];
+
+
+            const image =
+                images[0] ||
+                product.image ||
                 "";
 
 
+            modalCategory.textContent =
+                product.category ||
+                "PRODUCTO";
 
-            const price =
 
+            modalName.textContent =
+                product.name ||
+                "Producto";
+
+
+            modalPrice.textContent =
                 formatPrice(
                     product.price
                 );
 
 
-
-            const stock =
-
-                Number(
-                    product.stock || 0
-                );
-
-
-
-            let imageHTML;
-
+            modalDescription.textContent =
+                product.description ||
+                "Consultá disponibilidad, talles y detalles por WhatsApp.";
 
 
             if (image) {
 
-                imageHTML = `
+                modalImage.innerHTML = `
 
                     <img
                         src="${escapeHtml(image)}"
-                        alt="${escapeHtml(name)}"
-                        loading="lazy"
+                        alt="${escapeHtml(
+                            product.name ||
+                            "Producto"
+                        )}"
                     >
 
                 `;
 
             } else {
 
-                imageHTML = `
+                modalImage.innerHTML = `
 
                     <div
-                        class="product-image-placeholder"
+                        style="
+                            width:100%;
+                            height:100%;
+                            min-height:500px;
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                        "
                     >
 
                         <img
                             src="007imported-logo-circle.png"
-                            alt="007imported"
+                            alt="007IMPORTED"
+                            style="
+                                width:55%;
+                                object-fit:contain;
+                            "
                         >
 
                     </div>
@@ -2562,194 +3074,146 @@
             }
 
 
-
-            element.innerHTML = `
-
-                <div class="product-image">
-
-                    ${imageHTML}
-
-                </div>
-
-
-                <div class="product-info">
+            const message =
+                encodeURIComponent(
+                    "Hola 007IMPORTED, quiero consultar por el producto: " +
+                    (
+                        product.name ||
+                        "Producto"
+                    )
+                );
 
 
-                    <div class="product-category">
-
-                        ${escapeHtml(
-                            category
-                        )}
-
-                    </div>
+            modalWhatsapp.href =
+                "https://wa.me/" +
+                WHATSAPP +
+                "?text=" +
+                message;
 
 
-                    <div class="product-name">
-
-                        ${escapeHtml(
-                            name
-                        )}
-
-                    </div>
+            productModal.classList.add(
+                "show"
+            );
 
 
-                    ${
-                        description
-                            ?
-                        `
-                            <div
-                                class="product-description"
-                            >
-                                ${escapeHtml(
-                                    description
-                                )}
-                            </div>
-                        `
-                            :
-                        ""
-                    }
-
-
-                    <div class="product-bottom">
-
-
-                        <div class="product-price">
-
-                            ${price}
-
-                        </div>
-
-
-                        <div class="product-stock">
-
-                            ${
-                                stock > 0
-                                    ?
-                                `STOCK: ${stock}`
-                                    :
-                                "CONSULTAR"
-                            }
-
-                        </div>
-
-
-                    </div>
-
-
-                    <a
-                        class="product-whatsapp"
-                        href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
-                            "Hola! Quiero consultar por el producto: " +
-                            name
-                        )}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-
-                        CONSULTAR POR WHATSAPP
-
-                    </a>
-
-
-                </div>
-
-            `;
-
-
-
-            return element;
+            document.body.style.overflow =
+                "hidden";
 
         }
 
 
+        window.closeProductModal =
+            function() {
 
-        /* =====================================
-           CATEGORÍAS
-        ====================================== */
-
-        categories.forEach(
-            categoryButton => {
-
-
-                categoryButton.addEventListener(
-                    "click",
-                    () => {
-
-
-                        categories.forEach(
-                            button => {
-
-                                button.classList.remove(
-                                    "active"
-                                );
-
-                            }
-                        );
-
-
-                        categoryButton.classList.add(
-                            "active"
-                        );
-
-
-                        selectedCategory =
-                            categoryButton.dataset.category;
-
-
-                        renderProducts();
-
-
-                        /*
-                         * Baja suavemente
-                         * hasta los productos.
-                         */
-
-                        setTimeout(
-                            () => {
-
-                                const productsHeader =
-                                    document.querySelector(
-                                        ".products-header"
-                                    );
-
-
-                                if (
-                                    productsHeader
-                                ) {
-
-                                    productsHeader.scrollIntoView(
-                                        {
-                                            behavior:
-                                                "smooth",
-
-                                            block:
-                                                "start"
-                                        }
-                                    );
-
-                                }
-
-                            },
-                            50
-                        );
-
-                    }
+                productModal.classList.remove(
+                    "show"
                 );
+
+                document.body.style.overflow =
+                    "";
+
+            };
+
+
+        window.closeModalOutside =
+            function(event) {
+
+                if (
+                    event.target ===
+                    productModal
+                ) {
+
+                    closeProductModal();
+
+                }
+
+            };
+
+
+        /* =================================================
+           ESC PARA CERRAR
+        ================================================= */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closeProductModal();
+
+                }
 
             }
         );
 
 
+        /* =================================================
+           SCROLL PRODUCTOS
+        ================================================= */
 
-        /* =====================================
-           INICIAR
-        ====================================== */
+        window.scrollToProducts =
+            function() {
+
+                document
+                    .querySelector(
+                        "#catalogo"
+                    )
+                    .scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+            };
+
+
+        /* =================================================
+           MOBILE MENU
+        ================================================= */
+
+        window.toggleMobileMenu =
+            function() {
+
+                const menu =
+                    document.querySelector(
+                        "#mobileMenu"
+                    );
+
+
+                menu.style.display =
+                    menu.style.display === "block"
+                        ?
+                        "none"
+                        :
+                        "block";
+
+            };
+
+
+        window.closeMobileMenu =
+            function() {
+
+                const menu =
+                    document.querySelector(
+                        "#mobileMenu"
+                    );
+
+
+                menu.style.display =
+                    "none";
+
+            };
+
+
+        /* =================================================
+           INICIO
+        ================================================= */
 
         loadProducts();
 
-
     </script>
-
 
 </body>
 
