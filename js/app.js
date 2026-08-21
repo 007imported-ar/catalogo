@@ -1,6 +1,7 @@
 import { supabase } from "./supabase.js";
 import { STORE } from "./config.js";
 
+
 /* =====================================================
    ESTADO
 ===================================================== */
@@ -44,13 +45,19 @@ function setupLinks() {
     document
         .querySelectorAll('a[href*="instagram.com"]')
         .forEach(link => {
-            link.href = STORE.instagram;
+
+            if (STORE.instagram) {
+                link.href = STORE.instagram;
+            }
+
         });
 
 
     document
         .querySelectorAll('a[href*="wa.me"]')
         .forEach(link => {
+
+            if (!STORE.whatsapp) return;
 
             const message =
                 "Hola! Quería consultar por 007imported.";
@@ -69,10 +76,16 @@ function setupLinks() {
 
 function setupMenu() {
 
-    const menuButton = document.querySelector("#menuButton");
-    const mobileMenu = document.querySelector("#mobileMenu");
+    const menuButton =
+        document.querySelector("#menuButton");
 
-    if (!menuButton || !mobileMenu) return;
+    const mobileMenu =
+        document.querySelector("#mobileMenu");
+
+
+    if (!menuButton || !mobileMenu) {
+        return;
+    }
 
 
     menuButton.addEventListener("click", () => {
@@ -80,7 +93,10 @@ function setupMenu() {
         const open =
             mobileMenu.classList.toggle("active");
 
-        menuButton.classList.toggle("active", open);
+        menuButton.classList.toggle(
+            "active",
+            open
+        );
 
         menuButton.setAttribute(
             "aria-expanded",
@@ -96,9 +112,13 @@ function setupMenu() {
 
             link.addEventListener("click", () => {
 
-                mobileMenu.classList.remove("active");
+                mobileMenu.classList.remove(
+                    "active"
+                );
 
-                menuButton.classList.remove("active");
+                menuButton.classList.remove(
+                    "active"
+                );
 
                 menuButton.setAttribute(
                     "aria-expanded",
@@ -124,49 +144,49 @@ function setupCategories() {
         );
 
 
+    if (!buttons.length) {
+        return;
+    }
+
+
     buttons.forEach(button => {
 
-        button.addEventListener("click", () => {
+        button.addEventListener("click", event => {
+
+            event.preventDefault();
+
 
             const category =
-                button.dataset.category || "Todos";
-
-            state.category = category;
-
-
-            document
-                .querySelectorAll(".category-card")
-                .forEach(item => {
-
-                    item.classList.toggle(
-                        "active",
-                        item.dataset.category === category
-                    );
-
-                });
+                button.dataset.category ||
+                "Todos";
 
 
-            document
-                .querySelectorAll(".filter-button")
-                .forEach(item => {
+            state.category =
+                normalizeCategory(category);
 
-                    item.classList.toggle(
-                        "active",
-                        item.dataset.category === category
-                    );
 
-                });
+            updateCategoryButtons();
 
 
             renderProducts();
 
 
+            /*
+             * Si se presionó una tarjeta grande
+             * de categorías, bajamos al catálogo.
+             */
+
             if (
-                button.classList.contains("category-card")
+                button.classList.contains(
+                    "category-card"
+                )
             ) {
 
                 const catalog =
-                    document.querySelector("#catalogo");
+                    document.querySelector(
+                        "#catalogo"
+                    );
+
 
                 if (catalog) {
 
@@ -187,27 +207,121 @@ function setupCategories() {
 
 
 /* =====================================================
+   ACTUALIZAR BOTONES
+===================================================== */
+
+function updateCategoryButtons() {
+
+    document
+        .querySelectorAll(".category-card")
+        .forEach(button => {
+
+            const buttonCategory =
+                normalizeCategory(
+                    button.dataset.category
+                );
+
+
+            button.classList.toggle(
+                "active",
+                buttonCategory === state.category
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(".filter-button")
+        .forEach(button => {
+
+            const buttonCategory =
+                normalizeCategory(
+                    button.dataset.category
+                );
+
+
+            button.classList.toggle(
+                "active",
+                buttonCategory === state.category
+            );
+
+        });
+
+}
+
+
+/* =====================================================
+   NORMALIZAR CATEGORÍA
+===================================================== */
+
+function normalizeCategory(value) {
+
+    const category =
+        String(value || "")
+            .trim()
+            .toLowerCase();
+
+
+    const categories = {
+        "todos": "Todos",
+        "todo": "Todos",
+
+        "remeras": "Remeras",
+        "remera": "Remeras",
+
+        "pantalones": "Pantalones",
+        "pantalon": "Pantalones",
+
+        "buzos": "Buzos",
+        "buzo": "Buzos",
+
+        "camperas": "Camperas",
+        "campera": "Camperas",
+
+        "accesorios": "Accesorios",
+        "accesorio": "Accesorios"
+    };
+
+
+    return (
+        categories[category] ||
+        String(value || "").trim()
+    );
+
+}
+
+
+/* =====================================================
    BUSCADOR
 ===================================================== */
 
 function setupSearch() {
 
     const input =
-        document.querySelector("#searchInput");
+        document.querySelector(
+            "#searchInput"
+        );
 
-    if (!input) return;
+
+    if (!input) {
+        return;
+    }
 
 
-    input.addEventListener("input", event => {
+    input.addEventListener(
+        "input",
+        event => {
 
-        state.search =
-            event.target.value
-                .trim()
-                .toLowerCase();
+            state.search =
+                String(event.target.value || "")
+                    .trim()
+                    .toLowerCase();
 
-        renderProducts();
 
-    });
+            renderProducts();
+
+        }
+    );
 
 }
 
@@ -219,32 +333,60 @@ function setupSearch() {
 async function loadProducts() {
 
     const loading =
-        document.querySelector("#productsLoading");
+        document.querySelector(
+            "#productsLoading"
+        );
 
     const empty =
-        document.querySelector("#emptyProducts");
+        document.querySelector(
+            "#emptyProducts"
+        );
+
+    const grid =
+        document.querySelector(
+            "#productsGrid"
+        );
 
 
     if (loading) {
         loading.hidden = false;
     }
 
+
     if (empty) {
         empty.hidden = true;
     }
 
 
+    if (grid) {
+        grid.innerHTML = "";
+    }
+
+
     try {
 
-        const {
-            data,
-            error
-        } = await supabase
-            .from("products")
-            .select("*")
-            .order("created_at", {
-                ascending: false
-            });
+        /*
+         * IMPORTANTE:
+         *
+         * No usamos:
+         *
+         * .order("created_at")
+         *
+         * porque si created_at no existe,
+         * Supabase rompe toda la consulta.
+         */
+
+        const result =
+            await supabase
+                .from("products")
+                .select("*");
+
+
+        const data =
+            result.data;
+
+        const error =
+            result.error;
 
 
         if (error) {
@@ -252,7 +394,51 @@ async function loadProducts() {
         }
 
 
-        state.products = data || [];
+        state.products =
+            Array.isArray(data)
+                ? data
+                : [];
+
+
+        /*
+         * Ordenamos solamente si existe
+         * una fecha válida.
+         */
+
+        state.products.sort(
+            (a, b) => {
+
+                const dateA =
+                    new Date(
+                        a.created_at ||
+                        a.createdAt ||
+                        0
+                    ).getTime();
+
+
+                const dateB =
+                    new Date(
+                        b.created_at ||
+                        b.createdAt ||
+                        0
+                    ).getTime();
+
+
+                if (
+                    !Number.isNaN(dateA) &&
+                    !Number.isNaN(dateB)
+                ) {
+
+                    return dateB - dateA;
+
+                }
+
+
+                return 0;
+
+            }
+        );
+
 
         renderProducts();
 
@@ -260,18 +446,24 @@ async function loadProducts() {
     } catch (error) {
 
         console.error(
-            "Error cargando productos:",
+            "ERROR CARGANDO PRODUCTOS:",
             error
         );
 
+
         state.products = [];
+
 
         renderProducts();
 
-        showToast(
-            "No se pudo cargar el catálogo."
-        );
 
+        /*
+         * Mostramos el error real en la página
+         * para no dejar "Cargando catálogo..."
+         * infinitamente.
+         */
+
+        showCatalogError(error);
 
     } finally {
 
@@ -285,47 +477,131 @@ async function loadProducts() {
 
 
 /* =====================================================
-   FILTRAR
+   ERROR DEL CATÁLOGO
+===================================================== */
+
+function showCatalogError(error) {
+
+    const grid =
+        document.querySelector(
+            "#productsGrid"
+        );
+
+    const empty =
+        document.querySelector(
+            "#emptyProducts"
+        );
+
+
+    if (!grid) {
+        return;
+    }
+
+
+    const message =
+        error?.message ||
+        "No se pudo cargar el catálogo.";
+
+
+    grid.innerHTML = `
+
+        <div class="catalog-error">
+
+            <div class="empty-icon">×</div>
+
+            <h3>
+                No se pudo cargar el catálogo
+            </h3>
+
+            <p>
+                ${escapeHtml(message)}
+            </p>
+
+            <button
+                type="button"
+                class="button button-primary"
+                id="retryProducts"
+            >
+                Reintentar
+            </button>
+
+        </div>
+
+    `;
+
+
+    if (empty) {
+        empty.hidden = true;
+    }
+
+
+    const retry =
+        document.querySelector(
+            "#retryProducts"
+        );
+
+
+    if (retry) {
+
+        retry.addEventListener(
+            "click",
+            loadProducts
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   FILTRAR PRODUCTOS
 ===================================================== */
 
 function getFilteredProducts() {
 
-    return state.products.filter(product => {
+    return state.products.filter(
+        product => {
 
-        const category =
-            String(product.category || "")
+            const productCategory =
+                normalizeCategory(
+                    product.category ||
+                    product.categoria ||
+                    ""
+                );
+
+
+            const categoryMatch =
+                state.category === "Todos" ||
+                productCategory ===
+                    state.category;
+
+
+            const text = [
+
+                getProductName(product),
+
+                getProductDescription(product),
+
+                productCategory
+
+            ]
+                .filter(Boolean)
+                .join(" ")
                 .toLowerCase();
 
 
-        const categoryMatch =
-            state.category === "Todos" ||
-            category ===
-            state.category.toLowerCase();
+            const searchMatch =
+                !state.search ||
+                text.includes(state.search);
 
 
-        const text = [
+            return (
+                categoryMatch &&
+                searchMatch
+            );
 
-            product.name,
-            product.description,
-            product.category
-
-        ]
-            .filter(Boolean)
-            .join(" ")
-            .toLowerCase();
-
-
-        const searchMatch =
-            !state.search ||
-            text.includes(state.search);
-
-
-        return (
-            categoryMatch &&
-            searchMatch
-        );
-
-    });
+        }
+    );
 
 }
 
@@ -337,13 +613,19 @@ function getFilteredProducts() {
 function renderProducts() {
 
     const grid =
-        document.querySelector("#productsGrid");
+        document.querySelector(
+            "#productsGrid"
+        );
 
     const empty =
-        document.querySelector("#emptyProducts");
+        document.querySelector(
+            "#emptyProducts"
+        );
 
 
-    if (!grid) return;
+    if (!grid) {
+        return;
+    }
 
 
     const products =
@@ -381,7 +663,7 @@ function renderProducts() {
 
 
 /* =====================================================
-   TARJETA
+   CREAR TARJETA
 ===================================================== */
 
 function createProductCard(product) {
@@ -389,13 +671,25 @@ function createProductCard(product) {
     const article =
         document.createElement("article");
 
+
     article.className =
         "product-card";
 
 
     const image =
-        product.image ||
-        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80";
+        getProductImage(product);
+
+
+    const name =
+        getProductName(product);
+
+
+    const category =
+        getProductCategory(product);
+
+
+    const price =
+        getProductPrice(product);
 
 
     article.innerHTML = `
@@ -403,13 +697,14 @@ function createProductCard(product) {
         <button
             type="button"
             class="product-card-button"
+            aria-label="Ver ${escapeAttribute(name)}"
         >
 
             <div class="product-image-wrap">
 
                 <img
                     src="${escapeAttribute(image)}"
-                    alt="${escapeAttribute(product.name)}"
+                    alt="${escapeAttribute(name)}"
                     class="product-image"
                     loading="lazy"
                 >
@@ -420,15 +715,15 @@ function createProductCard(product) {
             <div class="product-card-info">
 
                 <div class="product-card-category">
-                    ${escapeHtml(product.category || "Producto")}
+                    ${escapeHtml(category)}
                 </div>
 
                 <h3 class="product-card-name">
-                    ${escapeHtml(product.name)}
+                    ${escapeHtml(name)}
                 </h3>
 
                 <div class="product-card-price">
-                    ${formatPrice(product.price)}
+                    ${formatPrice(price)}
                 </div>
 
             </div>
@@ -438,16 +733,86 @@ function createProductCard(product) {
     `;
 
 
-    article
-        .querySelector(".product-card-button")
-        .addEventListener("click", () => {
+    const button =
+        article.querySelector(
+            ".product-card-button"
+        );
 
-            openProductModal(product);
 
-        });
+    if (button) {
+
+        button.addEventListener(
+            "click",
+            () => openProductModal(product)
+        );
+
+    }
 
 
     return article;
+
+}
+
+
+/* =====================================================
+   DATOS DEL PRODUCTO
+===================================================== */
+
+function getProductName(product) {
+
+    return String(
+        product.name ||
+        product.nombre ||
+        "Producto"
+    );
+
+}
+
+
+function getProductCategory(product) {
+
+    return normalizeCategory(
+        product.category ||
+        product.categoria ||
+        "Producto"
+    );
+
+}
+
+
+function getProductDescription(product) {
+
+    return String(
+        product.description ||
+        product.descripcion ||
+        ""
+    );
+
+}
+
+
+function getProductPrice(product) {
+
+    return Number(
+        product.price ??
+        product.precio ??
+        0
+    ) || 0;
+
+}
+
+
+function getProductImage(product) {
+
+    return (
+        product.image ||
+        product.image_url ||
+        product.imagen ||
+        product.imagen_url ||
+        product.url_imagen ||
+        product.photo ||
+        ""
+    );
 
 }
 
@@ -459,44 +824,61 @@ function createProductCard(product) {
 function setupModal() {
 
     const close =
-        document.querySelector("#modalClose");
+        document.querySelector(
+            "#modalClose"
+        );
 
     const overlay =
-        document.querySelector("#modalOverlay");
+        document.querySelector(
+            "#modalOverlay"
+        );
 
     const add =
-        document.querySelector("#modalAddToCart");
+        document.querySelector(
+            "#modalAddToCart"
+        );
 
 
     if (close) {
+
         close.addEventListener(
             "click",
             closeProductModal
         );
+
     }
 
 
     if (overlay) {
+
         overlay.addEventListener(
             "click",
             closeProductModal
         );
+
     }
 
 
     if (add) {
 
-        add.addEventListener("click", () => {
+        add.addEventListener(
+            "click",
+            () => {
 
-            if (!selectedProduct) return;
+                if (!selectedProduct) {
+                    return;
+                }
 
-            addToCartProduct(
-                selectedProduct
-            );
 
-            closeProductModal();
+                addToCartProduct(
+                    selectedProduct
+                );
 
-        });
+
+                closeProductModal();
+
+            }
+        );
 
     }
 
@@ -524,13 +906,19 @@ function setupModal() {
 
 function openProductModal(product) {
 
-    selectedProduct = product;
+    selectedProduct =
+        product;
 
 
     const modal =
-        document.querySelector("#productModal");
+        document.querySelector(
+            "#productModal"
+        );
 
-    if (!modal) return;
+
+    if (!modal) {
+        return;
+    }
 
 
     const image =
@@ -565,8 +953,23 @@ function openProductModal(product) {
 
 
     const productImage =
-        product.image ||
-        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80";
+        getProductImage(product);
+
+
+    const productName =
+        getProductName(product);
+
+
+    const productCategory =
+        getProductCategory(product);
+
+
+    const productPrice =
+        getProductPrice(product);
+
+
+    const productDescription =
+        getProductDescription(product);
 
 
     if (image) {
@@ -575,27 +978,33 @@ function openProductModal(product) {
             productImage;
 
         image.alt =
-            product.name || "Producto";
+            productName;
 
     }
 
 
     if (category) {
+
         category.textContent =
-            product.category || "Producto";
+            productCategory;
+
     }
 
 
     if (name) {
+
         name.textContent =
-            product.name || "Producto";
+            productName;
+
     }
 
 
     if (price) {
 
         price.textContent =
-            formatPrice(product.price);
+            formatPrice(
+                productPrice
+            );
 
     }
 
@@ -603,17 +1012,17 @@ function openProductModal(product) {
     if (description) {
 
         description.textContent =
-            product.description ||
+            productDescription ||
             "Consultanos por disponibilidad, talles y colores.";
 
     }
 
 
-    if (whatsapp) {
+    if (whatsapp && STORE.whatsapp) {
 
         const message =
-            `Hola! Quería consultar por ${product.name}. ` +
-            `Precio: ${formatPrice(product.price)}.`;
+            `Hola! Quería consultar por ${productName}. ` +
+            `Precio: ${formatPrice(productPrice)}.`;
 
         whatsapp.href =
             `https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(message)}`;
@@ -621,11 +1030,19 @@ function openProductModal(product) {
     }
 
 
-    modal.classList.add("active");
+    modal.classList.add(
+        "active"
+    );
+
 
     modal.setAttribute(
         "aria-hidden",
         "false"
+    );
+
+
+    document.body.classList.add(
+        "modal-open"
     );
 
 }
@@ -638,12 +1055,20 @@ function openProductModal(product) {
 function closeProductModal() {
 
     const modal =
-        document.querySelector("#productModal");
+        document.querySelector(
+            "#productModal"
+        );
 
-    if (!modal) return;
+
+    if (!modal) {
+        return;
+    }
 
 
-    modal.classList.remove("active");
+    modal.classList.remove(
+        "active"
+    );
+
 
     modal.setAttribute(
         "aria-hidden",
@@ -651,7 +1076,13 @@ function closeProductModal() {
     );
 
 
-    selectedProduct = null;
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+
+    selectedProduct =
+        null;
 
 }
 
@@ -663,13 +1094,19 @@ function closeProductModal() {
 function setupCart() {
 
     const button =
-        document.querySelector("#cartButton");
+        document.querySelector(
+            "#cartButton"
+        );
 
     const close =
-        document.querySelector("#cartClose");
+        document.querySelector(
+            "#cartClose"
+        );
 
     const overlay =
-        document.querySelector("#cartOverlay");
+        document.querySelector(
+            "#cartOverlay"
+        );
 
     const continueButton =
         document.querySelector(
@@ -683,26 +1120,32 @@ function setupCart() {
 
 
     if (button) {
+
         button.addEventListener(
             "click",
             openCart
         );
+
     }
 
 
     if (close) {
+
         close.addEventListener(
             "click",
             closeCart
         );
+
     }
 
 
     if (overlay) {
+
         overlay.addEventListener(
             "click",
             closeCart
         );
+
     }
 
 
@@ -714,15 +1157,18 @@ function setupCart() {
 
                 closeCart();
 
+
                 const catalog =
                     document.querySelector(
                         "#catalogo"
                     );
 
+
                 if (catalog) {
 
                     catalog.scrollIntoView({
-                        behavior: "smooth"
+                        behavior: "smooth",
+                        block: "start"
                     });
 
                 }
@@ -759,13 +1205,25 @@ function loadCart() {
             );
 
 
-        state.cart =
+        const parsed =
             saved
                 ? JSON.parse(saved)
                 : [];
 
 
-    } catch {
+        state.cart =
+            Array.isArray(parsed)
+                ? parsed
+                : [];
+
+
+    } catch (error) {
+
+        console.error(
+            "Error cargando carrito:",
+            error
+        );
+
 
         state.cart = [];
 
@@ -783,10 +1241,23 @@ function loadCart() {
 
 function saveCart() {
 
-    localStorage.setItem(
-        "007imported_cart",
-        JSON.stringify(state.cart)
-    );
+    try {
+
+        localStorage.setItem(
+            "007imported_cart",
+            JSON.stringify(
+                state.cart
+            )
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Error guardando carrito:",
+            error
+        );
+
+    }
 
 
     renderCart();
@@ -795,16 +1266,22 @@ function saveCart() {
 
 
 /* =====================================================
-   AGREGAR
+   AGREGAR AL CARRITO
 ===================================================== */
 
 function addToCartProduct(product) {
+
+    const id =
+        product.id ??
+        product.ID ??
+        getProductName(product);
+
 
     const existing =
         state.cart.find(
             item =>
                 String(item.id) ===
-                String(product.id)
+                String(id)
         );
 
 
@@ -816,15 +1293,16 @@ function addToCartProduct(product) {
 
         state.cart.push({
 
-            id: product.id,
+            id: id,
 
-            name: product.name,
+            name:
+                getProductName(product),
 
             price:
-                Number(product.price) || 0,
+                getProductPrice(product),
 
             image:
-                product.image || "",
+                getProductImage(product),
 
             quantity: 1
 
@@ -837,7 +1315,7 @@ function addToCartProduct(product) {
 
 
     showToast(
-        `${product.name} agregado al carrito`
+        `${getProductName(product)} agregado al carrito`
     );
 
 
@@ -847,7 +1325,7 @@ function addToCartProduct(product) {
 
 
 /* =====================================================
-   ELIMINAR
+   ELIMINAR DEL CARRITO
 ===================================================== */
 
 function removeFromCart(id) {
@@ -866,10 +1344,13 @@ function removeFromCart(id) {
 
 
 /* =====================================================
-   CANTIDAD
+   CAMBIAR CANTIDAD
 ===================================================== */
 
-function changeQuantity(id, amount) {
+function changeQuantity(
+    id,
+    amount
+) {
 
     const item =
         state.cart.find(
@@ -879,10 +1360,13 @@ function changeQuantity(id, amount) {
         );
 
 
-    if (!item) return;
+    if (!item) {
+        return;
+    }
 
 
-    item.quantity += amount;
+    item.quantity +=
+        amount;
 
 
     if (item.quantity <= 0) {
@@ -931,13 +1415,19 @@ function renderCart() {
         );
 
 
-    if (!container) return;
+    if (!container) {
+        return;
+    }
 
 
     const totalItems =
         state.cart.reduce(
             (sum, item) =>
-                sum + item.quantity,
+                sum +
+                (
+                    Number(item.quantity) ||
+                    0
+                ),
             0
         );
 
@@ -946,15 +1436,23 @@ function renderCart() {
         state.cart.reduce(
             (sum, item) =>
                 sum +
-                item.price *
-                item.quantity,
+                (
+                    Number(item.price) ||
+                    0
+                ) *
+                (
+                    Number(item.quantity) ||
+                    0
+                ),
             0
         );
 
 
     if (count) {
+
         count.textContent =
             totalItems;
+
     }
 
 
@@ -962,18 +1460,22 @@ function renderCart() {
 
         container.innerHTML = "";
 
+
         if (empty) {
             empty.hidden = false;
         }
+
 
         if (footer) {
             footer.hidden = true;
         }
 
+
         if (totalElement) {
             totalElement.textContent =
                 "$0";
         }
+
 
         return;
 
@@ -983,6 +1485,7 @@ function renderCart() {
     if (empty) {
         empty.hidden = true;
     }
+
 
     if (footer) {
         footer.hidden = false;
@@ -995,23 +1498,34 @@ function renderCart() {
     state.cart.forEach(item => {
 
         const element =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
+
 
         element.className =
             "cart-item";
+
+
+        const image =
+            item.image ||
+            "";
 
 
         element.innerHTML = `
 
             <div class="cart-item-image">
 
-                <img
-                    src="${escapeAttribute(
-                        item.image ||
-                        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=300&q=80"
-                    )}"
-                    alt="${escapeAttribute(item.name)}"
-                >
+                ${
+                    image
+                        ? `
+                            <img
+                                src="${escapeAttribute(image)}"
+                                alt="${escapeAttribute(item.name)}"
+                            >
+                        `
+                        : ""
+                }
 
             </div>
 
@@ -1061,45 +1575,68 @@ function renderCart() {
         `;
 
 
-        element
-            .querySelector(
+        const decrease =
+            element.querySelector(
                 '[data-action="decrease"]'
-            )
-            .addEventListener(
-                "click",
-                () => changeQuantity(
-                    item.id,
-                    -1
-                )
             );
 
 
-        element
-            .querySelector(
+        const increase =
+            element.querySelector(
                 '[data-action="increase"]'
-            )
-            .addEventListener(
-                "click",
-                () => changeQuantity(
-                    item.id,
-                    1
-                )
             );
 
 
-        element
-            .querySelector(
+        const remove =
+            element.querySelector(
                 '[data-action="remove"]'
-            )
-            .addEventListener(
-                "click",
-                () => removeFromCart(
-                    item.id
-                )
             );
 
 
-        container.appendChild(element);
+        if (decrease) {
+
+            decrease.addEventListener(
+                "click",
+                () =>
+                    changeQuantity(
+                        item.id,
+                        -1
+                    )
+            );
+
+        }
+
+
+        if (increase) {
+
+            increase.addEventListener(
+                "click",
+                () =>
+                    changeQuantity(
+                        item.id,
+                        1
+                    )
+            );
+
+        }
+
+
+        if (remove) {
+
+            remove.addEventListener(
+                "click",
+                () =>
+                    removeFromCart(
+                        item.id
+                    )
+            );
+
+        }
+
+
+        container.appendChild(
+            element
+        );
 
     });
 
@@ -1125,10 +1662,16 @@ function openCart() {
             "#cartDrawer"
         );
 
-    if (!drawer) return;
+
+    if (!drawer) {
+        return;
+    }
 
 
-    drawer.classList.add("active");
+    drawer.classList.add(
+        "active"
+    );
+
 
     drawer.setAttribute(
         "aria-hidden",
@@ -1149,10 +1692,16 @@ function closeCart() {
             "#cartDrawer"
         );
 
-    if (!drawer) return;
+
+    if (!drawer) {
+        return;
+    }
 
 
-    drawer.classList.remove("active");
+    drawer.classList.remove(
+        "active"
+    );
+
 
     drawer.setAttribute(
         "aria-hidden",
@@ -1163,7 +1712,7 @@ function closeCart() {
 
 
 /* =====================================================
-   WHATSAPP
+   CHECKOUT WHATSAPP
 ===================================================== */
 
 function checkoutWhatsApp() {
@@ -1172,6 +1721,17 @@ function checkoutWhatsApp() {
 
         showToast(
             "Tu carrito está vacío."
+        );
+
+        return;
+
+    }
+
+
+    if (!STORE.whatsapp) {
+
+        showToast(
+            "WhatsApp no está configurado."
         );
 
         return;
@@ -1188,16 +1748,24 @@ function checkoutWhatsApp() {
 
     state.cart.forEach(item => {
 
+        const price =
+            Number(item.price) || 0;
+
+
+        const quantity =
+            Number(item.quantity) || 0;
+
+
         const subtotal =
-            item.price *
-            item.quantity;
+            price * quantity;
 
 
-        total += subtotal;
+        total +=
+            subtotal;
 
 
         message +=
-            `• ${item.name} x${item.quantity} — ${formatPrice(subtotal)}\n`;
+            `• ${item.name} x${quantity} — ${formatPrice(subtotal)}\n`;
 
     });
 
@@ -1212,7 +1780,8 @@ function checkoutWhatsApp() {
 
     window.open(
         url,
-        "_blank"
+        "_blank",
+        "noopener,noreferrer"
     );
 
 }
@@ -1264,31 +1833,40 @@ function showToast(message) {
         message;
 
 
-    toast.classList.add("show");
+    toast.classList.add(
+        "show"
+    );
 
 
-    clearTimeout(toastTimer);
+    clearTimeout(
+        toastTimer
+    );
 
 
     toastTimer =
-        setTimeout(() => {
+        setTimeout(
+            () => {
 
-            toast.classList.remove(
-                "show"
-            );
+                toast.classList.remove(
+                    "show"
+                );
 
-        }, 2500);
+            },
+            2500
+        );
 
 }
 
 
 /* =====================================================
-   SEGURIDAD
+   ESCAPE HTML
 ===================================================== */
 
 function escapeHtml(value) {
 
-    return String(value ?? "")
+    return String(
+        value ?? ""
+    )
         .replace(
             /&/g,
             "&amp;"
