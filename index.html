@@ -17,15 +17,14 @@
 
     <title>007IMPORTED — Indumentaria</title>
 
-    <!-- FAVICON -->
     <link
         rel="icon"
         type="image/x-icon"
         href="favicon.ico"
     >
 
-    <!-- FUENTE -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link
         rel="preconnect"
         href="https://fonts.gstatic.com"
@@ -135,6 +134,7 @@
         ===================================================== */
 
         body::before {
+
             content: "";
 
             position: fixed;
@@ -146,6 +146,7 @@
             z-index: -1;
 
             background:
+
                 radial-gradient(
                     circle at 78% 18%,
                     rgba(140, 111, 72, .10),
@@ -165,6 +166,7 @@
         ===================================================== */
 
         .header {
+
             position: fixed;
 
             top: 0;
@@ -178,16 +180,21 @@
             display: flex;
             align-items: center;
 
-            border-bottom: 1px solid rgba(205, 187, 158, .14);
+            border-bottom:
+                1px solid
+                rgba(205, 187, 158, .14);
 
-            background: rgba(8, 8, 8, .94);
+            background:
+                rgba(8, 8, 8, .94);
 
             backdrop-filter: blur(14px);
         }
 
 
         .header-inner {
+
             width: 100%;
+
             max-width: var(--max-width);
 
             margin: auto;
@@ -207,6 +214,7 @@
         ===================================================== */
 
         .brand {
+
             display: flex;
             align-items: center;
 
@@ -217,6 +225,7 @@
 
 
         .brand-logo {
+
             width: 58px;
             height: 58px;
 
@@ -227,7 +236,9 @@
 
 
         .brand-name {
+
             font-size: 17px;
+
             font-weight: 900;
 
             letter-spacing: -.8px;
@@ -244,6 +255,7 @@
         ===================================================== */
 
         .nav {
+
             display: flex;
             align-items: center;
 
@@ -254,11 +266,13 @@
 
 
         .nav a {
+
             position: relative;
 
             color: #d5d0c8;
 
             font-size: 10px;
+
             font-weight: 800;
 
             letter-spacing: .4px;
@@ -268,6 +282,7 @@
 
 
         .nav a::after {
+
             content: "";
 
             position: absolute;
@@ -299,6 +314,7 @@
         ===================================================== */
 
         .header-actions {
+
             display: flex;
             align-items: center;
 
@@ -307,9 +323,11 @@
 
 
         .instagram-link {
+
             color: var(--white);
 
             font-size: 10px;
+
             font-weight: 800;
 
             text-transform: uppercase;
@@ -324,6 +342,7 @@
 
 
         .cart-button {
+
             display: flex;
             align-items: center;
 
@@ -332,9 +351,11 @@
             color: var(--white);
 
             background: none;
+
             border: 0;
 
             font-size: 10px;
+
             font-weight: 800;
 
             text-transform: uppercase;
@@ -342,6 +363,7 @@
 
 
         .cart-count {
+
             width: 20px;
             height: 20px;
 
@@ -352,9 +374,11 @@
             border-radius: 50%;
 
             background: var(--cream);
+
             color: #080808;
 
             font-size: 9px;
+
             font-weight: 900;
         }
 
@@ -364,6 +388,7 @@
         ===================================================== */
 
         .menu-button {
+
             display: none;
 
             width: 42px;
@@ -384,6 +409,7 @@
         ===================================================== */
 
         .hero {
+
             min-height: 100vh;
 
             position: relative;
@@ -401,6 +427,7 @@
 
 
         .hero::before {
+
             content: "";
 
             position: absolute;
@@ -414,6 +441,7 @@
             border-radius: 50%;
 
             background:
+
                 radial-gradient(
                     circle,
                     rgba(150, 120, 75, .13),
@@ -425,6 +453,7 @@
 
 
         .hero::after {
+
             content: "007";
 
             position: absolute;
@@ -432,9 +461,15 @@
             right: -50px;
             bottom: -130px;
 
-            color: rgba(205, 187, 158, .025);
+            color:
+                rgba(205, 187, 158, .025);
 
-            font-size: clamp(250px, 35vw, 600px);
+            font-size:
+                clamp(
+                    250px,
+                    35vw,
+                    600px
+                );
 
             font-weight: 900;
 
@@ -447,7 +482,9 @@
 
 
         .hero-inner {
+
             width: 100%;
+
             max-width: var(--max-width);
 
             margin: auto;
@@ -459,6 +496,7 @@
 
 
         .hero-label {
+
             display: flex;
             align-items: center;
 
@@ -467,6 +505,7 @@
             color: var(--cream);
 
             font-size: 10px;
+
             font-weight: 900;
 
             letter-spacing: 4px;
@@ -476,6 +515,7 @@
 
 
         .hero-label::before {
+
             content: "";
 
             width: 30px;
@@ -486,6 +526,7 @@
 
 
         .hero h1 {
+
             max-width: 760px;
 
             font-size:
@@ -511,6 +552,7 @@
 
 
         .hero-description {
+
             max-width: 570px;
 
             margin-top: 35px;
@@ -524,6 +566,7 @@
 
 
         .hero-buttons {
+
             display: flex;
 
             gap: 10px;
@@ -533,6 +576,7 @@
 
 
         .button {
+
             min-height: 52px;
 
             padding: 0 25px;
@@ -541,13 +585,16 @@
             align-items: center;
             justify-content: center;
 
-            border: 1px solid var(--border-light);
+            border:
+                1px solid
+                var(--border-light);
 
             background: transparent;
 
             color: var(--white);
 
             font-size: 10px;
+
             font-weight: 900;
 
             text-transform: uppercase;
@@ -557,7 +604,9 @@
 
 
         .button-primary {
+
             background: var(--cream);
+
             border-color: var(--cream);
 
             color: #080808;
@@ -565,7 +614,9 @@
 
 
         .button-primary:hover {
+
             background: var(--cream-light);
+
             border-color: var(--cream-light);
 
             transform: translateY(-2px);
@@ -573,6 +624,7 @@
 
 
         .button-secondary:hover {
+
             color: var(--cream);
 
             border-color: var(--cream);
@@ -586,6 +638,7 @@
         ===================================================== */
 
         .section {
+
             width: 100%;
 
             padding:
@@ -594,7 +647,9 @@
 
 
         .section-inner {
+
             width: 100%;
+
             max-width: var(--max-width);
 
             margin: auto;
@@ -602,6 +657,7 @@
 
 
         .section-header {
+
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
@@ -613,9 +669,11 @@
 
 
         .section-label {
+
             color: var(--cream);
 
             font-size: 10px;
+
             font-weight: 900;
 
             letter-spacing: 4px;
@@ -625,6 +683,7 @@
 
 
         .section-title {
+
             font-size:
                 clamp(
                     40px,
@@ -643,6 +702,7 @@
 
 
         .section-description {
+
             max-width: 360px;
 
             color: var(--gray);
@@ -658,6 +718,7 @@
         ===================================================== */
 
         .categories {
+
             display: grid;
 
             grid-template-columns:
@@ -668,6 +729,7 @@
 
 
         .category {
+
             position: relative;
 
             min-height: 190px;
@@ -678,7 +740,9 @@
             flex-direction: column;
             justify-content: space-between;
 
-            border: 1px solid var(--border);
+            border:
+                1px solid
+                var(--border);
 
             background:
                 linear-gradient(
@@ -701,6 +765,7 @@
 
 
         .category::before {
+
             content: "";
 
             position: absolute;
@@ -720,6 +785,7 @@
 
         .category:hover,
         .category.active {
+
             border-color: var(--cream);
 
             background:
@@ -734,6 +800,7 @@
 
 
         .category-number {
+
             position: relative;
 
             z-index: 2;
@@ -741,6 +808,7 @@
             color: #777169;
 
             font-size: 9px;
+
             font-weight: 700;
 
             letter-spacing: 1px;
@@ -748,6 +816,7 @@
 
 
         .category-arrow {
+
             position: absolute;
 
             right: 22px;
@@ -760,11 +829,13 @@
 
 
         .category-name {
+
             position: relative;
 
             z-index: 2;
 
             font-size: 22px;
+
             font-weight: 900;
 
             letter-spacing: -1px;
@@ -778,14 +849,21 @@
         ===================================================== */
 
         #productos {
+
             background: #0b0b0a;
 
-            border-top: 1px solid rgba(205, 187, 158, .10);
-            border-bottom: 1px solid rgba(205, 187, 158, .10);
+            border-top:
+                1px solid
+                rgba(205, 187, 158, .10);
+
+            border-bottom:
+                1px solid
+                rgba(205, 187, 158, .10);
         }
 
 
         .products-toolbar {
+
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -795,9 +873,11 @@
 
 
         .products-title {
+
             color: var(--gray);
 
             font-size: 11px;
+
             font-weight: 700;
 
             text-transform: uppercase;
@@ -807,6 +887,7 @@
 
 
         .products-grid {
+
             display: grid;
 
             grid-template-columns:
@@ -817,11 +898,14 @@
 
 
         .product-card {
+
             position: relative;
 
             background: var(--card);
 
-            border: 1px solid var(--border);
+            border:
+                1px solid
+                var(--border);
 
             overflow: hidden;
 
@@ -832,6 +916,7 @@
 
 
         .product-card:hover {
+
             transform: translateY(-4px);
 
             border-color: var(--cream);
@@ -839,6 +924,7 @@
 
 
         .product-image {
+
             width: 100%;
 
             aspect-ratio: 4 / 5;
@@ -848,10 +934,13 @@
             overflow: hidden;
 
             position: relative;
+
+            cursor: pointer;
         }
 
 
         .product-image img {
+
             width: 100%;
             height: 100%;
 
@@ -865,11 +954,13 @@
 
         .product-card:hover
         .product-image img {
+
             transform: scale(1.04);
         }
 
 
         .product-image-placeholder {
+
             width: 100%;
             height: 100%;
 
@@ -882,6 +973,7 @@
 
 
         .product-image-placeholder img {
+
             width: 65%;
             height: 65%;
 
@@ -890,6 +982,7 @@
 
 
         .product-category-tag {
+
             position: absolute;
 
             top: 10px;
@@ -897,11 +990,13 @@
 
             padding: 6px 8px;
 
-            background: rgba(8, 8, 8, .82);
+            background:
+                rgba(8, 8, 8, .82);
 
             color: var(--cream);
 
             font-size: 8px;
+
             font-weight: 900;
 
             letter-spacing: 1px;
@@ -911,14 +1006,17 @@
 
 
         .product-info {
+
             padding: 18px;
         }
 
 
         .product-name {
+
             color: var(--white);
 
             font-size: 14px;
+
             font-weight: 800;
 
             line-height: 1.3;
@@ -926,6 +1024,7 @@
 
 
         .product-description {
+
             min-height: 34px;
 
             margin-top: 8px;
@@ -939,6 +1038,7 @@
 
 
         .product-bottom {
+
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -950,14 +1050,17 @@
 
 
         .product-price {
+
             color: var(--cream);
 
             font-size: 15px;
+
             font-weight: 900;
         }
 
 
         .product-stock {
+
             color: #777169;
 
             font-size: 9px;
@@ -965,19 +1068,23 @@
 
 
         .product-contact {
+
             width: 100%;
 
             margin-top: 13px;
 
             padding: 11px;
 
-            border: 1px solid var(--border);
+            border:
+                1px solid
+                var(--border);
 
             background: transparent;
 
             color: var(--white);
 
             font-size: 9px;
+
             font-weight: 900;
 
             text-transform: uppercase;
@@ -987,6 +1094,7 @@
 
 
         .product-contact:hover {
+
             background: var(--cream);
 
             border-color: var(--cream);
@@ -1000,6 +1108,7 @@
         ===================================================== */
 
         .products-message {
+
             grid-column: 1 / -1;
 
             min-height: 220px;
@@ -1008,7 +1117,9 @@
             align-items: center;
             justify-content: center;
 
-            border: 1px dashed var(--border);
+            border:
+                1px dashed
+                var(--border);
 
             color: var(--gray);
 
@@ -1023,6 +1134,7 @@
         ===================================================== */
 
         .about {
+
             display: grid;
 
             grid-template-columns:
@@ -1035,6 +1147,7 @@
 
 
         .about-big {
+
             font-size:
                 clamp(
                     45px,
@@ -1058,6 +1171,7 @@
 
 
         .about-text {
+
             color: var(--gray);
 
             font-size: 14px;
@@ -1067,6 +1181,7 @@
 
 
         .about-list {
+
             display: grid;
 
             grid-template-columns: 1fr 1fr;
@@ -1078,13 +1193,17 @@
 
 
         .about-item {
+
             padding: 18px;
 
-            border: 1px solid var(--border);
+            border:
+                1px solid
+                var(--border);
 
             color: var(--gray-light);
 
             font-size: 10px;
+
             font-weight: 800;
 
             text-transform: uppercase;
@@ -1092,6 +1211,7 @@
 
 
         .about-item span {
+
             display: block;
 
             margin-bottom: 8px;
@@ -1107,14 +1227,17 @@
         ===================================================== */
 
         .contact-section {
+
             text-align: center;
 
             padding-top: 130px;
+
             padding-bottom: 130px;
         }
 
 
         .contact-title {
+
             max-width: 800px;
 
             margin: auto;
@@ -1142,6 +1265,7 @@
 
 
         .contact-text {
+
             max-width: 500px;
 
             margin: 30px auto 0;
@@ -1155,7 +1279,9 @@
 
 
         .contact-buttons {
+
             display: flex;
+
             justify-content: center;
 
             gap: 10px;
@@ -1169,16 +1295,20 @@
         ===================================================== */
 
         footer {
+
             padding:
                 45px 25px 30px;
 
-            border-top: 1px solid var(--border);
+            border-top:
+                1px solid
+                var(--border);
 
             background: #080808;
         }
 
 
         .footer-inner {
+
             max-width: var(--max-width);
 
             margin: auto;
@@ -1186,8 +1316,11 @@
 
 
         .footer-top {
+
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
 
             gap: 30px;
@@ -1195,7 +1328,9 @@
 
 
         .footer-logo {
+
             display: flex;
+
             align-items: center;
 
             gap: 12px;
@@ -1203,6 +1338,7 @@
 
 
         .footer-logo img {
+
             width: 48px;
             height: 48px;
 
@@ -1211,21 +1347,27 @@
 
 
         .footer-logo strong {
+
             font-size: 14px;
+
             font-weight: 900;
         }
 
 
         .footer-links {
+
             display: flex;
+
             gap: 25px;
         }
 
 
         .footer-links a {
+
             color: var(--gray);
 
             font-size: 9px;
+
             font-weight: 800;
 
             text-transform: uppercase;
@@ -1238,15 +1380,19 @@
 
 
         .footer-marquee {
+
             margin-top: 50px;
 
             padding-top: 25px;
 
-            border-top: 1px solid var(--border);
+            border-top:
+                1px solid
+                var(--border);
 
             color: var(--cream);
 
             font-size: 11px;
+
             font-weight: 900;
 
             letter-spacing: 5px;
@@ -1260,6 +1406,7 @@
 
 
         .footer-copy {
+
             margin-top: 25px;
 
             color: #57534e;
@@ -1271,10 +1418,11 @@
 
 
         /* =====================================================
-           MODAL PRODUCT
+           MODAL PRODUCTO
         ===================================================== */
 
         .product-modal {
+
             position: fixed;
 
             inset: 0;
@@ -1282,12 +1430,15 @@
             z-index: 3000;
 
             display: none;
+
             align-items: center;
+
             justify-content: center;
 
             padding: 20px;
 
-            background: rgba(0,0,0,.82);
+            background:
+                rgba(0,0,0,.82);
 
             backdrop-filter: blur(10px);
         }
@@ -1299,7 +1450,9 @@
 
 
         .modal-box {
+
             width: 100%;
+
             max-width: 900px;
 
             max-height: 90vh;
@@ -1308,32 +1461,184 @@
 
             display: grid;
 
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns:
+                1fr 1fr;
 
             background: var(--card);
 
-            border: 1px solid var(--border);
+            border:
+                1px solid
+                var(--border);
         }
 
 
+        /* =====================================================
+           MODAL IMAGEN + CARRUSEL
+        ===================================================== */
+
         .modal-image {
+
             min-height: 550px;
 
             background: #10100f;
 
             overflow: hidden;
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            touch-action: pan-y;
         }
 
 
         .modal-image img {
+
             width: 100%;
+
             height: 100%;
 
             object-fit: cover;
+
+            display: block;
+
+            user-select: none;
+
+            -webkit-user-drag: none;
         }
 
 
+        /* =====================================================
+           FLECHAS DEL CARRUSEL
+        ===================================================== */
+
+        .modal-image-arrow {
+
+            position: absolute;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            z-index: 20;
+
+            width: 48px;
+
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border:
+                1px solid
+                rgba(205,187,158,.55);
+
+            background:
+                rgba(8,8,8,.72);
+
+            color: var(--cream);
+
+            font-size: 25px;
+
+            line-height: 1;
+
+            transition:
+                background .2s,
+                border-color .2s,
+                transform .2s;
+        }
+
+
+        .modal-image-arrow:hover {
+
+            background: var(--cream);
+
+            border-color: var(--cream);
+
+            color: #080808;
+
+            transform:
+                translateY(-50%)
+                scale(1.05);
+        }
+
+
+        .modal-image-arrow.left {
+            left: 15px;
+        }
+
+
+        .modal-image-arrow.right {
+            right: 15px;
+        }
+
+
+        /*
+           Las flechas están ocultas
+           hasta que haya más de una imagen.
+        */
+
+        .modal-image-arrow.hidden {
+            display: none;
+        }
+
+
+        /* =====================================================
+           CONTADOR DE IMAGENES
+        ===================================================== */
+
+        .modal-image-counter {
+
+            position: absolute;
+
+            left: 50%;
+
+            bottom: 15px;
+
+            transform: translateX(-50%);
+
+            z-index: 20;
+
+            padding:
+                7px 12px;
+
+            background:
+                rgba(8,8,8,.78);
+
+            border:
+                1px solid
+                rgba(205,187,158,.30);
+
+            color: var(--cream);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            display: none;
+        }
+
+
+        .modal-image-counter.show {
+            display: block;
+        }
+
+
+        /* =====================================================
+           MODAL INFO
+        ===================================================== */
+
         .modal-info {
+
             position: relative;
 
             padding: 45px;
@@ -1341,15 +1646,20 @@
 
 
         .modal-close {
+
             position: absolute;
 
             right: 20px;
+
             top: 20px;
 
             width: 38px;
+
             height: 38px;
 
-            border: 1px solid var(--border);
+            border:
+                1px solid
+                var(--border);
 
             background: transparent;
 
@@ -1360,6 +1670,7 @@
 
 
         .modal-close:hover {
+
             color: var(--cream);
 
             border-color: var(--cream);
@@ -1367,9 +1678,11 @@
 
 
         .modal-category {
+
             color: var(--cream);
 
             font-size: 9px;
+
             font-weight: 900;
 
             letter-spacing: 3px;
@@ -1379,6 +1692,7 @@
 
 
         .modal-name {
+
             margin-top: 15px;
 
             font-size: 38px;
@@ -1394,16 +1708,19 @@
 
 
         .modal-price {
+
             margin-top: 25px;
 
             color: var(--cream);
 
             font-size: 24px;
+
             font-weight: 900;
         }
 
 
         .modal-description {
+
             margin-top: 25px;
 
             color: var(--gray);
@@ -1415,6 +1732,7 @@
 
 
         .modal-whatsapp {
+
             width: 100%;
 
             margin-top: 30px;
@@ -1422,19 +1740,32 @@
             min-height: 53px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             background: var(--cream);
 
-            border: 1px solid var(--cream);
+            border:
+                1px solid
+                var(--cream);
 
             color: #080808;
 
             font-size: 10px;
+
             font-weight: 900;
 
             text-transform: uppercase;
+        }
+
+
+        .modal-whatsapp:hover {
+
+            background: var(--cream-light);
+
+            border-color: var(--cream-light);
         }
 
 
@@ -1448,25 +1779,33 @@
                 display: none;
             }
 
+
             .menu-button {
                 display: block;
             }
+
 
             .header-actions {
                 margin-left: auto;
             }
 
+
             .products-grid {
+
                 grid-template-columns:
                     repeat(3, 1fr);
             }
 
+
             .categories {
+
                 grid-template-columns:
                     repeat(2, 1fr);
             }
 
+
             .about {
+
                 grid-template-columns: 1fr;
 
                 gap: 40px;
@@ -1481,24 +1820,32 @@
                 height: 76px;
             }
 
+
             .header-inner {
                 padding: 0 18px;
             }
 
+
             .brand-logo {
+
                 width: 45px;
+
                 height: 45px;
             }
+
 
             .brand-name {
                 font-size: 14px;
             }
 
+
             .instagram-link {
                 display: none;
             }
 
+
             .hero {
+
                 min-height: 100svh;
 
                 padding:
@@ -1506,7 +1853,9 @@
                     70px;
             }
 
+
             .hero h1 {
+
                 font-size:
                     clamp(
                         58px,
@@ -1517,137 +1866,206 @@
                 letter-spacing: -4px;
             }
 
+
             .hero-description {
                 font-size: 13px;
             }
 
+
             .hero-buttons {
+
                 display: grid;
 
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns:
+                    1fr 1fr;
             }
 
+
             .button {
+
                 padding: 0 10px;
 
                 font-size: 9px;
             }
 
+
             .section {
+
                 padding:
                     80px 18px;
             }
+
 
             .section-header {
                 display: block;
             }
 
+
             .section-description {
                 margin-top: 20px;
             }
 
+
             .categories {
-                grid-template-columns: 1fr 1fr;
+
+                grid-template-columns:
+                    1fr 1fr;
 
                 gap: 4px;
             }
 
+
             .category {
+
                 min-height: 145px;
 
                 padding: 15px;
             }
 
+
             .category-name {
                 font-size: 16px;
             }
 
+
             .category-arrow {
+
                 right: 15px;
+
                 top: 15px;
             }
 
+
             .products-grid {
+
                 grid-template-columns:
                     repeat(2, 1fr);
 
                 gap: 6px;
             }
 
+
             .product-info {
                 padding: 12px;
             }
+
 
             .product-name {
                 font-size: 12px;
             }
 
+
             .product-description {
                 display: none;
             }
+
 
             .product-price {
                 font-size: 13px;
             }
 
+
             .product-stock {
                 display: none;
             }
 
+
             .product-contact {
+
                 padding: 9px 5px;
 
                 font-size: 8px;
             }
 
+
             .about-list {
+
                 grid-template-columns: 1fr;
             }
+
 
             .contact-title {
                 letter-spacing: -4px;
             }
 
+
             .contact-buttons {
+
                 display: grid;
 
                 grid-template-columns: 1fr;
             }
 
+
             .footer-top {
+
                 flex-direction: column;
 
                 align-items: flex-start;
             }
 
+
             .footer-links {
+
                 flex-wrap: wrap;
             }
 
+
             .footer-marquee {
+
                 font-size: 9px;
 
                 letter-spacing: 3px;
             }
 
+
+            /* MODAL MOBILE */
+
             .modal-box {
+
                 grid-template-columns: 1fr;
 
                 max-height: 92vh;
             }
 
+
             .modal-image {
+
                 min-height: 330px;
 
                 max-height: 45vh;
             }
 
+
             .modal-info {
-                padding: 28px 20px;
+
+                padding:
+                    28px 20px;
             }
+
 
             .modal-name {
                 font-size: 30px;
+            }
+
+
+            .modal-image-arrow {
+
+                width: 42px;
+
+                height: 42px;
+
+                font-size: 21px;
+            }
+
+
+            .modal-image-arrow.left {
+                left: 10px;
+            }
+
+
+            .modal-image-arrow.right {
+                right: 10px;
             }
 
         }
@@ -1920,8 +2338,6 @@
 
                 </div>
 
-
-                <!-- CATEGORIAS -->
 
                 <div class="categories">
 
@@ -2365,12 +2781,54 @@
         <div class="modal-box">
 
 
+            <!-- =================================================
+                 IMAGEN DEL PRODUCTO
+            ================================================= -->
+
             <div
                 class="modal-image"
                 id="modalImage"
             >
+
+                <!-- FLECHA IZQUIERDA -->
+
+                <button
+                    type="button"
+                    class="modal-image-arrow left hidden"
+                    id="modalPrev"
+                    aria-label="Imagen anterior"
+                >
+                    ‹
+                </button>
+
+
+                <!-- FLECHA DERECHA -->
+
+                <button
+                    type="button"
+                    class="modal-image-arrow right hidden"
+                    id="modalNext"
+                    aria-label="Imagen siguiente"
+                >
+                    ›
+                </button>
+
+
+                <!-- CONTADOR -->
+
+                <div
+                    class="modal-image-counter"
+                    id="modalImageCounter"
+                >
+                    1 / 1
+                </div>
+
             </div>
 
+
+            <!-- =================================================
+                 INFORMACIÓN
+            ================================================== -->
 
             <div class="modal-info">
 
@@ -2448,6 +2906,7 @@
         const WHATSAPP =
             "5491173854862";
 
+
         const INSTAGRAM =
             "https://www.instagram.com/007imported/?hl=es";
 
@@ -2461,45 +2920,72 @@
                 "#productsGrid"
             );
 
+
         const productsTitle =
             document.querySelector(
                 "#productsTitle"
             );
+
 
         const headerProductCount =
             document.querySelector(
                 "#headerProductCount"
             );
 
+
         const productModal =
             document.querySelector(
                 "#productModal"
             );
+
 
         const modalImage =
             document.querySelector(
                 "#modalImage"
             );
 
+
+        const modalPrev =
+            document.querySelector(
+                "#modalPrev"
+            );
+
+
+        const modalNext =
+            document.querySelector(
+                "#modalNext"
+            );
+
+
+        const modalImageCounter =
+            document.querySelector(
+                "#modalImageCounter"
+            );
+
+
         const modalCategory =
             document.querySelector(
                 "#modalCategory"
             );
+
 
         const modalName =
             document.querySelector(
                 "#modalName"
             );
 
+
         const modalPrice =
             document.querySelector(
                 "#modalPrice"
             );
 
+
         const modalDescription =
             document.querySelector(
                 "#modalDescription"
             );
+
 
         const modalWhatsapp =
             document.querySelector(
@@ -2514,6 +3000,16 @@
         let allProducts = [];
 
         let currentCategory = "Todos";
+
+        let currentProduct = null;
+
+        let currentImages = [];
+
+        let currentImageIndex = 0;
+
+        let touchStartX = 0;
+
+        let touchEndX = 0;
 
 
         /* =================================================
@@ -2563,6 +3059,113 @@
                     /'/g,
                     "&#039;"
                 );
+
+        }
+
+
+        /* =================================================
+           OBTENER IMAGENES
+        ================================================= */
+
+        function getProductImages(product) {
+
+            let images = [];
+
+
+            /*
+               Si Supabase devuelve images como array
+            */
+
+            if (
+                Array.isArray(
+                    product.images
+                )
+            ) {
+
+                images =
+                    product.images
+                        .filter(
+                            image =>
+                                image &&
+                                typeof image === "string"
+                        );
+
+            }
+
+
+            /*
+               Si por alguna razón images
+               viene como texto JSON
+            */
+
+            else if (
+                typeof product.images ===
+                "string"
+            ) {
+
+                try {
+
+                    const parsed =
+                        JSON.parse(
+                            product.images
+                        );
+
+
+                    if (
+                        Array.isArray(
+                            parsed
+                        )
+                    ) {
+
+                        images =
+                            parsed.filter(
+                                image =>
+                                    image &&
+                                    typeof image === "string"
+                            );
+
+                    }
+
+                } catch (error) {
+
+                    /*
+                       Si no es JSON,
+                       lo tratamos como URL única.
+                    */
+
+                    if (
+                        product.images.trim()
+                    ) {
+
+                        images = [
+                            product.images.trim()
+                        ];
+
+                    }
+
+                }
+
+            }
+
+
+            /*
+               Si no hay images,
+               usamos product.image.
+            */
+
+            if (
+                images.length === 0 &&
+                product.image
+            ) {
+
+                images = [
+                    product.image
+                ];
+
+            }
+
+
+            return images;
 
         }
 
@@ -2808,18 +3411,13 @@
 
 
             const images =
-                Array.isArray(
-                    product.images
-                )
-                    ?
-                    product.images
-                    :
-                    [];
+                getProductImages(
+                    product
+                );
 
 
             const image =
                 images[0] ||
-                product.image ||
                 "";
 
 
@@ -2985,27 +3583,25 @@
 
 
         /* =================================================
-           MODAL
+           ABRIR MODAL
         ================================================= */
 
         function openProductModal(
             product
         ) {
 
-            const images =
-                Array.isArray(
-                    product.images
-                )
-                    ?
-                    product.images
-                    :
-                    [];
+            currentProduct =
+                product;
 
 
-            const image =
-                images[0] ||
-                product.image ||
-                "";
+            currentImages =
+                getProductImages(
+                    product
+                );
+
+
+            currentImageIndex =
+                0;
 
 
             modalCategory.textContent =
@@ -3029,50 +3625,16 @@
                 "Consultá disponibilidad, talles y detalles por WhatsApp.";
 
 
-            if (image) {
+            /*
+               Mostrar primera imagen
+            */
 
-                modalImage.innerHTML = `
+            renderModalImage();
 
-                    <img
-                        src="${escapeHtml(image)}"
-                        alt="${escapeHtml(
-                            product.name ||
-                            "Producto"
-                        )}"
-                    >
 
-                `;
-
-            } else {
-
-                modalImage.innerHTML = `
-
-                    <div
-                        style="
-                            width:100%;
-                            height:100%;
-                            min-height:500px;
-                            display:flex;
-                            align-items:center;
-                            justify-content:center;
-                        "
-                    >
-
-                        <img
-                            src="007imported-logo-circle.png"
-                            alt="007IMPORTED"
-                            style="
-                                width:55%;
-                                object-fit:contain;
-                            "
-                        >
-
-                    </div>
-
-                `;
-
-            }
-
+            /*
+               WhatsApp
+            */
 
             const message =
                 encodeURIComponent(
@@ -3091,6 +3653,10 @@
                 message;
 
 
+            /*
+               Abrir modal
+            */
+
             productModal.classList.add(
                 "show"
             );
@@ -3102,6 +3668,405 @@
         }
 
 
+        /* =================================================
+           MOSTRAR IMAGEN ACTUAL
+        ================================================= */
+
+        function renderModalImage() {
+
+            /*
+               Si no hay imágenes
+            */
+
+            if (
+                currentImages.length === 0
+            ) {
+
+                modalImage
+                    .querySelectorAll(
+                        ".modal-current-image, .modal-no-image"
+                    )
+                    .forEach(
+                        element => element.remove()
+                    );
+
+
+                const noImage =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                noImage.className =
+                    "modal-no-image";
+
+
+                noImage.style.cssText = `
+                    width:100%;
+                    height:100%;
+                    min-height:500px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                `;
+
+
+                noImage.innerHTML = `
+
+                    <img
+                        src="007imported-logo-circle.png"
+                        alt="007IMPORTED"
+                        style="
+                            width:55%;
+                            object-fit:contain;
+                        "
+                    >
+
+                `;
+
+
+                modalImage.prepend(
+                    noImage
+                );
+
+
+                modalPrev.classList.add(
+                    "hidden"
+                );
+
+
+                modalNext.classList.add(
+                    "hidden"
+                );
+
+
+                modalImageCounter.classList.remove(
+                    "show"
+                );
+
+
+                return;
+
+            }
+
+
+            /*
+               Eliminar imagen anterior
+            */
+
+            modalImage
+                .querySelectorAll(
+                    ".modal-current-image, .modal-no-image"
+                )
+                .forEach(
+                    element => element.remove()
+                );
+
+
+            /*
+               Crear nueva imagen
+            */
+
+            const image =
+                document.createElement(
+                    "img"
+                );
+
+
+            image.className =
+                "modal-current-image";
+
+
+            image.src =
+                currentImages[
+                    currentImageIndex
+                ];
+
+
+            image.alt =
+                currentProduct?.name ||
+                "Producto";
+
+
+            image.draggable =
+                false;
+
+
+            /*
+               Insertar antes de las flechas
+            */
+
+            modalImage.prepend(
+                image
+            );
+
+
+            /*
+               Si hay más de una imagen,
+               mostrar flechas
+            */
+
+            if (
+                currentImages.length > 1
+            ) {
+
+                modalPrev.classList.remove(
+                    "hidden"
+                );
+
+
+                modalNext.classList.remove(
+                    "hidden"
+                );
+
+
+                modalImageCounter.classList.add(
+                    "show"
+                );
+
+
+                modalImageCounter.textContent =
+                    (
+                        currentImageIndex + 1
+                    ) +
+                    " / " +
+                    currentImages.length;
+
+            } else {
+
+                modalPrev.classList.add(
+                    "hidden"
+                );
+
+
+                modalNext.classList.add(
+                    "hidden"
+                );
+
+
+                modalImageCounter.classList.remove(
+                    "show"
+                );
+
+            }
+
+        }
+
+
+        /* =================================================
+           IMAGEN ANTERIOR
+        ================================================= */
+
+        function previousImage() {
+
+            if (
+                currentImages.length <= 1
+            ) {
+                return;
+            }
+
+
+            currentImageIndex--;
+
+
+            if (
+                currentImageIndex < 0
+            ) {
+
+                currentImageIndex =
+                    currentImages.length - 1;
+
+            }
+
+
+            renderModalImage();
+
+        }
+
+
+        /* =================================================
+           IMAGEN SIGUIENTE
+        ================================================= */
+
+        function nextImage() {
+
+            if (
+                currentImages.length <= 1
+            ) {
+                return;
+            }
+
+
+            currentImageIndex++;
+
+
+            if (
+                currentImageIndex >=
+                currentImages.length
+            ) {
+
+                currentImageIndex =
+                    0;
+
+            }
+
+
+            renderModalImage();
+
+        }
+
+
+        /* =================================================
+           EVENTOS FLECHAS
+        ================================================= */
+
+        modalPrev.addEventListener(
+            "click",
+            event => {
+
+                event.stopPropagation();
+
+                previousImage();
+
+            }
+        );
+
+
+        modalNext.addEventListener(
+            "click",
+            event => {
+
+                event.stopPropagation();
+
+                nextImage();
+
+            }
+        );
+
+
+        /* =================================================
+           TECLADO
+        ================================================= */
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    !productModal.classList.contains(
+                        "show"
+                    )
+                ) {
+                    return;
+                }
+
+
+                if (
+                    event.key ===
+                    "ArrowLeft"
+                ) {
+
+                    previousImage();
+
+                }
+
+
+                if (
+                    event.key ===
+                    "ArrowRight"
+                ) {
+
+                    nextImage();
+
+                }
+
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closeProductModal();
+
+                }
+
+            }
+        );
+
+
+        /* =================================================
+           SWIPE CELULAR
+        ================================================= */
+
+        modalImage.addEventListener(
+            "touchstart",
+            event => {
+
+                touchStartX =
+                    event.changedTouches[0].screenX;
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        modalImage.addEventListener(
+            "touchend",
+            event => {
+
+                touchEndX =
+                    event.changedTouches[0].screenX;
+
+
+                handleSwipe();
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        function handleSwipe() {
+
+            const difference =
+                touchStartX -
+                touchEndX;
+
+
+            /*
+               Evita cambios por pequeños
+               movimientos del dedo.
+            */
+
+            if (
+                Math.abs(difference) < 50
+            ) {
+                return;
+            }
+
+
+            if (
+                difference > 0
+            ) {
+
+                nextImage();
+
+            } else {
+
+                previousImage();
+
+            }
+
+        }
+
+
+        /* =================================================
+           CERRAR MODAL
+        ================================================= */
+
         window.closeProductModal =
             function() {
 
@@ -3109,8 +4074,21 @@
                     "show"
                 );
 
+
                 document.body.style.overflow =
                     "";
+
+
+                currentProduct =
+                    null;
+
+
+                currentImages =
+                    [];
+
+
+                currentImageIndex =
+                    0;
 
             };
 
@@ -3128,27 +4106,6 @@
                 }
 
             };
-
-
-        /* =================================================
-           ESC PARA CERRAR
-        ================================================= */
-
-        document.addEventListener(
-            "keydown",
-            event => {
-
-                if (
-                    event.key ===
-                    "Escape"
-                ) {
-
-                    closeProductModal();
-
-                }
-
-            }
-        );
 
 
         /* =================================================
