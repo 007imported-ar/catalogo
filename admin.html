@@ -2,30 +2,19 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>007imported — Admin</title>
 
-    <!-- FAVICON -->
     <link
         rel="icon"
-        type="image/png"
-        href="007imported-logo-circle.png"
+        type="image/x-icon"
+        href="./favicon.ico"
     >
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
@@ -52,15 +41,15 @@
             --red: #ff4545;
         }
 
+        html,
+        body {
+            min-height: 100%;
+        }
+
         body {
             background: var(--black);
             color: var(--white);
-
-            font-family:
-                Inter,
-                Arial,
-                sans-serif;
-
+            font-family: Inter, Arial, sans-serif;
             min-height: 100vh;
         }
 
@@ -75,22 +64,47 @@
             cursor: pointer;
         }
 
-
         /* =====================================
            LOGO
         ====================================== */
 
-        .brand-logo {
-            width: 100%;
-            height: 100%;
+        .login-logo {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 35px;
 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-logo img {
             display: block;
+
+            width: 180px;
+            height: 180px;
+
+            max-width: 100%;
+            max-height: 100%;
 
             object-fit: contain;
 
             border-radius: 50%;
         }
 
+        .brand-logo {
+            display: block;
+
+            width: 100%;
+            height: 100%;
+
+            max-width: 100%;
+            max-height: 100%;
+
+            object-fit: contain;
+
+            border-radius: 50%;
+        }
 
         /* =====================================
            LOGIN
@@ -117,37 +131,10 @@
             padding: 40px;
         }
 
-        /* LOGO DEL LOGIN */
-
-        .login-logo {
-            width: 150px;
-            height: 150px;
-
-            margin: 0 auto 35px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .login-logo img {
-            width: 100%;
-            height: 100%;
-
-            display: block;
-
-            object-fit: contain;
-
-            border-radius: 50%;
-        }
-
         .login-card h1 {
             font-size: 28px;
             font-weight: 900;
-
             text-transform: uppercase;
-
-            text-align: center;
         }
 
         .login-card > p {
@@ -158,10 +145,7 @@
 
             margin-top: 10px;
             margin-bottom: 30px;
-
-            text-align: center;
         }
-
 
         /* =====================================
            ADMIN APP
@@ -169,10 +153,8 @@
 
         .admin-app {
             display: none;
-
             min-height: 100vh;
         }
-
 
         /* =====================================
            HEADER
@@ -200,7 +182,6 @@
         .admin-logo {
             display: flex;
             align-items: center;
-
             gap: 15px;
         }
 
@@ -245,7 +226,6 @@
         .admin-user {
             display: flex;
             align-items: center;
-
             gap: 20px;
         }
 
@@ -255,7 +235,6 @@
 
         .admin-user-info strong {
             display: block;
-
             font-size: 13px;
         }
 
@@ -286,10 +265,8 @@
 
         .logout-button:hover {
             border-color: var(--green);
-
             color: var(--green);
         }
-
 
         /* =====================================
            CONTENT
@@ -336,7 +313,6 @@
             margin-top: 16px;
         }
 
-
         /* =====================================
            GRID
         ====================================== */
@@ -382,7 +358,6 @@
 
             font-size: 12px;
         }
-
 
         /* =====================================
            FORM
@@ -431,7 +406,6 @@
 
         textarea.input {
             min-height: 120px;
-
             resize: vertical;
         }
 
@@ -442,7 +416,6 @@
 
             gap: 15px;
         }
-
 
         /* =====================================
            IMÁGENES
@@ -483,7 +456,6 @@
 
         .upload-icon {
             font-size: 34px;
-
             margin-bottom: 12px;
         }
 
@@ -577,7 +549,6 @@
 
         .image-preview-delete:hover {
             border-color: var(--red);
-
             color: var(--red);
         }
 
@@ -610,7 +581,6 @@
             font-size: 10px;
         }
 
-
         /* =====================================
            BUTTONS
         ====================================== */
@@ -638,7 +608,6 @@
 
         .save-button:disabled {
             opacity: .6;
-
             cursor: not-allowed;
         }
 
@@ -663,10 +632,8 @@
 
         .cancel-button:hover {
             border-color: var(--green);
-
             color: var(--green);
         }
-
 
         /* =====================================
            PRODUCT LIST
@@ -736,7 +703,6 @@
 
         .product-data {
             flex: 1;
-
             min-width: 0;
         }
 
@@ -744,9 +710,7 @@
             display: block;
 
             white-space: nowrap;
-
             overflow: hidden;
-
             text-overflow: ellipsis;
 
             font-size: 13px;
@@ -779,7 +743,6 @@
 
         .product-actions {
             display: flex;
-
             gap: 5px;
         }
 
@@ -798,13 +761,11 @@
 
         .action:hover {
             border-color: var(--green);
-
             color: var(--green);
         }
 
         .action.delete:hover {
             border-color: var(--red);
-
             color: var(--red);
         }
 
@@ -819,7 +780,6 @@
 
             font-size: 12px;
         }
-
 
         /* =====================================
            TOAST
@@ -851,16 +811,13 @@
 
         .toast.show {
             transform: translateY(0);
-
             opacity: 1;
         }
 
         .toast.error {
             background: var(--red);
-
             color: white;
         }
-
 
         /* =====================================
            RESPONSIVE
@@ -878,7 +835,6 @@
 
             .admin-header {
                 height: 70px;
-
                 padding: 0 15px;
             }
 
@@ -897,7 +853,6 @@
 
             .admin-logo-text span {
                 font-size: 8px;
-
                 letter-spacing: 1.5px;
             }
 
@@ -915,7 +870,6 @@
 
             .two-columns {
                 grid-template-columns: 1fr;
-
                 gap: 0;
             }
 
@@ -924,10 +878,14 @@
             }
 
             .login-logo {
-                width: 125px;
-                height: 125px;
-
+                width: 140px;
+                height: 140px;
                 margin-bottom: 28px;
+            }
+
+            .login-logo img {
+                width: 140px;
+                height: 140px;
             }
 
             .product-actions {
@@ -940,19 +898,15 @@
             }
 
             .image-previews {
-                grid-template-columns:
-                    repeat(3, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
 
         }
 
     </style>
-
 </head>
 
-
 <body>
-
 
     <!-- ==========================================
          LOGIN
@@ -965,33 +919,26 @@
 
         <div class="login-card">
 
-
-            <!-- LOGO REAL -->
-
+            <!-- LOGO -->
             <div class="login-logo">
 
                 <img
-                    src="007imported-logo-circle.png"
+                    src="./007imported-logo-circle.png"
                     alt="007imported"
-                    class="brand-logo"
                 >
 
             </div>
 
-
             <h1>
                 Panel Admin
             </h1>
-
 
             <p>
                 Ingresá con tu cuenta para administrar
                 el catálogo de 007imported.
             </p>
 
-
             <form id="loginForm">
-
 
                 <div class="field">
 
@@ -1009,7 +956,6 @@
 
                 </div>
 
-
                 <div class="field">
 
                     <label for="password">
@@ -1026,7 +972,6 @@
 
                 </div>
 
-
                 <button
                     class="save-button"
                     type="submit"
@@ -1035,9 +980,7 @@
                     INICIAR SESIÓN
                 </button>
 
-
             </form>
-
 
         </div>
 
@@ -1053,25 +996,19 @@
         id="adminApp"
     >
 
-
         <header class="admin-header">
 
-
             <div class="admin-logo">
-
-
-                <!-- LOGO REAL -->
 
                 <div class="admin-logo-box">
 
                     <img
-                        src="007imported-logo-circle.png"
+                        src="./007imported-logo-circle.png"
                         alt="007imported"
                         class="brand-logo"
                     >
 
                 </div>
-
 
                 <div class="admin-logo-text">
 
@@ -1085,12 +1022,9 @@
 
                 </div>
 
-
             </div>
 
-
             <div class="admin-user">
-
 
                 <div class="admin-user-info">
 
@@ -1104,7 +1038,6 @@
 
                 </div>
 
-
                 <button
                     class="logout-button"
                     id="logoutButton"
@@ -1113,48 +1046,37 @@
                     CERRAR SESIÓN
                 </button>
 
-
             </div>
-
 
         </header>
 
 
         <main class="admin-container">
 
-
             <div class="heading">
-
 
                 <div class="heading-label">
                     ADMINISTRACIÓN
                 </div>
-
 
                 <h1>
                     GESTIONÁ<br>
                     TU CATÁLOGO.
                 </h1>
 
-
                 <p>
                     Agregá, editá y eliminá productos
                     de tu tienda.
                 </p>
-
 
             </div>
 
 
             <div class="admin-grid">
 
-
-                <!-- =================================
-                     FORMULARIO
-                ================================== -->
+                <!-- FORMULARIO -->
 
                 <section class="panel">
-
 
                     <div class="panel-header">
 
@@ -1175,7 +1097,6 @@
 
                     <form id="productForm">
 
-
                         <div class="field">
 
                             <label for="productName">
@@ -1194,7 +1115,6 @@
 
 
                         <div class="two-columns">
-
 
                             <div class="field">
 
@@ -1231,7 +1151,6 @@
                                 >
 
                             </div>
-
 
                         </div>
 
@@ -1287,23 +1206,18 @@
                         </div>
 
 
-                        <!-- =================================
-                             IMÁGENES
-                        ================================== -->
+                        <!-- IMÁGENES -->
 
                         <div class="field">
-
 
                             <label>
                                 Imágenes del producto
                             </label>
 
-
                             <label
                                 class="upload"
                                 for="productImage"
                             >
-
 
                                 <input
                                     id="productImage"
@@ -1311,7 +1225,6 @@
                                     accept="image/*"
                                     multiple
                                 >
-
 
                                 <div
                                     class="upload-text"
@@ -1332,7 +1245,6 @@
 
                                 </div>
 
-
                             </label>
 
 
@@ -1348,7 +1260,6 @@
                             >
                                 0 imágenes seleccionadas
                             </div>
-
 
                         </div>
 
@@ -1370,19 +1281,14 @@
                             CANCELAR EDICIÓN
                         </button>
 
-
                     </form>
-
 
                 </section>
 
 
-                <!-- =================================
-                     PRODUCTOS
-                ================================== -->
+                <!-- PRODUCTOS -->
 
                 <section class="panel">
-
 
                     <div class="panel-header">
 
@@ -1412,15 +1318,11 @@
 
                     </div>
 
-
                 </section>
-
 
             </div>
 
-
         </main>
-
 
     </div>
 
@@ -1438,7 +1340,6 @@
     =========================================== -->
 
     <script type="module">
-
 
         import { supabase }
             from "./js/supabase.js";
@@ -1522,7 +1423,6 @@
 
             toast.classList.add("show");
 
-
             setTimeout(() => {
 
                 toast.classList.remove("show");
@@ -1590,6 +1490,13 @@
                 "#userEmail"
             ).textContent =
                 user.email || "";
+
+
+            document.querySelector(
+                "#userName"
+            ).textContent =
+                user.user_metadata?.name ||
+                "Administrador";
 
 
             loadProducts();
@@ -1718,7 +1625,7 @@
 
 
         /* =====================================
-           SESIÓN CAMBIÓ
+           CAMBIO DE SESIÓN
         ====================================== */
 
         supabase.auth.onAuthStateChange(
@@ -2084,9 +1991,7 @@
            PRODUCT ELEMENT
         ====================================== */
 
-        function createProductElement(
-            product
-        ) {
+        function createProductElement(product) {
 
             const element =
                 document.createElement("div");
@@ -2116,38 +2021,34 @@
 
                     ${
                         image
+                            ?
+                            `
+                            <img
+                                src="${escapeHtml(image)}"
+                                alt="${escapeHtml(
+                                    product.name || "Producto"
+                                )}"
+                            >
 
-                        ?
-
-                        `
-                        <img
-                            src="${escapeHtml(image)}"
-                            alt="${escapeHtml(
-                                product.name || "Producto"
-                            )}"
-                        >
-
-                        ${
-                            images.length > 1
-                                ?
-                                `
-                                <div class="product-image-count">
-                                    ${images.length} FOTOS
-                                </div>
-                                `
-                                :
-                                ""
-                        }
-                        `
-
-                        :
-
-                        `
-                        <img
-                            src="007imported-logo-circle.png"
-                            alt="007imported"
-                        >
-                        `
+                            ${
+                                images.length > 1
+                                    ?
+                                    `
+                                    <div class="product-image-count">
+                                        ${images.length} FOTOS
+                                    </div>
+                                    `
+                                    :
+                                    ""
+                            }
+                            `
+                            :
+                            `
+                            <img
+                                src="./007imported-logo-circle.png"
+                                alt="007imported"
+                            >
+                            `
                     }
 
                 </div>
@@ -2162,33 +2063,20 @@
                         )}
                     </strong>
 
-
                     <div class="product-category">
-
                         ${escapeHtml(
                             product.category ||
                             "Sin categoría"
                         )}
-
                     </div>
-
 
                     <div class="product-price">
-
-                        ${formatPrice(
-                            product.price
-                        )}
-
+                        ${formatPrice(product.price)}
                     </div>
 
-
                     <div class="product-stock">
-
                         Stock:
-                        ${Number(
-                            product.stock || 0
-                        )}
-
+                        ${Number(product.stock || 0)}
                     </div>
 
                 </div>
@@ -2203,7 +2091,6 @@
                     >
                         ✎
                     </button>
-
 
                     <button
                         class="action delete"
@@ -2248,7 +2135,7 @@
 
 
         /* =====================================
-           CREAR / EDITAR
+           CREAR / EDITAR PRODUCTO
         ====================================== */
 
         productForm.addEventListener(
@@ -2334,17 +2221,11 @@
                     const productData = {
 
                         name,
-
                         price,
-
                         description,
-
                         category,
-
                         image: imageUrl,
-
                         images: allImages,
-
                         stock
 
                     };
@@ -2393,7 +2274,6 @@
 
                     await loadProducts();
 
-
                 } catch (error) {
 
                     console.error(
@@ -2407,7 +2287,6 @@
                         "No se pudo guardar el producto.",
                         true
                     );
-
 
                 } finally {
 
@@ -2428,7 +2307,7 @@
 
 
         /* =====================================
-           EDITAR
+           EDITAR PRODUCTO
         ====================================== */
 
         function editProduct(product) {
@@ -2523,7 +2402,7 @@
 
 
         /* =====================================
-           CANCELAR
+           CANCELAR EDICIÓN
         ====================================== */
 
         cancelEdit.addEventListener(
@@ -2562,7 +2441,7 @@
 
 
         /* =====================================
-           ELIMINAR
+           ELIMINAR PRODUCTO
         ====================================== */
 
         async function deleteProduct(product) {
@@ -2621,7 +2500,7 @@
 
 
         /* =====================================
-           DATA URL
+           ARCHIVO → DATA URL
         ====================================== */
 
         function fileToDataUrl(file) {
@@ -2716,7 +2595,6 @@
         renderImagePreviews();
 
         checkSession();
-
 
     </script>
 
