@@ -2169,21 +2169,19 @@
 
                     await loadProducts();
 
+} catch (error) {
 
-                } catch (error) {
+    console.error(
+        "Error guardando producto:",
+        error
+    );
 
-                    console.error(
-                        "Error guardando producto:",
-                        error
-                    );
+    showToast(
+        error.message || "No se pudo guardar el producto.",
+        true
+    );
 
-
-                    showToast(
-                        "No se pudo guardar el producto.",
-                        true
-                    );
-
-                } finally {
+} finally {
 
                     saveButton.disabled =
                         false;
