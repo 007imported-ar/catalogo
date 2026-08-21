@@ -12,6 +12,7 @@
 
     <title>007imported — Admin</title>
 
+    <!-- FAVICON -->
     <link
         rel="icon"
         type="image/x-icon"
@@ -19,7 +20,11 @@
     >
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
@@ -75,6 +80,44 @@
 
 
         /* =====================================
+           LOGO
+        ====================================== */
+
+        .brand-logo {
+            display: block;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            border-radius: 50%;
+        }
+
+        .login-logo {
+            width: 150px;
+            height: 150px;
+
+            margin: 0 auto 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-logo img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            display: block;
+
+            border-radius: 50%;
+        }
+
+
+        /* =====================================
            LOGIN
         ====================================== */
 
@@ -100,7 +143,9 @@
         }
 
         .logo {
-            margin-bottom: 45px;
+            margin-bottom: 35px;
+
+            text-align: center;
         }
 
         .logo-main {
@@ -173,21 +218,27 @@
         .admin-logo {
             display: flex;
             align-items: center;
+
             gap: 15px;
         }
 
         .admin-logo-box {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
 
-            border: 1px solid var(--border);
+            flex-shrink: 0;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            font-size: 15px;
-            font-weight: 900;
+            overflow: hidden;
+
+            border-radius: 50%;
+
+            border: 1px solid var(--border);
+
+            background: #050505;
         }
 
         .admin-logo-text strong {
@@ -829,7 +880,26 @@
         @media (max-width: 600px) {
 
             .admin-header {
+                height: 70px;
                 padding: 0 15px;
+            }
+
+            .admin-logo {
+                gap: 10px;
+            }
+
+            .admin-logo-box {
+                width: 40px;
+                height: 40px;
+            }
+
+            .admin-logo-text strong {
+                font-size: 12px;
+            }
+
+            .admin-logo-text span {
+                font-size: 8px;
+                letter-spacing: 1.5px;
             }
 
             .admin-user-info {
@@ -851,6 +921,12 @@
 
             .login-card {
                 padding: 28px 22px;
+            }
+
+            .login-logo {
+                width: 125px;
+                height: 125px;
+                margin-bottom: 28px;
             }
 
             .product-actions {
@@ -888,6 +964,18 @@
 
         <div class="login-card">
 
+            <!-- LOGO REAL -->
+            <div class="login-logo">
+
+                <img
+                    src="007imported-logo-circle.png"
+                    alt="007imported"
+                    class="brand-logo"
+                >
+
+            </div>
+
+
             <div class="logo">
 
                 <div class="logo-main">
@@ -900,6 +988,7 @@
 
             </div>
 
+
             <h1>
                 Panel Admin
             </h1>
@@ -908,6 +997,7 @@
                 Ingresá con tu cuenta para administrar
                 el catálogo de 007imported.
             </p>
+
 
             <form id="loginForm">
 
@@ -927,6 +1017,7 @@
 
                 </div>
 
+
                 <div class="field">
 
                     <label for="password">
@@ -942,6 +1033,7 @@
                     >
 
                 </div>
+
 
                 <button
                     class="save-button"
@@ -971,9 +1063,17 @@
 
             <div class="admin-logo">
 
+                <!-- LOGO REAL -->
                 <div class="admin-logo-box">
-                    007
+
+                    <img
+                        src="007imported-logo-circle.png"
+                        alt="007imported"
+                        class="brand-logo"
+                    >
+
                 </div>
+
 
                 <div class="admin-logo-text">
 
@@ -1003,6 +1103,7 @@
                     </span>
 
                 </div>
+
 
                 <button
                     class="logout-button"
@@ -1086,7 +1187,6 @@
 
                         <div class="two-columns">
 
-
                             <div class="field">
 
                                 <label for="productPrice">
@@ -1122,7 +1222,6 @@
                                 >
 
                             </div>
-
 
                         </div>
 
@@ -1378,22 +1477,10 @@
             document.querySelector("#toast");
 
 
-        /*
-         * Imágenes que ya estaban guardadas
-         * en el producto.
-         */
         let existingImages = [];
 
-
-        /*
-         * Imágenes nuevas seleccionadas.
-         */
         let newImageFiles = [];
 
-
-        /*
-         * Producto que estamos editando.
-         */
         let editingProduct = null;
 
 
@@ -1406,24 +1493,19 @@
             error = false
         ) {
 
-            toast.textContent =
-                message;
+            toast.textContent = message;
 
             toast.classList.toggle(
                 "error",
                 error
             );
 
-            toast.classList.add(
-                "show"
-            );
+            toast.classList.add("show");
 
 
             setTimeout(() => {
 
-                toast.classList.remove(
-                    "show"
-                );
+                toast.classList.remove("show");
 
             }, 3000);
 
@@ -1656,9 +1738,7 @@
 
 
                 if (!files.length) {
-
                     return;
-
                 }
 
 
@@ -1684,22 +1764,12 @@
                 }
 
 
-                /*
-                 * Agregamos las nuevas imágenes
-                 * a las que ya había seleccionado.
-                 */
                 newImageFiles.push(
                     ...validFiles
                 );
 
 
-                /*
-                 * Limpiamos el input para que
-                 * se pueda volver a seleccionar
-                 * el mismo archivo.
-                 */
-                productImage.value =
-                    "";
+                productImage.value = "";
 
 
                 renderImagePreviews();
@@ -1714,13 +1784,8 @@
 
         function renderImagePreviews() {
 
-            imagePreviews.innerHTML =
-                "";
+            imagePreviews.innerHTML = "";
 
-
-            /*
-             * IMÁGENES EXISTENTES
-             */
 
             existingImages.forEach(
                 (
@@ -1729,9 +1794,7 @@
                 ) => {
 
                     const item =
-                        document.createElement(
-                            "div"
-                        );
+                        document.createElement("div");
 
 
                     item.className =
@@ -1745,9 +1808,7 @@
                             alt="Imagen ${index + 1}"
                         >
 
-                        <div
-                            class="image-preview-number"
-                        >
+                        <div class="image-preview-number">
                             ${index + 1}
                         </div>
 
@@ -1763,9 +1824,7 @@
                             index === 0
                                 ?
                                 `
-                                <div
-                                    class="image-main-label"
-                                >
+                                <div class="image-main-label">
                                     PORTADA
                                 </div>
                                 `
@@ -1795,17 +1854,11 @@
                         );
 
 
-                    imagePreviews.appendChild(
-                        item
-                    );
+                    imagePreviews.appendChild(item);
 
                 }
             );
 
-
-            /*
-             * IMÁGENES NUEVAS
-             */
 
             newImageFiles.forEach(
                 (
@@ -1814,9 +1867,7 @@
                 ) => {
 
                     const item =
-                        document.createElement(
-                            "div"
-                        );
+                        document.createElement("div");
 
 
                     item.className =
@@ -1824,9 +1875,7 @@
 
 
                     const url =
-                        URL.createObjectURL(
-                            file
-                        );
+                        URL.createObjectURL(file);
 
 
                     item.innerHTML = `
@@ -1836,9 +1885,7 @@
                             alt="Nueva imagen"
                         >
 
-                        <div
-                            class="image-preview-number"
-                        >
+                        <div class="image-preview-number">
                             ${existingImages.length + index + 1}
                         </div>
 
@@ -1855,9 +1902,7 @@
                             index === 0
                                 ?
                                 `
-                                <div
-                                    class="image-main-label"
-                                >
+                                <div class="image-main-label">
                                     PORTADA
                                 </div>
                                 `
@@ -1887,9 +1932,7 @@
                         );
 
 
-                    imagePreviews.appendChild(
-                        item
-                    );
+                    imagePreviews.appendChild(item);
 
                 }
             );
@@ -1904,43 +1947,27 @@
                 `${total} imagen${total === 1 ? "" : "es"} seleccionada${total === 1 ? "" : "s"}`;
 
 
-            if (total > 0) {
+            uploadText.innerHTML = `
 
-                uploadText.innerHTML = `
+                <div class="upload-icon">
+                    +
+                </div>
 
-                    <div class="upload-icon">
-                        +
-                    </div>
+                <div class="upload-title">
+                    ${
+                        total > 0
+                            ?
+                            "Agregar más imágenes"
+                            :
+                            "Seleccionar imágenes"
+                    }
+                </div>
 
-                    <div class="upload-title">
-                        Agregar más imágenes
-                    </div>
+                <div class="upload-info">
+                    Podés seleccionar varias a la vez
+                </div>
 
-                    <div class="upload-info">
-                        Podés seleccionar varias a la vez
-                    </div>
-
-                `;
-
-            } else {
-
-                uploadText.innerHTML = `
-
-                    <div class="upload-icon">
-                        +
-                    </div>
-
-                    <div class="upload-title">
-                        Seleccionar imágenes
-                    </div>
-
-                    <div class="upload-info">
-                        Podés seleccionar varias a la vez
-                    </div>
-
-                `;
-
-            }
+            `;
 
         }
 
@@ -2017,17 +2044,14 @@
             }
 
 
-            productsList.innerHTML =
-                "";
+            productsList.innerHTML = "";
 
 
             products.forEach(
                 product => {
 
                     productsList.appendChild(
-                        createProductElement(
-                            product
-                        )
+                        createProductElement(product)
                     );
 
                 }
@@ -2045,28 +2069,15 @@
         ) {
 
             const element =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
 
             element.className =
                 "product";
 
 
-            /*
-             * Compatibilidad:
-             *
-             * Si el producto tiene images,
-             * usamos la primera.
-             *
-             * Si no, usamos image.
-             */
-
             const images =
-                Array.isArray(
-                    product.images
-                )
+                Array.isArray(product.images)
                     ?
                     product.images
                     :
@@ -2091,41 +2102,36 @@
                         `
                         <img
                             src="${escapeHtml(image)}"
-                            alt=""
+                            alt="${escapeHtml(
+                                product.name || "Producto"
+                            )}"
                         >
 
                         ${
                             images.length > 1
                                 ?
                                 `
-                                <div
-                                    class="product-image-count"
-                                >
+                                <div class="product-image-count">
                                     ${images.length} FOTOS
                                 </div>
                                 `
                                 :
                                 ""
                         }
-
                         `
 
                         :
 
                         `
-                        <div
+                        <img
+                            src="007imported-logo-circle.png"
+                            alt="007imported"
                             style="
                                 width:100%;
                                 height:100%;
-                                display:flex;
-                                align-items:center;
-                                justify-content:center;
-                                color:#555;
-                                font-size:20px;
+                                object-fit:cover;
                             "
                         >
-                            007
-                        </div>
                         `
                     }
 
@@ -2203,9 +2209,7 @@
                     "click",
                     () => {
 
-                        editProduct(
-                            product
-                        );
+                        editProduct(product);
 
                     }
                 );
@@ -2217,9 +2221,7 @@
                     "click",
                     () => {
 
-                        deleteProduct(
-                            product
-                        );
+                        deleteProduct(product);
 
                     }
                 );
@@ -2242,9 +2244,7 @@
 
 
                 const wasEditing =
-                    Boolean(
-                        editingProduct
-                    );
+                    Boolean(editingProduct);
 
 
                 saveButton.disabled =
@@ -2290,13 +2290,7 @@
                         ).value;
 
 
-                    /*
-                     * Convertimos las nuevas imágenes
-                     * a Data URL.
-                     */
-
-                    const newImageUrls =
-                        [];
+                    const newImageUrls = [];
 
 
                     for (
@@ -2305,41 +2299,21 @@
                     ) {
 
                         const url =
-                            await fileToDataUrl(
-                                file
-                            );
+                            await fileToDataUrl(file);
 
-
-                        newImageUrls.push(
-                            url
-                        );
+                        newImageUrls.push(url);
 
                     }
 
 
-                    /*
-                     * Combinamos:
-                     *
-                     * 1. imágenes existentes
-                     * 2. imágenes nuevas
-                     */
-
                     const allImages = [
-
                         ...existingImages,
-
                         ...newImageUrls
-
                     ];
 
 
-                    /*
-                     * La primera imagen es la portada.
-                     */
-
                     const imageUrl =
-                        allImages[0] ||
-                        null;
+                        allImages[0] || null;
 
 
                     const productData = {
@@ -2352,11 +2326,9 @@
 
                         category,
 
-                        image:
-                            imageUrl,
+                        image: imageUrl,
 
-                        images:
-                            allImages,
+                        images: allImages,
 
                         stock
 
@@ -2371,9 +2343,7 @@
                         result =
                             await supabase
                                 .from("products")
-                                .update(
-                                    productData
-                                )
+                                .update(productData)
                                 .eq(
                                     "id",
                                     editingProduct.id
@@ -2384,17 +2354,13 @@
                         result =
                             await supabase
                                 .from("products")
-                                .insert(
-                                    productData
-                                );
+                                .insert(productData);
 
                     }
 
 
                     if (result.error) {
-
                         throw result.error;
-
                     }
 
 
@@ -2450,9 +2416,7 @@
            EDITAR
         ====================================== */
 
-        function editProduct(
-            product
-        ) {
+        function editProduct(product) {
 
             editingProduct =
                 product;
@@ -2501,50 +2465,30 @@
                 "Remeras";
 
 
-            /*
-             * Cargamos las imágenes existentes.
-             *
-             * Si el producto todavía usa
-             * el sistema viejo "image",
-             * lo convertimos automáticamente
-             * en una lista de una imagen.
-             */
-
             if (
-                Array.isArray(
-                    product.images
-                )
+                Array.isArray(product.images)
             ) {
 
-                existingImages =
-                    [
-                        ...product.images
-                    ];
+                existingImages = [
+                    ...product.images
+                ];
 
             } else if (
                 product.image
             ) {
 
-                existingImages =
-                    [
-                        product.image
-                    ];
+                existingImages = [
+                    product.image
+                ];
 
             } else {
 
-                existingImages =
-                    [];
+                existingImages = [];
 
             }
 
 
-            /*
-             * Al entrar en edición empezamos
-             * sin imágenes nuevas.
-             */
-
-            newImageFiles =
-                [];
+            newImageFiles = [];
 
 
             renderImagePreviews();
@@ -2575,16 +2519,11 @@
 
         function resetForm() {
 
-            editingProduct =
-                null;
+            editingProduct = null;
 
+            existingImages = [];
 
-            existingImages =
-                [];
-
-
-            newImageFiles =
-                [];
+            newImageFiles = [];
 
 
             productForm.reset();
@@ -2611,9 +2550,7 @@
            ELIMINAR
         ====================================== */
 
-        async function deleteProduct(
-            product
-        ) {
+        async function deleteProduct(product) {
 
             const confirmed =
                 confirm(
@@ -2622,9 +2559,7 @@
 
 
             if (!confirmed) {
-
                 return;
-
             }
 
 
@@ -2674,9 +2609,7 @@
            DATA URL
         ====================================== */
 
-        function fileToDataUrl(
-            file
-        ) {
+        function fileToDataUrl(file) {
 
             return new Promise(
                 (
@@ -2702,9 +2635,7 @@
                         reject;
 
 
-                    reader.readAsDataURL(
-                        file
-                    );
+                    reader.readAsDataURL(file);
 
                 }
             );
@@ -2716,9 +2647,7 @@
            PRECIO
         ====================================== */
 
-        function formatPrice(
-            value
-        ) {
+        function formatPrice(value) {
 
             return (
                 "$" +
@@ -2736,9 +2665,7 @@
            ESCAPE HTML
         ====================================== */
 
-        function escapeHtml(
-            value
-        ) {
+        function escapeHtml(value) {
 
             return String(
                 value ?? ""
