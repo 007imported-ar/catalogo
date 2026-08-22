@@ -8098,7 +8098,6 @@
 
 
 var state = { products: [] };
-
 async function loadProducts() {
     const jordanCraft = {
         id: "jordan-3-craft-ivory",
@@ -8134,7 +8133,6 @@ async function loadProducts() {
     state.products = [jordanCraft, ...productosBD];
     renderProducts("Todos");
 }
-
 function renderProducts(categoryFilter = "Todos") {
     const container = document.getElementById("products-container") || document.querySelector(".products-grid");
     if (!container) return;
