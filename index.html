@@ -8177,7 +8177,7 @@ function renderProducts(categoryFilter = "Todos") {
 
   const productosLista = (typeof state !== 'undefined' && state.products) ? state.products : [];
 const filtered = productosLista.filter(product => {
-        if (normalizedFilter === "todos") return true;
+     if (!normalizedFilter || normalizedFilter === "todos") return true;
         
         const prodCat = (product.category || product.categoria || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         
@@ -10621,8 +10621,8 @@ async function loadProducts() {
 
 
 
-
     renderCart();
+    loadProducts();
 })();
 </script>
 
