@@ -253,17 +253,16 @@ async function loadProducts() {
     const jordanCraft = {
         id: "jordan-3-craft-ivory",
         name: "Air Jordan 3 Retro Craft Ivory",
-        category: "Zapatillas",
+        category: "zapatillas",
         price: 120000,
+        stock: 10,
         description: "Calidad Premium Quality. Cuero seleccionado con detalles de print de elefante en tono marfil.",
         image: "./activos/jordan3-ivory.jpg",
         images: ["./activos/jordan3-ivory.jpg"]
     };
 
     const loading = document.querySelector("#loadingProducts");
-    const empty = document.querySelector("#emptyProducts");
-
-    if (loading) loading.hidden = false;
+    if (loading) loading.hidden = true;
 
     try {
         const { data, error } = await supabase
@@ -273,72 +272,13 @@ async function loadProducts() {
 
         const productosBD = Array.isArray(data) ? data : [];
         state.products = [jordanCraft, ...productosBD];
-
     } catch (error) {
         console.error("Error al cargar productos:", error);
         state.products = [jordanCraft];
-    } finally {
-        if (loading) loading.hidden = true;
-        renderProducts(state.products);
     }
+
+    renderProducts(state.products);
 }
-
-
-/* =====================================================
-   FILTRAR PRODUCTOS
-===================================================== */
-
-function getFilteredProducts() {
-
-    return state.products.filter(product => {
-
-        const category =
-            String(
-                product.category || ""
-            )
-                .trim()
-                .toLowerCase();
-
-
-        const selectedCategory =
-            String(
-                state.category || "Todos"
-            )
-                .trim()
-                .toLowerCase();
-
-
-        const categoryMatch =
-            selectedCategory === "todos" ||
-            category === selectedCategory;
-
-
-        const text = [
-
-            product.name,
-            product.description,
-            product.category
-
-        ]
-            .filter(Boolean)
-            .join(" ")
-            .toLowerCase();
-
-
-        const searchMatch =
-            !state.search ||
-            text.includes(state.search);
-
-
-        return (
-            categoryMatch &&
-            searchMatch
-        );
-
-    });
-
-}
-
 
 /* =====================================================
    MOSTRAR PRODUCTOS
