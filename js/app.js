@@ -250,87 +250,37 @@ function setupSearch() {
 ===================================================== */
 
 async function loadProducts() {
+    const jordanCraft = {
+        id: "jordan-3-craft-ivory",
+        name: "Air Jordan 3 Retro Craft Ivory",
+        category: "Zapatillas",
+        price: 120000,
+        description: "Calidad Premium Quality. Cuero seleccionado con detalles de print de elefante en tono marfil.",
+        image: "./activos/jordan3-ivory.jpg",
+        images: ["./activos/jordan3-ivory.jpg"]
+    };
 
-    const loading =
-        document.querySelector(
-            "#productsLoading"
-        );
+    const loading = document.querySelector("#loadingProducts");
+    const empty = document.querySelector("#emptyProducts");
 
-    const empty =
-        document.querySelector(
-            "#emptyProducts"
-        );
+    if (loading) loading.hidden = false;
 
-
-    if (loading) {
-        loading.hidden = false;
-    }
-
-    if (empty) {
-        empty.hidden = true;
-    }
-
-const jordanCraft = {
-    id: "jordan-3-craft-ivory",
-    name: "Air Jordan 3 Retro Craft Ivory",
-    category: "Zapatillas",
-    price: 120000,
-    description: "Calidad Premium Quality. Cuero seleccionado con detalles de print de elefante en tono marfil.",
-    image: "./activos/jordan3-ivory.jpg",
-    images: ["./activos/jordan3-ivory.jpg"]
-};
     try {
-
-        const {
-            data,
-            error
-        } = await supabase
+        const { data, error } = await supabase
             .from("products")
             .select("*")
-            .order("created_at", {
-                ascending: false
-     const productosBD = Array.isArray(data) ? data : [];
-state.products = [jordanCraft, ...productosBD];
-            throw error;
-        }
+            .order("created_at", { ascending: false });
 
-
-        state.products =
-            Array.isArray(data)
-                ? data
-                : [];
-
-
-        renderProducts();
-
+        const productosBD = Array.isArray(data) ? data : [];
+        state.products = [jordanCraft, ...productosBD];
 
     } catch (error) {
-
-        console.error(
-            "Error cargando productos:",
-            error
-        );
-
-
-        state.products = [];
-
-
-        renderProducts();
-
-
-        showToast(
-            "No se pudo cargar el catálogo."
-        );
-
-
+        console.error("Error al cargar productos:", error);
+        state.products = [jordanCraft];
     } finally {
-
-        if (loading) {
-            loading.hidden = true;
-        }
-
+        if (loading) loading.hidden = true;
+        renderProducts(state.products);
     }
-
 }
 
 
