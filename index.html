@@ -8166,7 +8166,7 @@
 
 
 
-window.state = window.state || { products: [] };
+var state = { products: [] };
 function renderProducts(categoryFilter = "Todos") {
     const container = document.getElementById("products-container") || document.querySelector(".products-grid");
     if (!container) return;
