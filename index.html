@@ -8228,73 +8228,13 @@ async function loadProducts() {
     renderProducts("Todos");
 }
 
-
-                if (button) {
-
-
-
-
-                    button.classList.add(
-                        "active"
-                    );
-
-
-
-
-                }
-
-
-
-
-
-
-
-
-                renderProducts(
-                    category
-                );
-
-
-
-
-
-
-
-
-                setTimeout(
-                    () => {
-
-
-
-
-                        document
-                            .querySelector(
-                                "#productos"
-                            )
-                            .scrollIntoView({
-                                behavior:
-                                    "smooth"
-                            });
-
-
-
-
-                    },
-                    50
-                );
-
-
-
-
-            };
-
-
-
-
-
-
-
-
+// Control de categorías o eventos de botones limpio
+document.querySelectorAll(".category-btn, .filter-btn").forEach(button => {
+    button.addEventListener("click", (e) => {
+        const category = e.target.dataset.category || e.target.textContent.trim();
+        renderProducts(category);
+    });
+});
         /* =====================================================
            RENDER PRODUCTOS
         ====================================================== */
