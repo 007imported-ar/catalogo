@@ -8103,7 +8103,7 @@
 
 
 
-          async function loadProducts() {
+       async function loadProducts() {
     const jordanCraft = {
         id: "jordan-3-craft-ivory",
         name: "Air Jordan 3 Retro Craft Ivory",
@@ -8124,32 +8124,18 @@
                 .from("products")
                 .select("*")
                 .order("created_at", { ascending: false });
-
-            const productosBD = (Array.isArray(data) && !error) ? data : [];
+const productosBD = (Array.isArray(data) && !error) ? data : [];
             state.products = [jordanCraft, ...productosBD];
         } else {
             state.products = [jordanCraft];
         }
-    } catch (error) {
-        console.error("Error cargando productos:", error);
+    } catch (err) {
+        console.error("Error cargando productos:", err);
         state.products = [jordanCraft];
     }
 
     renderProducts("Todos");
 }
-                if (error) {
-
-
-
-
-                    throw error;
-
-
-
-
-                }
-
-
 
 
 
