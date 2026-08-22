@@ -404,6 +404,15 @@
             border-color: var(--green);
         }
 
+        select.input {
+            cursor: pointer;
+        }
+
+        select.input option {
+            background: #101010;
+            color: white;
+        }
+
         textarea.input {
             min-height: 120px;
             resize: vertical;
@@ -919,7 +928,6 @@
 
         <div class="login-card">
 
-            <!-- LOGO -->
             <div class="login-logo">
 
                 <img
@@ -1074,7 +1082,9 @@
 
             <div class="admin-grid">
 
-                <!-- FORMULARIO -->
+                <!-- =================================
+                     FORMULARIO
+                ================================== -->
 
                 <section class="panel">
 
@@ -1097,6 +1107,8 @@
 
                     <form id="productForm">
 
+                        <!-- NOMBRE -->
+
                         <div class="field">
 
                             <label for="productName">
@@ -1107,12 +1119,14 @@
                                 class="input"
                                 id="productName"
                                 type="text"
-                                placeholder="Ej: Remera Oversize"
+                                placeholder="Ej: Nike Air Max"
                                 required
                             >
 
                         </div>
 
+
+                        <!-- PRECIO + STOCK -->
 
                         <div class="two-columns">
 
@@ -1128,7 +1142,7 @@
                                     type="number"
                                     min="0"
                                     step="1"
-                                    placeholder="25000"
+                                    placeholder="70000"
                                     required
                                 >
 
@@ -1155,6 +1169,8 @@
                         </div>
 
 
+                        <!-- DESCRIPCIÓN -->
+
                         <div class="field">
 
                             <label for="productDescription">
@@ -1170,6 +1186,10 @@
                         </div>
 
 
+                        <!-- =================================
+                             CATEGORÍAS NUEVAS
+                        ================================== -->
+
                         <div class="field">
 
                             <label for="productCategory">
@@ -1181,24 +1201,20 @@
                                 id="productCategory"
                             >
 
-                                <option value="Remeras">
-                                    Remeras
-                                </option>
-
-                                <option value="Pantalones">
-                                    Pantalones
-                                </option>
-
-                                <option value="Buzos">
-                                    Buzos
-                                </option>
-
-                                <option value="Camperas">
-                                    Camperas
+                                <option value="Zapatillas">
+                                    Zapatillas
                                 </option>
 
                                 <option value="Accesorios">
                                     Accesorios
+                                </option>
+
+                                <option value="Jean">
+                                    Jean
+                                </option>
+
+                                <option value="Conjuntos">
+                                    Conjuntos
                                 </option>
 
                             </select>
@@ -1206,7 +1222,9 @@
                         </div>
 
 
-                        <!-- IMÁGENES -->
+                        <!-- =================================
+                             IMÁGENES
+                        ================================== -->
 
                         <div class="field">
 
@@ -1264,6 +1282,8 @@
                         </div>
 
 
+                        <!-- GUARDAR -->
+
                         <button
                             class="save-button"
                             type="submit"
@@ -1272,6 +1292,8 @@
                             AGREGAR PRODUCTO
                         </button>
 
+
+                        <!-- CANCELAR -->
 
                         <button
                             class="cancel-button"
@@ -1286,7 +1308,9 @@
                 </section>
 
 
-                <!-- PRODUCTOS -->
+                <!-- =================================
+                     PRODUCTOS
+                ================================== -->
 
                 <section class="panel">
 
@@ -2221,11 +2245,17 @@
                     const productData = {
 
                         name,
+
                         price,
+
                         description,
+
                         category,
+
                         image: imageUrl,
+
                         images: allImages,
+
                         stock
 
                     };
@@ -2256,7 +2286,9 @@
 
 
                     if (result.error) {
+
                         throw result.error;
+
                     }
 
 
@@ -2352,12 +2384,44 @@
                 product.description || "";
 
 
-            document.querySelector(
-                "#productCategory"
-            ).value =
-                product.category ||
-                "Remeras";
+            /*
+             * NUEVAS CATEGORÍAS
+             */
 
+            const categorySelect =
+                document.querySelector(
+                    "#productCategory"
+                );
+
+
+            const validCategories = [
+                "Zapatillas",
+                "Accesorios",
+                "Jean",
+                "Conjuntos"
+            ];
+
+
+            if (
+                validCategories.includes(
+                    product.category
+                )
+            ) {
+
+                categorySelect.value =
+                    product.category;
+
+            } else {
+
+                categorySelect.value =
+                    "Zapatillas";
+
+            }
+
+
+            /*
+             * IMÁGENES
+             */
 
             if (
                 Array.isArray(product.images)
@@ -2394,8 +2458,11 @@
 
 
             window.scrollTo({
+
                 top: 0,
+
                 behavior: "smooth"
+
             });
 
         }
@@ -2421,6 +2488,17 @@
 
 
             productForm.reset();
+
+
+            /*
+             * Después de resetear,
+             * dejamos Zapatillas seleccionada.
+             */
+
+            document.querySelector(
+                "#productCategory"
+            ).value =
+                "Zapatillas";
 
 
             formTitle.textContent =
