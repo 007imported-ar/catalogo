@@ -8097,13 +8097,7 @@
             `;
 
 
-
-
-
-
-
-
-    var state = { products: [] };
+var state = { products: [] };
 
 async function loadProducts() {
     const jordanCraft = {
@@ -8120,23 +8114,24 @@ async function loadProducts() {
     const loading = document.querySelector("#loadingProducts");
     if (loading) loading.hidden = true;
 
+    let productosBD = [];
+
     try {
         if (typeof supabase !== 'undefined') {
-            const { data, error } = await supabase
+            const response = await supabase
                 .from("products")
                 .select("*")
                 .order("created_at", { ascending: false });
 
-            const productosBD = (Array.isArray(data) && !error) ? data : [];
-            state.products = [jordanCraft, ...productosBD];
-        } else {
-            state.products = [jordanCraft];
+            if (!response.error && Array.isArray(response.data)) {
+                productosBD = response.data;
+            }
         }
     } catch (err) {
-        console.error("Error cargando productos:", err);
-        state.products = [jordanCraft];
+        console.error("Error cargando productos de Supabase:", err);
     }
 
+    state.products = [jordanCraft, ...productosBD];
     renderProducts("Todos");
 }
 
@@ -8177,68 +8172,6 @@ document.querySelectorAll(".category-btn, .filter-btn").forEach(button => {
         renderProducts(category);
     });
 });
-       
-
-            if (
-                category === "Todos"
-            ) {
-
-
-
-
-                productsTitle.textContent =
-                    "TODOS LOS PRODUCTOS";
-
-
-
-
-            } else {
-
-
-
-
-                productsTitle.textContent =
-                    category.toUpperCase();
-
-
-
-
-            }
-
-
-
-
-
-
-
-
-            if (!products.length) {
-
-
-
-
-                productsGrid.innerHTML = `
-
-
-
-
-                    <div class="products-message">
-
-
-
-
-                        No hay productos
-                        disponibles en esta categoría.
-
-
-
-
-                    </div>
-
-
-
-
-                `;
 
 
 
@@ -10323,6 +10256,6 @@ document.querySelectorAll(".category-btn, .filter-btn").forEach(button => {
     });
 
 loadProducts();
-renderCart();
+    renderCart();
 })();
 </script>
