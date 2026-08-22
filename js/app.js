@@ -249,35 +249,6 @@ function setupSearch() {
    CARGAR PRODUCTOS
 ===================================================== */
 
-async function loadProducts() {
-    const loading = document.querySelector("#loadingProducts");
-    if (loading) loading.hidden = true;
-
-    try {
-        const { data, error } = await supabase
-            .from("products")
-            .select("*")
-            .order("created_at", { ascending: false });
-
-        const productosBD = Array.isArray(data) ? data : [];
-        state.products = productosBD;
-    } catch (error) {
-        console.error("Error al cargar productos:", error);
-        state.products = [];
-    }
-
-    renderProducts(state.products);
-}
-/* =====================================================
-   MOSTRAR PRODUCTOS
-===================================================== */
-
-function renderProducts() {
-
-    const grid =
-        document.querySelector(
-            "#productsGrid"
-        );
 
     const empty =
         document.querySelector(
