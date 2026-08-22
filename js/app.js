@@ -270,16 +270,21 @@ async function loadProducts() {
             .select("*")
             .order("created_at", { ascending: false });
 
-        const productosBD = Array.isArray(data) ? data : [];
-        state.products = [jordanCraft, ...productosBD];
+        if (error) {
+            console.error("Error devuelto por Supabase:", error);
+            state.products = [jordanCraft];
+        } else {
+            const productosBD = Array.isArray(data) ? data : [];
+            state.products = [jordanCraft, ...productosBD];
+        }
     } catch (error) {
-        console.error("Error al cargar productos:", error);
+        console.error("Error al conectar con la base de datos:", error);
         state.products = [jordanCraft];
     }
 
+    console.log("Productos cargados listos para renderizar:", state.products);
     renderProducts(state.products);
 }
-
 /* =====================================================
    TARJETA DE PRODUCTO
 ===================================================== */
