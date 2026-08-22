@@ -250,12 +250,12 @@ function setupSearch() {
 ===================================================== */
 
 async function loadProducts() {
+   // BORRÁ ESTO (Líneas 253 a 262):
     const jordanCraft = {
         id: "jordan-3-craft-ivory",
         name: "Air Jordan 3 Retro Craft Ivory",
         category: "zapatillas",
         price: 120000,
-        stock: 10,
         description: "Calidad Premium Quality. Cuero seleccionado con detalles de print de elefante en tono marfil.",
         image: "./activos/jordan3-ivory.jpg",
         images: ["./activos/jordan3-ivory.jpg"]
