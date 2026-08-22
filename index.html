@@ -8167,48 +8167,31 @@
 
 
 
+function renderProducts(categoryFilter = "Todos") {
+    const container = document.getElementById("products-container") || document.querySelector(".products-grid");
+    if (!container) return;
 
+    container.innerHTML = "";
 
-                /*
-                 * Al entrar mostramos TODOS.
-                 */
+    const normalizedFilter = categoryFilter.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
+    const filtered = state.products.filter(product => {
+        if (normalizedFilter === "todos") return true;
+        
+        const prodCat = (product.category || product.categoria || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        
+        return prodCat.includes(normalizedFilter) || normalizedFilter.includes(prodCat);
+    });
 
+    if (filtered.length === 0) {
+        container.innerHTML = `<p class="no-products">No hay productos disponibles en esta categoría.</p>`;
+        return;
+    }
 
-
-                currentCategory =
-                    "Todos";
-
-
-
-
-
-
-
-
-                document
-                    .querySelectorAll(
-                        ".category"
-                    )
-                    .forEach(
-                        category => {
-
-
-
-
-                            category.classList.remove(
-                                "active"
-                            );
-
-
-
-
-                        }
-                    );
-
-
-
-
+    filtered.forEach(product => {
+        container.appendChild(createProductCard(product));
+    });
+}
 
 
 
