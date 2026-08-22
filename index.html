@@ -8158,8 +8158,9 @@
 
 
 
-                headerProductCount.textContent =
-                    allProducts.length;
+                if (headerProductCount) {
+    headerProductCount.textContent = allProducts.length;
+}
 
 
 
