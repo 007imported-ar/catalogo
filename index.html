@@ -8103,89 +8103,7 @@
 
 
 
-       async function loadProducts() {
-    const jordanCraft = {
-        id: "jordan-3-craft-ivory",
-        name: "Air Jordan 3 Retro Craft Ivory",
-        category: "zapatillas",
-        price: 120000,
-        stock: 10,
-        description: "Calidad Premium Quality. Cuero seleccionado con detalles de print de elefante en tono marfil.",
-        image: "./assets/jordan3-ivory.jpg",
-        images: ["./assets/jordan3-ivory.jpg"]
-    };
-
-    const loading = document.querySelector("#loadingProducts");
-    if (loading) loading.hidden = true;
-
-    try {
-        if (typeof supabase !== 'undefined') {
-            const { data, error } = await supabase
-                .from("products")
-                .select("*")
-                .order("created_at", { ascending: false });
-const productosBD = (Array.isArray(data) && !error) ? data : [];
-            state.products = [jordanCraft, ...productosBD];
-        } else {
-            state.products = [jordanCraft];
-        }
-    } catch (err) {
-        console.error("Error cargando productos:", err);
-        state.products = [jordanCraft];
-    }
-
-    renderProducts("Todos");
-}
-
-
-
-
-
-
-                allProducts =
-                    data || [];
-
-
-
-
-
-
-
-
-             if (headerProductCount) {
-    headerProductCount.textContent = allProducts.length;
-}
-
-
-
-
-
-var state = { products: [] };
-
-function renderProducts(categoryFilter = "Todos") {
-    const container = document.getElementById("products-container") || document.querySelector(".products-grid");
-    if (!container) return;
-
-    container.innerHTML = "";
-
-    const normalizedFilter = categoryFilter.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    const productosLista = (typeof state !== 'undefined' && state.products) ? state.products : [];
-
-    const filtered = productosLista.filter(product => {
-        if (!normalizedFilter || normalizedFilter === "todos") return true;
-        const prodCat = (product.category || product.categoria || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        return prodCat.includes(normalizedFilter) || normalizedFilter.includes(prodCat);
-    });
-
-    if (filtered.length === 0) {
-        container.innerHTML = '<p class="no-products">No hay productos disponibles en esta categoría.</p>';
-        return;
-    }
-
-    filtered.forEach(product => {
-        container.appendChild(createProductCard(product));
-    });
-}
+    var state = { products: [] };
 
 async function loadProducts() {
     const jordanCraft = {
@@ -8214,16 +8132,45 @@ async function loadProducts() {
         } else {
             state.products = [jordanCraft];
         }
-    } catch (error) {
-        console.error("Error cargando productos:", error);
+    } catch (err) {
+        console.error("Error cargando productos:", err);
         state.products = [jordanCraft];
     }
 
     renderProducts("Todos");
 }
 
+function renderProducts(categoryFilter = "Todos") {
+    const container = document.getElementById("products-container") || document.querySelector(".products-grid");
+    if (!container) return;
 
-// Control de categorías o eventos de botones limpio
+    container.innerHTML = "";
+
+    const normalizedFilter = categoryFilter.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const productosLista = (typeof state !== 'undefined' && state.products) ? state.products : [];
+
+    const filtered = productosLista.filter(product => {
+        if (!normalizedFilter || normalizedFilter === "todos") return true;
+        const prodCat = (product.category || product.categoria || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        return prodCat.includes(normalizedFilter) || normalizedFilter.includes(prodCat);
+    });
+
+    const productsTitle = document.getElementById("products-title") || document.querySelector(".products-title");
+    if (productsTitle) {
+        productsTitle.textContent = (categoryFilter === "Todos") ? "TODOS LOS PRODUCTOS" : categoryFilter.toUpperCase();
+    }
+
+    if (filtered.length === 0) {
+        container.innerHTML = '<div class="products-message">No hay productos disponibles en esta categoría.</div>';
+        return;
+    }
+
+    filtered.forEach(product => {
+        container.appendChild(createProductCard(product));
+    });
+}
+
+// Control de categorías o eventos de botones
 document.querySelectorAll(".category-btn, .filter-btn").forEach(button => {
     button.addEventListener("click", (e) => {
         const category = e.target.dataset.category || e.target.textContent.trim();
