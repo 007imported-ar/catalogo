@@ -271,10 +271,10 @@ async function loadProducts() {
             .order("created_at", { ascending: false });
 
         const productosBD = Array.isArray(data) ? data : [];
-        state.products = [jordanCraft, ...productosBD];
+       state.products = productosBD;
     } catch (error) {
         console.error("Error al cargar productos:", error);
-        state.products = [jordanCraft];
+       state.products = [];
     }
 
     renderProducts(state.products);
