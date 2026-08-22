@@ -265,26 +265,10 @@ async function loadProducts() {
         renderProducts(state.products);
     } catch (error) {
         console.error("Error al cargar productos de Supabase:", error);
-        const container = document.getElementById("products-container") || document.querySelector(".products-grid");
         state.products = [];
         renderProducts([]);
     }
 }
-    if (empty) {
-        empty.hidden = true;
-    }
-
-
-    products.forEach(product => {
-
-        grid.appendChild(
-            createProductCard(product)
-        );
-
-    });
-
-}
-
 
 /* =====================================================
    TARJETA DE PRODUCTO
