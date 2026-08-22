@@ -8166,7 +8166,7 @@
 
 
 
-
+window.state = window.state || { products: [] };
 function renderProducts(categoryFilter = "Todos") {
     const container = document.getElementById("products-container") || document.querySelector(".products-grid");
     if (!container) return;
@@ -8175,7 +8175,8 @@ function renderProducts(categoryFilter = "Todos") {
 
     const normalizedFilter = categoryFilter.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-    const filtered = state.products.filter(product => {
+  const productosLista = (typeof state !== 'undefined' && state.products) ? state.products : [];
+const filtered = productosLista.filter(product => {
         if (normalizedFilter === "todos") return true;
         
         const prodCat = (product.category || product.categoria || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -8195,9 +8196,10 @@ function renderProducts(categoryFilter = "Todos") {
 
 
 
-
-                renderProducts(
-                    "Todos"
+// BORRÁ O REEMPLAZÁ ESTAS LÍNEAS (8199 a 8201):
+renderProducts(
+    "Todos"
+);
                 );
 
 
