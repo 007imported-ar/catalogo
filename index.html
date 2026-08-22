@@ -8181,49 +8181,6 @@ document.querySelectorAll(".category-btn, .filter-btn").forEach(button => {
 
 
 
-            }
-
-
-
-
-
-
-
-
-            productsGrid.innerHTML = "";
-
-
-
-
-
-
-
-
-            products.forEach(
-                product => {
-
-
-
-
-                    productsGrid.appendChild(
-                        createProductCard(
-                            product
-                        )
-                    );
-
-
-
-
-                }
-            );
-
-
-
-
-
-
-
-
 
 
 
@@ -10256,5 +10213,5 @@ document.querySelectorAll(".category-btn, .filter-btn").forEach(button => {
 
 loadProducts();
     renderCart();
-}();
+};
 </script>
