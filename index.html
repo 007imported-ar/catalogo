@@ -8176,59 +8176,6 @@ document.querySelectorAll(".category-btn, .filter-btn").forEach(button => {
 
 
 
-                return;
-
-
-
-
-
-
-
-
-        /* =====================================================
-           CREAR TARJETA
-        ====================================================== */
-
-
-
-
-        function createProductCard(
-            product
-        ) {
-
-
-
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-
-
-
-
-
-
-
-            card.className =
-                "product-card";
-
-
-
-
-
-
-
-
-            const images =
-                getProductImages(
-                    product
-                );
-
-
-
-
 
 
 
@@ -10212,6 +10159,5 @@ document.querySelectorAll(".category-btn, .filter-btn").forEach(button => {
     });
 
 loadProducts();
-    renderCart();
-};
+renderCart();
 </script>
