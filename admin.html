@@ -1,0 +1,2469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>007imported — Admin</title>
+<link rel="icon" type="image/x-icon" href="./favicon.ico">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{
+ box-sizing:border-box;
+ margin:0;
+ padding:0
+}
+
+:root{
+ --black:#080808;
+ --dark:#101010;
+ --card:#151515;
+ --card2:#1b1b1b;
+ --border:#2c2c2c;
+ --white:#f5f5f5;
+ --gray:#8b8b8b;
+ --cream:#cdbb9e;
+ --cream2:#dfd0b7;
+ --red:#ff4545
+}
+
+html,
+body{
+ min-height:100%
+}
+
+body{
+ background:var(--black);
+ color:var(--white);
+ font-family:Inter,Arial,sans-serif;
+ min-height:100vh
+}
+
+button,
+input,
+textarea,
+select{
+ font-family:inherit
+}
+
+button{
+ cursor:pointer
+}
+
+/* LOGIN */
+
+.login-screen{
+ min-height:100vh;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:25px
+}
+
+.login-card{
+ width:100%;
+ max-width:430px;
+ background:var(--card);
+ border:1px solid var(--border);
+ padding:40px
+}
+
+.login-logo{
+ width:160px;
+ height:160px;
+ margin:0 auto 30px
+}
+
+.login-logo img{
+ width:100%;
+ height:100%;
+ object-fit:contain;
+ border-radius:50%
+}
+
+.login-card h1{
+ font-size:28px;
+ font-weight:900;
+ text-transform:uppercase
+}
+
+.login-card>p{
+ color:var(--gray);
+ font-size:13px;
+ line-height:1.6;
+ margin:10px 0 30px
+}
+
+/* ADMIN */
+
+.admin-app{
+ display:none;
+ min-height:100vh
+}
+
+.admin-header{
+ height:82px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 35px;
+ border-bottom:1px solid var(--border);
+ background:rgba(8,8,8,.96);
+ position:sticky;
+ top:0;
+ z-index:100
+}
+
+.admin-logo{
+ display:flex;
+ align-items:center;
+ gap:15px
+}
+
+.admin-logo-box{
+ width:48px;
+ height:48px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ overflow:hidden;
+ border-radius:50%;
+ border:1px solid var(--border);
+ background:#050505
+}
+
+.brand-logo{
+ width:100%;
+ height:100%;
+ object-fit:contain
+}
+
+.admin-logo-text strong{
+ display:block;
+ font-size:15px;
+ font-weight:900
+}
+
+.admin-logo-text span{
+ display:block;
+ margin-top:3px;
+ color:var(--gray);
+ font-size:10px;
+ letter-spacing:2px
+}
+
+.admin-user{
+ display:flex;
+ align-items:center;
+ gap:20px
+}
+
+.admin-user-info{
+ text-align:right
+}
+
+.admin-user-info strong{
+ display:block;
+ font-size:13px
+}
+
+.admin-user-info span{
+ display:block;
+ color:var(--gray);
+ font-size:11px;
+ margin-top:3px
+}
+
+.logout-button{
+ background:transparent;
+ border:1px solid var(--border);
+ color:white;
+ padding:11px 15px;
+ font-size:10px;
+ font-weight:800
+}
+
+.logout-button:hover{
+ border-color:var(--cream);
+ color:var(--cream)
+}
+
+.admin-container{
+ max-width:1250px;
+ margin:auto;
+ padding:50px 25px 100px
+}
+
+.heading{
+ margin-bottom:35px
+}
+
+.heading-label{
+ color:var(--cream);
+ font-size:11px;
+ font-weight:800;
+ letter-spacing:3px;
+ margin-bottom:12px
+}
+
+.heading h1{
+ font-size:clamp(35px,6vw,60px);
+ line-height:.92;
+ letter-spacing:-3px;
+ font-weight:900
+}
+
+.heading p{
+ color:var(--gray);
+ font-size:13px;
+ margin-top:16px
+}
+
+.admin-grid{
+ display:grid;
+ grid-template-columns:minmax(0,1.25fr) minmax(350px,.75fr);
+ gap:20px
+}
+
+.panel{
+ background:var(--card);
+ border:1px solid var(--border);
+ padding:30px
+}
+
+.panel-header{
+ display:flex;
+ justify-content:space-between;
+ align-items:flex-start;
+ margin-bottom:28px
+}
+
+.panel-header h2{
+ font-size:18px;
+ font-weight:900;
+ text-transform:uppercase
+}
+
+.panel-header p{
+ margin-top:6px;
+ color:var(--gray);
+ font-size:12px
+}
+
+/* CAMPOS */
+
+.field{
+ margin-bottom:20px
+}
+
+.field label{
+ display:block;
+ color:#aaa;
+ font-size:10px;
+ font-weight:800;
+ letter-spacing:1px;
+ text-transform:uppercase;
+ margin-bottom:8px
+}
+
+.input{
+ width:100%;
+ min-height:53px;
+ padding:14px 15px;
+ color:white;
+ background:#101010;
+ border:1px solid var(--border);
+ outline:none;
+ border-radius:0
+}
+
+.input:focus{
+ border-color:var(--cream)
+}
+
+textarea.input{
+ min-height:120px;
+ resize:vertical
+}
+
+.two-columns{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:15px
+}
+
+/* MEDIA */
+
+.media-upload{
+ position:relative;
+ min-height:190px;
+ background:#0e0e0e;
+ border:1px dashed #3c3c3c;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ overflow:hidden;
+ cursor:pointer
+}
+
+.media-upload:hover{
+ border-color:var(--cream)
+}
+
+.media-upload input{
+ display:none
+}
+
+.upload-text{
+ color:var(--gray)
+}
+
+.upload-icon{
+ font-size:34px;
+ margin-bottom:12px
+}
+
+.upload-title{
+ color:#ccc;
+ font-size:11px;
+ font-weight:800;
+ text-transform:uppercase
+}
+
+.upload-info{
+ margin-top:7px;
+ font-size:10px;
+ line-height:1.5
+}
+
+.media-previews{
+ display:grid;
+ grid-template-columns:repeat(auto-fill,minmax(110px,1fr));
+ gap:10px;
+ margin-top:15px
+}
+
+.media-preview{
+ position:relative;
+ aspect-ratio:1/1;
+ background:#101010;
+ border:1px solid var(--border);
+ overflow:hidden
+}
+
+.media-preview img,
+.media-preview video{
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ display:block
+}
+
+.media-type{
+ position:absolute;
+ left:6px;
+ top:6px;
+ background:var(--cream);
+ color:#080808;
+ padding:4px 6px;
+ font-size:8px;
+ font-weight:900
+}
+
+.media-number{
+ position:absolute;
+ right:6px;
+ top:6px;
+ background:rgba(0,0,0,.75);
+ color:white;
+ padding:4px 6px;
+ font-size:8px;
+ font-weight:900
+}
+
+.media-delete{
+ position:absolute;
+ right:5px;
+ bottom:5px;
+ width:28px;
+ height:28px;
+ border:1px solid rgba(255,255,255,.2);
+ background:rgba(0,0,0,.8);
+ color:white;
+ font-size:16px
+}
+
+.media-delete:hover{
+ border-color:var(--red);
+ color:var(--red)
+}
+
+.media-count{
+ margin-top:8px;
+ color:var(--gray);
+ font-size:10px
+}
+
+.notice{
+ margin-top:10px;
+ padding:11px 12px;
+ border:1px solid var(--border);
+ color:var(--gray);
+ font-size:10px;
+ line-height:1.5
+}
+
+.notice strong{
+ color:var(--cream)
+}
+
+/* BOTONES */
+
+.save-button{
+ width:100%;
+ min-height:57px;
+ border:0;
+ background:var(--cream);
+ color:#050505;
+ font-size:11px;
+ font-weight:900;
+ text-transform:uppercase
+}
+
+.save-button:hover{
+ background:var(--cream2)
+}
+
+.save-button:disabled{
+ opacity:.6;
+ cursor:not-allowed
+}
+
+.cancel-button{
+ width:100%;
+ min-height:50px;
+ margin-top:10px;
+ border:1px solid var(--border);
+ background:transparent;
+ color:white;
+ font-size:11px;
+ font-weight:800;
+ display:none
+}
+
+.cancel-button:hover{
+ border-color:var(--cream);
+ color:var(--cream)
+}
+
+/* PRODUCTOS */
+
+.products{
+ display:flex;
+ flex-direction:column;
+ gap:10px;
+ max-height:680px;
+ overflow-y:auto
+}
+
+.product{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ padding:12px;
+ background:var(--card2);
+ border:1px solid var(--border)
+}
+
+.product-image{
+ width:65px;
+ height:65px;
+ background:#222;
+ flex-shrink:0;
+ overflow:hidden;
+ position:relative
+}
+
+.product-image img,
+.product-image video{
+ width:100%;
+ height:100%;
+ object-fit:cover
+}
+
+.product-data{
+ flex:1;
+ min-width:0
+}
+
+.product-data strong{
+ display:block;
+ white-space:nowrap;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ font-size:13px
+}
+
+.product-category{
+ color:var(--gray);
+ font-size:10px;
+ margin-top:5px
+}
+
+.product-price{
+ color:var(--cream);
+ font-size:12px;
+ font-weight:800;
+ margin-top:4px
+}
+
+.product-sizes{
+ color:var(--gray);
+ font-size:10px;
+ margin-top:4px;
+ line-height:1.4
+}
+
+.product-media-count{
+ color:var(--cream);
+ font-size:9px;
+ margin-top:4px
+}
+
+.product-actions{
+ display:flex;
+ gap:5px
+}
+
+.action{
+ width:36px;
+ height:36px;
+ background:transparent;
+ border:1px solid var(--border);
+ color:white;
+ font-size:13px
+}
+
+.action:hover{
+ border-color:var(--cream);
+ color:var(--cream)
+}
+
+.action.delete:hover{
+ border-color:var(--red);
+ color:var(--red)
+}
+
+.empty{
+ padding:40px 15px;
+ border:1px dashed var(--border);
+ text-align:center;
+ color:var(--gray);
+ font-size:12px
+}
+
+/* TOAST */
+
+.toast{
+ position:fixed;
+ right:25px;
+ bottom:25px;
+ z-index:500;
+ padding:15px 20px;
+ background:white;
+ color:black;
+ font-size:12px;
+ font-weight:700;
+ transform:translateY(100px);
+ opacity:0;
+ transition:.25s
+}
+
+.toast.show{
+ transform:translateY(0);
+ opacity:1
+}
+
+.toast.error{
+ background:var(--red);
+ color:white
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+ .admin-grid{
+  grid-template-columns:1fr
+ }
+
+}
+
+@media(max-width:600px){
+
+ .admin-header{
+  height:70px;
+  padding:0 15px
+ }
+
+ .admin-logo{
+  gap:10px
+ }
+
+ .admin-logo-box{
+  width:40px;
+  height:40px
+ }
+
+ .admin-logo-text strong{
+  font-size:12px
+ }
+
+ .admin-logo-text span{
+  font-size:8px
+ }
+
+ .admin-user-info{
+  display:none
+ }
+
+ .admin-container{
+  padding:35px 15px 70px
+ }
+
+ .panel{
+  padding:22px 18px
+ }
+
+ .two-columns{
+  grid-template-columns:1fr;
+  gap:0
+ }
+
+ .login-card{
+  padding:28px 22px
+ }
+
+ .login-logo{
+  width:140px;
+  height:140px
+ }
+
+ .product-actions{
+  flex-direction:column
+ }
+
+ .action{
+  width:34px;
+  height:34px
+ }
+
+ .media-previews{
+  grid-template-columns:repeat(3,1fr)
+ }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<section class="login-screen" id="loginScreen">
+
+ <div class="login-card">
+
+  <div class="login-logo">
+   <img src="./007imported-logo-circle.png" alt="007imported">
+  </div>
+
+  <h1>Panel Admin</h1>
+
+  <p>
+   Ingresá con tu cuenta para administrar el catálogo de 007imported.
+  </p>
+
+  <form id="loginForm">
+
+   <div class="field">
+    <label for="email">Email</label>
+    <input
+     class="input"
+     id="email"
+     type="email"
+     placeholder="tu@email.com"
+     required
+    >
+   </div>
+
+   <div class="field">
+    <label for="password">Contraseña</label>
+    <input
+     class="input"
+     id="password"
+     type="password"
+     placeholder="••••••••"
+     required
+    >
+   </div>
+
+   <button
+    class="save-button"
+    type="submit"
+    id="loginButton"
+   >
+    INICIAR SESIÓN
+   </button>
+
+  </form>
+
+ </div>
+
+</section>
+
+
+<!-- ADMIN -->
+
+<div class="admin-app" id="adminApp">
+
+<header class="admin-header">
+
+ <div class="admin-logo">
+
+  <div class="admin-logo-box">
+   <img
+    src="./007imported-logo-circle.png"
+    alt="007imported"
+    class="brand-logo"
+   >
+  </div>
+
+  <div class="admin-logo-text">
+   <strong>PANEL ADMIN</strong>
+   <span>007IMPORTED</span>
+  </div>
+
+ </div>
+
+ <div class="admin-user">
+
+  <div class="admin-user-info">
+   <strong id="userName">Administrador</strong>
+   <span id="userEmail">-</span>
+  </div>
+
+  <button
+   class="logout-button"
+   id="logoutButton"
+   type="button"
+  >
+   CERRAR SESIÓN
+  </button>
+
+ </div>
+
+</header>
+
+
+<main class="admin-container">
+
+<div class="heading">
+
+ <div class="heading-label">
+  ADMINISTRACIÓN
+ </div>
+
+ <h1>
+  GESTIONÁ<br>
+  TU CATÁLOGO.
+ </h1>
+
+ <p>
+  Agregá, editá y eliminá productos, imágenes y videos.
+ </p>
+
+</div>
+
+
+<div class="admin-grid">
+
+
+<!-- FORMULARIO -->
+
+<section class="panel">
+
+<div class="panel-header">
+
+ <div>
+
+  <h2 id="formTitle">
+   Nuevo producto
+  </h2>
+
+  <p>
+   Completá los datos del producto.
+  </p>
+
+ </div>
+
+</div>
+
+
+<form id="productForm">
+
+
+<!-- NOMBRE -->
+
+<div class="field">
+
+ <label for="productName">
+  Nombre
+ </label>
+
+ <input
+  class="input"
+  id="productName"
+  type="text"
+  placeholder="Ej: Air Jordan 3 White Cement"
+  required
+ >
+
+</div>
+
+
+<!-- PRECIO + TALLES -->
+
+<div class="two-columns">
+
+
+<div class="field">
+
+ <label for="productPrice">
+  Precio ($)
+ </label>
+
+ <input
+  class="input"
+  id="productPrice"
+  type="number"
+  min="0"
+  step="1"
+  placeholder="68000"
+  required
+ >
+
+</div>
+
+
+<div class="field">
+
+ <label for="productTalles">
+  Talles
+ </label>
+
+ <input
+  class="input"
+  id="productTalles"
+  type="text"
+  placeholder="Ej: 34 al 44, 38, 39, 40, 41, 42 o S, M, L, XL"
+ >
+
+</div>
+
+
+</div>
+
+
+<!-- DESCRIPCIÓN -->
+
+<div class="field">
+
+ <label for="productDescription">
+  Descripción
+ </label>
+
+ <textarea
+  class="input"
+  id="productDescription"
+  placeholder="Descripción del producto..."
+ ></textarea>
+
+</div>
+
+
+<!-- CATEGORÍA -->
+
+<div class="field">
+
+ <label for="productCategory">
+  Categoría
+ </label>
+
+ <select
+  class="input"
+  id="productCategory"
+ >
+
+  <option value="Zapatillas">
+   Zapatillas
+  </option>
+
+  <option value="Accesorios">
+   Accesorios
+  </option>
+
+  <option value="Jean">
+   Jean
+  </option>
+
+  <option value="Conjuntos">
+   Conjuntos
+  </option>
+
+ </select>
+
+</div>
+
+
+<!-- FOTOS Y VIDEOS -->
+
+<div class="field">
+
+<label>
+ Fotos y videos del producto
+</label>
+
+
+<label
+ class="media-upload"
+ for="productMedia"
+>
+
+ <input
+  id="productMedia"
+  type="file"
+  accept="image/*,video/*"
+  multiple
+ >
+
+ <div class="upload-text">
+
+  <div class="upload-icon">
+   +
+  </div>
+
+  <div
+   class="upload-title"
+   id="uploadTitle"
+  >
+   Seleccionar fotos y videos
+  </div>
+
+  <div class="upload-info">
+
+   Podés seleccionar varios archivos a la vez.
+   <br>
+
+   El primer elemento visual será la portada si es una foto.
+
+  </div>
+
+ </div>
+
+</label>
+
+
+<div
+ class="media-previews"
+ id="mediaPreviews"
+></div>
+
+
+<div
+ class="media-count"
+ id="mediaCount"
+>
+ 0 archivos seleccionados
+</div>
+
+
+<div class="notice">
+
+ <strong>
+  Importante:
+ </strong>
+
+ los archivos se guardan dentro del producto.
+ Para evitar que la página se vuelva pesada,
+ recomendamos imágenes optimizadas y videos cortos y livianos.
+
+</div>
+
+</div>
+
+
+<!-- GUARDAR -->
+
+<button
+ class="save-button"
+ type="submit"
+ id="saveButton"
+>
+ AGREGAR PRODUCTO
+</button>
+
+
+<button
+ class="cancel-button"
+ type="button"
+ id="cancelEdit"
+>
+ CANCELAR EDICIÓN
+</button>
+
+
+</form>
+
+</section>
+
+
+<!-- PRODUCTOS -->
+
+<section class="panel">
+
+<div class="panel-header">
+
+ <div>
+
+  <h2>
+   Productos
+  </h2>
+
+  <p id="productCount">
+   Cargando...
+  </p>
+
+ </div>
+
+</div>
+
+
+<div
+ class="products"
+ id="productsList"
+>
+
+ <div class="empty">
+  Cargando productos...
+ </div>
+
+</div>
+
+</section>
+
+
+</div>
+
+</main>
+
+</div>
+
+
+<div
+ class="toast"
+ id="toast"
+></div>
+
+
+<script type="module">
+
+import { supabase } from "./js/supabase.js";
+
+
+/* =========================
+   ELEMENTOS
+========================= */
+
+const $ = selector =>
+ document.querySelector(selector);
+
+
+const loginScreen =
+ $("#loginScreen");
+
+const adminApp =
+ $("#adminApp");
+
+const loginForm =
+ $("#loginForm");
+
+const loginButton =
+ $("#loginButton");
+
+const logoutButton =
+ $("#logoutButton");
+
+
+const productForm =
+ $("#productForm");
+
+const productsList =
+ $("#productsList");
+
+const productCount =
+ $("#productCount");
+
+
+const productMedia =
+ $("#productMedia");
+
+const mediaPreviews =
+ $("#mediaPreviews");
+
+const mediaCount =
+ $("#mediaCount");
+
+const uploadTitle =
+ $("#uploadTitle");
+
+
+const saveButton =
+ $("#saveButton");
+
+const cancelEdit =
+ $("#cancelEdit");
+
+const formTitle =
+ $("#formTitle");
+
+const toast =
+ $("#toast");
+
+
+let existingMedia = [];
+
+let newMediaFiles = [];
+
+let editingProduct = null;
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message, error = false){
+
+ toast.textContent = message;
+
+ toast.classList.toggle(
+  "error",
+  error
+ );
+
+ toast.classList.add("show");
+
+ setTimeout(() => {
+
+  toast.classList.remove("show");
+
+ }, 3200);
+
+}
+
+
+/* =========================
+   SESIÓN
+========================= */
+
+async function checkSession(){
+
+ const {
+  data,
+  error
+ } =
+ await supabase.auth.getSession();
+
+
+ if(error){
+
+  console.error(error);
+
+  showToast(
+   "No se pudo comprobar la sesión.",
+   true
+  );
+
+  return;
+
+ }
+
+
+ if(data.session){
+
+  showAdmin(
+   data.session.user
+  );
+
+ }else{
+
+  showLogin();
+
+ }
+
+}
+
+
+function showLogin(){
+
+ loginScreen.style.display =
+  "flex";
+
+ adminApp.style.display =
+  "none";
+
+}
+
+
+function showAdmin(user){
+
+ loginScreen.style.display =
+  "none";
+
+ adminApp.style.display =
+  "block";
+
+
+ $("#userEmail").textContent =
+  user.email || "";
+
+ $("#userName").textContent =
+  user.user_metadata?.name ||
+  "Administrador";
+
+
+ loadProducts();
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+loginForm.addEventListener(
+ "submit",
+ async event => {
+
+  event.preventDefault();
+
+
+  const email =
+   $("#email").value.trim();
+
+  const password =
+   $("#password").value;
+
+
+  loginButton.disabled =
+   true;
+
+  loginButton.textContent =
+   "INGRESANDO...";
+
+
+  const {
+   data,
+   error
+  } =
+  await supabase.auth.signInWithPassword({
+   email,
+   password
+  });
+
+
+  loginButton.disabled =
+   false;
+
+  loginButton.textContent =
+   "INICIAR SESIÓN";
+
+
+  if(error){
+
+   console.error(error);
+
+   showToast(
+    "Email o contraseña incorrectos.",
+    true
+   );
+
+   return;
+
+  }
+
+
+  showAdmin(data.user);
+
+ }
+);
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+logoutButton.addEventListener(
+ "click",
+ async () => {
+
+  const {
+   error
+  } =
+  await supabase.auth.signOut();
+
+
+  if(error){
+
+   showToast(
+    "No se pudo cerrar la sesión.",
+    true
+   );
+
+   return;
+
+  }
+
+
+  showLogin();
+
+ }
+);
+
+
+supabase.auth.onAuthStateChange(
+ (event, session) => {
+
+  if(session){
+
+   showAdmin(
+    session.user
+   );
+
+  }else{
+
+   showLogin();
+
+  }
+
+ }
+);
+
+
+/* =========================
+   MEDIA
+========================= */
+
+function isVideo(source){
+
+ if(typeof source !== "string")
+  return false;
+
+
+ return (
+
+  /^data:video\//i.test(source)
+
+  ||
+
+  /\.(mp4|webm|ogg|mov)(\?|#|$)/i
+   .test(source)
+
+ );
+
+}
+
+
+function fileToDataUrl(file){
+
+ return new Promise(
+  (resolve, reject) => {
+
+   const reader =
+    new FileReader();
+
+
+   reader.onload =
+    () => resolve(
+     reader.result
+    );
+
+
+   reader.onerror =
+    reject;
+
+
+   reader.readAsDataURL(
+    file
+   );
+
+  }
+ );
+
+}
+
+
+/* =========================
+   SELECCIÓN DE ARCHIVOS
+========================= */
+
+productMedia.addEventListener(
+ "change",
+ () => {
+
+  const files =
+   Array.from(
+    productMedia.files || []
+   );
+
+
+  if(!files.length)
+   return;
+
+
+  const validFiles =
+   files.filter(file =>
+    file.type.startsWith("image/") ||
+    file.type.startsWith("video/")
+   );
+
+
+  if(
+   validFiles.length !==
+   files.length
+  ){
+
+   showToast(
+    "Algunos archivos no eran imágenes o videos.",
+    true
+   );
+
+  }
+
+
+  const allowedFiles = [];
+
+
+  for(const file of validFiles){
+
+   if(
+    file.type.startsWith("video/") &&
+    file.size >
+    8 * 1024 * 1024
+   ){
+
+    showToast(
+     `El video "${file.name}" supera los 8 MB y no se agregó.`,
+     true
+    );
+
+    continue;
+
+   }
+
+
+   allowedFiles.push(file);
+
+  }
+
+
+  newMediaFiles.push(
+   ...allowedFiles
+  );
+
+
+  productMedia.value = "";
+
+
+  renderMedia();
+
+ }
+);
+
+
+/* =========================
+   PREVISUALIZACIÓN
+========================= */
+
+function renderMedia(){
+
+ mediaPreviews.innerHTML =
+  "";
+
+
+ const mediaList = [
+  ...existingMedia,
+  ...newMediaFiles
+ ];
+
+
+ mediaList.forEach(
+  (media, index) => {
+
+   const isFile =
+    media instanceof File;
+
+
+   const video =
+    isFile
+     ? media.type.startsWith("video/")
+     : isVideo(media);
+
+
+   const url =
+    isFile
+     ? URL.createObjectURL(media)
+     : media;
+
+
+   const item =
+    document.createElement(
+     "div"
+    );
+
+
+   item.className =
+    "media-preview";
+
+
+   const visual =
+    video
+     ? document.createElement(
+        "video"
+       )
+     : document.createElement(
+        "img"
+       );
+
+
+   visual.src =
+    url;
+
+
+   if(video){
+
+    visual.muted =
+     true;
+
+    visual.playsInline =
+     true;
+
+    visual.preload =
+     "metadata";
+
+   }else{
+
+    visual.alt =
+     `Imagen ${index + 1}`;
+
+   }
+
+
+   const typeLabel =
+    document.createElement(
+     "span"
+    );
+
+   typeLabel.className =
+    "media-type";
+
+   typeLabel.textContent =
+    video
+     ? "VIDEO"
+     : "FOTO";
+
+
+   const numberLabel =
+    document.createElement(
+     "span"
+    );
+
+   numberLabel.className =
+    "media-number";
+
+   numberLabel.textContent =
+    index + 1;
+
+
+   const deleteButton =
+    document.createElement(
+     "button"
+    );
+
+
+   deleteButton.type =
+    "button";
+
+   deleteButton.className =
+    "media-delete";
+
+   deleteButton.textContent =
+    "×";
+
+   deleteButton.title =
+    "Eliminar";
+
+
+   deleteButton.addEventListener(
+    "click",
+    () => {
+
+     if(
+      index <
+      existingMedia.length
+     ){
+
+      existingMedia.splice(
+       index,
+       1
+      );
+
+     }else{
+
+      newMediaFiles.splice(
+       index -
+       existingMedia.length,
+       1
+      );
+
+     }
+
+
+     renderMedia();
+
+    }
+   );
+
+
+   item.appendChild(
+    visual
+   );
+
+   item.appendChild(
+    typeLabel
+   );
+
+   item.appendChild(
+    numberLabel
+   );
+
+   item.appendChild(
+    deleteButton
+   );
+
+
+   mediaPreviews.appendChild(
+    item
+   );
+
+  }
+ );
+
+
+ mediaCount.textContent =
+  `${mediaList.length} archivo${
+   mediaList.length === 1
+    ? ""
+    : "s"
+  } seleccionado${
+   mediaList.length === 1
+    ? ""
+    : "s"
+  }`;
+
+
+ uploadTitle.textContent =
+  mediaList.length
+   ? "AGREGAR MÁS FOTOS O VIDEOS"
+   : "SELECCIONAR FOTOS Y VIDEOS";
+
+}
+
+
+/* =========================
+   PRODUCTOS
+========================= */
+
+async function loadProducts(){
+
+ productsList.innerHTML =
+  '<div class="empty">Cargando productos...</div>';
+
+
+ const {
+  data,
+  error
+ } =
+ await supabase
+  .from("products")
+  .select("*")
+  .order(
+   "created_at",
+   {
+    ascending:false
+   }
+  );
+
+
+ if(error){
+
+  console.error(error);
+
+
+  productsList.innerHTML = `
+   <div class="empty">
+    No se pudieron cargar los productos.
+    <br><br>
+    ${escapeHtml(
+     error.message
+    )}
+   </div>
+  `;
+
+
+  productCount.textContent =
+   "Error";
+
+
+  return;
+
+ }
+
+
+ const products =
+  data || [];
+
+
+ productCount.textContent =
+  `${products.length} producto${
+   products.length === 1
+    ? ""
+    : "s"
+  }`;
+
+
+ if(!products.length){
+
+  productsList.innerHTML =
+   '<div class="empty">Todavía no hay productos.</div>';
+
+  return;
+
+ }
+
+
+ productsList.innerHTML =
+  "";
+
+
+ products.forEach(
+  product => {
+
+   productsList.appendChild(
+    createProductElement(
+     product
+    )
+   );
+
+  }
+ );
+
+}
+
+
+/* =========================
+   MEDIA DEL PRODUCTO
+========================= */
+
+function getMedia(product){
+
+ if(
+  Array.isArray(
+   product.images
+  )
+ ){
+
+  return product.images.filter(
+   item =>
+    typeof item === "string" &&
+    item
+  );
+
+ }
+
+
+ if(product.image){
+
+  return [
+   product.image
+  ];
+
+ }
+
+
+ return [];
+
+}
+
+
+function getFirstImage(product){
+
+ const media =
+  getMedia(product);
+
+
+ return (
+
+  media.find(
+   item =>
+    !isVideo(item)
+  )
+
+  ||
+
+  product.image
+
+  ||
+
+  ""
+
+ );
+
+}
+
+
+/* =========================
+   ELEMENTO PRODUCTO
+========================= */
+
+function createProductElement(
+ product
+){
+
+ const element =
+  document.createElement(
+   "div"
+  );
+
+
+ element.className =
+  "product";
+
+
+ const media =
+  getMedia(product);
+
+
+ const image =
+  getFirstImage(product);
+
+
+ const videos =
+  media.filter(
+   item =>
+    isVideo(item)
+  ).length;
+
+
+ const visual =
+  image
+
+   ? `<img
+       src="${escapeHtml(image)}"
+       alt="${escapeHtml(
+        product.name ||
+        "Producto"
+       )}"
+      >`
+
+   : `<img
+       src="./007imported-logo-circle.png"
+       alt="007imported"
+      >`;
+
+
+ const sizes =
+  product.talles ||
+  product.stock ||
+  "Sin talles";
+
+
+ element.innerHTML = `
+
+  <div class="product-image">
+   ${visual}
+  </div>
+
+  <div class="product-data">
+
+   <strong>
+    ${escapeHtml(
+     product.name ||
+     "Sin nombre"
+    )}
+   </strong>
+
+   <div class="product-category">
+    ${escapeHtml(
+     product.category ||
+     "Sin categoría"
+    )}
+   </div>
+
+   <div class="product-price">
+    ${formatPrice(
+     product.price
+    )}
+   </div>
+
+   <div class="product-sizes">
+    Talles: ${escapeHtml(
+     sizes
+    )}
+   </div>
+
+   <div class="product-media-count">
+
+    ${media.length}
+
+    archivo${
+     media.length === 1
+      ? ""
+      : "s"
+    }
+
+    ${
+     videos
+      ? ` · ${videos} video${
+         videos === 1
+          ? ""
+          : "s"
+        }`
+      : ""
+    }
+
+   </div>
+
+  </div>
+
+  <div class="product-actions">
+
+   <button
+    class="action edit"
+    type="button"
+    title="Editar"
+   >
+    ✎
+   </button>
+
+   <button
+    class="action delete"
+    type="button"
+    title="Eliminar"
+   >
+    ×
+   </button>
+
+  </div>
+ `;
+
+
+ element
+  .querySelector(
+   ".edit"
+  )
+  .addEventListener(
+   "click",
+   () => {
+
+    editProduct(
+     product
+    );
+
+   }
+  );
+
+
+ element
+  .querySelector(
+   ".delete"
+  )
+  .addEventListener(
+   "click",
+   () => {
+
+    deleteProduct(
+     product
+    );
+
+   }
+  );
+
+
+ return element;
+
+}
+
+
+/* =========================
+   GUARDAR PRODUCTO
+========================= */
+
+productForm.addEventListener(
+ "submit",
+ async event => {
+
+  event.preventDefault();
+
+
+  const wasEditing =
+   Boolean(
+    editingProduct
+   );
+
+
+  saveButton.disabled =
+   true;
+
+  saveButton.textContent =
+   "GUARDANDO...";
+
+
+  try{
+
+   const name =
+    $("#productName")
+     .value
+     .trim();
+
+
+   const price =
+    Number(
+     $("#productPrice")
+      .value
+    );
+
+
+   /*
+    Talles como texto.
+    Ejemplos:
+    38, 39, 40, 41
+    S, M, L, XL
+   */
+
+   const talles =
+    $("#productTalles")
+     .value
+     .trim();
+
+
+   const description =
+    $("#productDescription")
+     .value
+     .trim();
+
+
+   const category =
+    $("#productCategory")
+     .value;
+
+
+   const newMediaUrls =
+    [];
+
+
+   for(
+    const file of
+    newMediaFiles
+   ){
+
+    const url =
+     await fileToDataUrl(
+      file
+     );
+
+
+    newMediaUrls.push(
+     url
+    );
+
+   }
+
+
+   const allMedia = [
+    ...existingMedia,
+    ...newMediaUrls
+   ];
+
+
+   const firstImage =
+    allMedia.find(
+     item =>
+      !isVideo(item)
+    ) || null;
+
+
+   const productData = {
+
+    name,
+
+    price,
+
+    description,
+
+    category,
+
+    image:
+     firstImage,
+
+    images:
+     allMedia,
+
+    talles
+
+   };
+
+
+   let result;
+
+
+   if(editingProduct){
+
+    result =
+     await supabase
+      .from("products")
+      .update(
+       productData
+      )
+      .eq(
+       "id",
+       editingProduct.id
+      );
+
+   }else{
+
+    result =
+     await supabase
+      .from("products")
+      .insert(
+       productData
+      );
+
+   }
+
+
+   if(result.error){
+
+    throw result.error;
+
+   }
+
+
+   showToast(
+    wasEditing
+     ? "Producto actualizado."
+     : "Producto agregado."
+   );
+
+
+   resetForm();
+
+
+   await loadProducts();
+
+
+  }catch(error){
+
+   console.error(
+    "Error guardando producto:",
+    error
+   );
+
+
+   showToast(
+    error.message ||
+    "No se pudo guardar el producto.",
+    true
+   );
+
+
+  }finally{
+
+   saveButton.disabled =
+    false;
+
+
+   /*
+    Usamos wasEditing para que
+    el texto sea correcto incluso
+    después de resetForm().
+   */
+
+   saveButton.textContent =
+    wasEditing
+     ? "GUARDAR CAMBIOS"
+     : "AGREGAR PRODUCTO";
+
+  }
+
+ }
+);
+
+
+/* =========================
+   EDITAR
+========================= */
+
+function editProduct(
+ product
+){
+
+ editingProduct =
+  product;
+
+
+ formTitle.textContent =
+  "Editar producto";
+
+
+ saveButton.textContent =
+  "GUARDAR CAMBIOS";
+
+
+ cancelEdit.style.display =
+  "block";
+
+
+ $("#productName").value =
+  product.name || "";
+
+
+ $("#productPrice").value =
+  product.price ?? "";
+
+
+ $("#productTalles").value =
+  product.talles ||
+  product.stock ||
+  "";
+
+
+ $("#productDescription").value =
+  product.description || "";
+
+
+ $("#productCategory").value =
+  product.category ||
+  "Zapatillas";
+
+
+ existingMedia =
+  getMedia(
+   product
+  ).slice();
+
+
+ newMediaFiles =
+  [];
+
+
+ renderMedia();
+
+
+ $("#productName").focus();
+
+
+ window.scrollTo({
+  top:0,
+  behavior:"smooth"
+ });
+
+}
+
+
+/* =========================
+   CANCELAR / RESET
+========================= */
+
+cancelEdit.addEventListener(
+ "click",
+ resetForm
+);
+
+
+function resetForm(){
+
+ editingProduct =
+  null;
+
+
+ existingMedia =
+  [];
+
+
+ newMediaFiles =
+  [];
+
+
+ productForm.reset();
+
+
+ $("#productCategory").value =
+  "Zapatillas";
+
+
+ formTitle.textContent =
+  "Nuevo producto";
+
+
+ saveButton.textContent =
+  "AGREGAR PRODUCTO";
+
+
+ cancelEdit.style.display =
+  "none";
+
+
+ renderMedia();
+
+}
+
+
+/* =========================
+   ELIMINAR
+========================= */
+
+async function deleteProduct(
+ product
+){
+
+ const confirmed =
+  confirm(
+   `¿Querés eliminar "${product.name}"?`
+  );
+
+
+ if(!confirmed)
+  return;
+
+
+ const {
+  error
+ } =
+ await supabase
+  .from("products")
+  .delete()
+  .eq(
+   "id",
+   product.id
+  );
+
+
+ if(error){
+
+  console.error(
+   error
+  );
+
+
+  showToast(
+   error.message ||
+   "No se pudo eliminar el producto.",
+   true
+  );
+
+
+  return;
+
+ }
+
+
+ showToast(
+  "Producto eliminado."
+ );
+
+
+ await loadProducts();
+
+}
+
+
+/* =========================
+   PRECIO
+========================= */
+
+function formatPrice(
+ value
+){
+
+ return "$" +
+  Number(
+   value || 0
+  ).toLocaleString(
+   "es-AR"
+  );
+
+}
+
+
+/* =========================
+   SEGURIDAD HTML
+========================= */
+
+function escapeHtml(
+ value
+){
+
+ return String(
+  value ?? ""
+ )
+ .replace(
+  /&/g,
+  "&amp;"
+ )
+ .replace(
+  /</g,
+  "&lt;"
+ )
+ .replace(
+  />/g,
+  "&gt;"
+ )
+ .replace(
+  /"/g,
+  "&quot;"
+ )
+ .replace(
+  /'/g,
+  "&#039;"
+ );
+
+}
+
+
+/* =========================
+   INICIAR
+========================= */
+
+renderMedia();
+
+checkSession();
+
+</script>
+
+</body>
+</html>
